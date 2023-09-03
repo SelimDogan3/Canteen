@@ -9,7 +9,6 @@ namespace Cantin.Web.Controllers
 		
 		public IActionResult Index()
 		{
-			var s = ";"
 			return View();
 		}
 	}
