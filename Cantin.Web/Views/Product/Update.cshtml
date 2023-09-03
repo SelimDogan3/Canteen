@@ -1,0 +1,39 @@
+﻿@model ProductUpdateDto
+<div class="card card-custom">
+    <div class="card-header">
+        <h3 class="card-title">
+            Ürün Güncelle
+        </h3>
+        <div class="card-toolbar">
+            <div class="example-tools justify-content-center">
+                <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
+                <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+            </div>
+        </div>
+    </div>
+    <!--begin::Form-->
+    <form method="post" asp-controller="Product" asp-action="Update">
+        <div asp-validation-summary="All"></div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="Name">Ürün Adı</label>
+                <input type="text" class="form-control" placeholder="Ürünün adını girin" asp-for="Name" />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">Ürün Barkodu</label>
+                <input type="text" class="form-control" placeholder="Ürünün barkodunu girin" asp-for="Barcode" />
+                <span class="text-danger" asp-validation-for="Barcode"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">Ürün Satış Fiyatı</label>
+                <input type="text" class="form-control" placeholder="Ürünün satış fiyatını girin" asp-for="SalePrice" />
+                <span class="text-danger" asp-validation-for="SalePrice"></span>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mr-2">Güncelle</button>
+            </div>
+        </div>
+    </form>
+    <!--end::Form-->
+</div>

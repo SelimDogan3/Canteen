@@ -1,0 +1,1 @@
+﻿let table = $('#RolesTable').DataTable();

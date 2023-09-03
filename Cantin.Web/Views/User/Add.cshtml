@@ -1,0 +1,64 @@
+﻿@model UserAddDto
+<div class="card card-custom">
+    <div class="card-header">
+        <h3 class="card-title">
+            Kullanıcı Ekle
+        </h3>
+        <div class="card-toolbar">
+            <div class="example-tools justify-content-center">
+                <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
+                <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+            </div>
+        </div>
+    </div>
+    <!--begin::Form-->
+    <form method="post" asp-controller="User" asp-action="Add">
+        <div asp-validation-summary="All"></div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="FirstName">Kullanıcının Adı</label>
+                <input type="text" class="form-control" placeholder="Kullanıcı adını girin" asp-for="FirstName" />
+                <span class="text-danger" asp-validation-for="FirstName"></span>
+            </div>
+            <div class="form-group">
+                <label>Kullanıcının Soyadı</label>
+                <input type="text" class="form-control" placeholder="kullanıcı soyadını girin" asp-for="LastName" />
+                <span class="text-danger" class="text-danger" asp-validation-for="LastName"></span>
+            </div>
+            <div class="form-group">
+                <label>Kullanıcının Emaili</label>
+                <input type="text" class="form-control" placeholder="kullanıcı Emailini girin" asp-for="Email" />
+                <span class="text-danger" class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label>Kullanıcının Telefon Numarası</label>
+                <input type="text" class="form-control" placeholder="kullanıcı Telefon Numarasını girin" asp-for="PhoneNumber" />
+                <span class="text-danger" class="text-danger" asp-validation-for="PhoneNumber"></span>
+            </div>
+            <div class="form-group mb-1">
+                <label for="exampleTextarea">Kullanıcının Adresi</label>
+                <textarea class="form-control" id="exampleTextarea" rows="3" asp-for="Adress"></textarea>
+                <span class="text-danger" class="text-danger" asp-validation-for="Adress"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoleId">Kullanıcının Rolü</label>
+                <select id="CategoryList" class="form-control" asp-for="RoleId" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"></select>
+                <span class="text-danger" asp-validation-for="RoleId"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StoreId">Mağaza Seçin</label>
+                <select id="PublisherList" class="form-control" asp-for="StoreId" asp-items="@(new SelectList(Model.Stores,"Id","Name"))"></select>
+                <span class="text-danger" asp-validation-for="StoreId"></span>
+            </div>
+            <div class="form-group">
+                <label>Kullanıcı Şifresi</label>
+                <input type="password" class="form-control" placeholder="kullanıcı Şifresini girin" asp-for="pass"/>
+                <span class="text-danger" asp-validation-for="pass"></span>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary mr-2">Ekle</button>
+        </div>
+    </form>
+    <!--end::Form-->
+</div>

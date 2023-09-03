@@ -1,0 +1,44 @@
+﻿@model SupplyUpdateDto
+<div class="card card-custom">
+    <div class="card-header">
+        <h3 class="card-title">
+            Tedarik Güncelle
+        </h3>
+        <div class="card-toolbar">
+            <div class="example-tools justify-content-center">
+                <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
+                <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+            </div>
+        </div>
+    </div>
+    <!--begin::Form-->
+    <form method="post" asp-controller="Supply" asp-action="Update">
+        <div asp-validation-summary="All"></div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="Supplier">Tedarikçinin Adı</label>
+                <input type="text" class="form-control" placeholder="Tedarikçinin adını girin" asp-for="Supplier" />
+                <span class="text-danger" asp-validation-for="Supplier"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductId">Tedarik Edilen Ürün</label>
+                <select id="CategoryList" class="form-control" asp-for="ProductId" value="@Model.ProductId" asp-items="@(new SelectList(Model.Products,"Id","Name"))"></select>
+                <span class="text-danger" asp-validation-for="ProductId"></span>
+            </div>
+            <div class="form-group">
+                <label>Tedarik Miktarı</label>
+                <input type="text" class="form-control" placeholder="Tedarik miktarını girin" asp-for="Quantity" />
+                <span class="text-danger" class="text-danger" asp-validation-for="Quantity"></span>
+            </div>
+            <div class="form-group">
+                <label>Birim Fiyatı</label>
+                <input type="text" class="form-control" placeholder="Ürünün birim fiyatını girin" asp-for="BuyPrice" />
+                <span class="text-danger" class="text-danger" asp-validation-for="BuyPrice"></span>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mr-2">Güncelle</button>
+            </div>
+        </div>
+    </form>
+    <!--end::Form-->
+</div>

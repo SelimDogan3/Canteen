@@ -1,0 +1,34 @@
+﻿@model RoleAddDto
+<div class="card card-custom">
+    <div class="card-header">
+        <h3 class="card-title">
+            Rol Ekle
+        </h3>
+        <div class="card-toolbar">
+            <div class="example-tools justify-content-center">
+                <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
+                <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+            </div>
+        </div>
+    </div>
+    <!--begin::Form-->
+    <form method="post" asp-controller="Role" asp-action="Add">
+        <div asp-validation-summary="All"></div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="Name">Rolün Adı</label>
+                <input type="text" class="form-control" placeholder="Rolün adını girin" asp-for="Name" />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">Rolün Açıklaması</label>
+                <input type="text" class="form-control" placeholder="Rolün Açıklamasını girin" asp-for="Description" />
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mr-2">Ekle</button>
+            </div>
+            </div>
+    </form>
+    <!--end::Form-->
+</div>
