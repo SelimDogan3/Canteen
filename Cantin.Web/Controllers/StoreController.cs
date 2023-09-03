@@ -1,4 +1,5 @@
 ﻿using Cantin.Entity.Dtos.Stores;
+using Cantin.Entity.Entities;
 using Cantin.Service.Services.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,15 @@ namespace Cantin.Web.Controllers
     {
         private readonly ILogger<StoreController> logger;
         private readonly IStoreService storeService;
+        private readonly IStockService stockService;
         private readonly IToastNotification toastMessage;
         private readonly string type = "Mağaza";
 
-        public StoreController(ILogger<StoreController> logger, IStoreService storeService, IToastNotification toastMessage)
+        public StoreController(ILogger<StoreController> logger, IStoreService storeService,IStockService stockService, IToastNotification toastMessage)
         {
             this.logger = logger;
             this.storeService = storeService;
+            this.stockService = stockService;
             this.toastMessage = toastMessage;
         }
         public async Task<IActionResult> Index()
@@ -68,6 +71,10 @@ namespace Cantin.Web.Controllers
             var name = await storeService.DeleteStoreAsyncById(Id);
             toastMessage.AddSuccessToastMessage(Messages.Messages.Delete(name, type));
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Stock() {
+            List<StockDto> stocks = await stockService.GetAllStocksIncludingStores();
+            return View(stocks);
         }
     }
 }

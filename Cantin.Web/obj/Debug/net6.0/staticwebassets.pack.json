@@ -19801,6 +19801,10 @@
       "PackagePath": "staticwebassets\\js\\SaleIndex.js"
     },
     {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\StockIndex.js",
+      "PackagePath": "staticwebassets\\js\\StockIndex.js"
+    },
+    {
       "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\StoreIndex.js",
       "PackagePath": "staticwebassets\\js\\StoreIndex.js"
     },

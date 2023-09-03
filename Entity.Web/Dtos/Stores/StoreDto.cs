@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cantin.Entity.Dtos.Stores
+﻿namespace Cantin.Entity.Dtos.Stores
 {
-	public class StoreDto
+    public class StoreDto
 	{
         public Guid Id { get; set; }
         public string Name { get; set; }

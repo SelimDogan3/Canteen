@@ -31,7 +31,7 @@ let tableStart =
                     <tbody>
                           `
     ;
-let tableFinish = 
+let tableFinish =
     `
                    </table>
             </div>

@@ -47,7 +47,7 @@ $(document).ready(function () {
     table.on('click', 'button.reduce', function (e) {
         let tr = $(this).closest('tr');
         let row = table.row(tr);
-        let line = lines.ProductLines.filter(line => line.Product.name === row.data()[0])[0]
+        let line = lines.ProductLines.filter(line => line.Product.name === row.data()[0])[0];
         line.Quantity -= 1;
         if (line.Quantity === 0) {
             index = lines.ProductLines.indexOf(line);

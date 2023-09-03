@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4WlM5wn4N2FBDTlNT2fhzZUDM1cQi//2qNz2MYAnV4U=",
+  "Hash": "VqBatm+jQbYclANIF7rXzT43MSnJawaSR/5Sdw9AL4M=",
   "Source": "Cantin.Web",
   "BasePath": "_content/Cantin.Web",
   "Mode": "Default",
@@ -84250,6 +84250,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\StockIndex.js",
+      "SourceId": "Cantin.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\",
+      "BasePath": "_content/Cantin.Web",
+      "RelativePath": "js/StockIndex.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\StockIndex.js"
     },
     {
       "Identity": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\StoreIndex.js",

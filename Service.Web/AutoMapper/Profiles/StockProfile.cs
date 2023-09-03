@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cantin.Entity.Dtos.Stores;
 using Cantin.Entity.Entities;
 
 namespace Cantin.Service.AutoMapper.Profiles
@@ -8,6 +9,8 @@ namespace Cantin.Service.AutoMapper.Profiles
         public StockProfile()
         {
             CreateMap<Supply, Stock>();
+            CreateMap<Stock, StockLine>();
+            CreateMap<StoreDto, StockDto>();
         }
     }
 }
