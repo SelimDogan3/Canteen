@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Cantin.Entity.Dtos.Sales;
+using Cantin.Service.Extensions;
 using Cantin.Service.Services.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Cantin.Web.Controllers
 {
@@ -13,6 +15,7 @@ namespace Cantin.Web.Controllers
 		private readonly ISaleService saleService;
 		private readonly IMapper mapper;
 		private readonly IProductService productService;
+		private readonly ClaimsPrincipal _user;
 
 		public SaleController(ILogger<SaleController> logger,ISaleService saleService,IMapper mapper,IProductService productService)
         {
@@ -20,6 +23,7 @@ namespace Cantin.Web.Controllers
 			this.saleService = saleService;
 			this.mapper = mapper;
 			this.productService = productService;
+			_user = HttpContext.User;
 		}
 		public async Task<IActionResult> GetProductByBarcode(string barCode) {
 			var product = await productService.GetProductByBarcodeAsync(barCode);
@@ -27,7 +31,14 @@ namespace Cantin.Web.Controllers
 		}
         public async Task<IActionResult> Index()
 		{
-			var sales = await saleService.GetAllSalesNonDeletedAsync();
+			List<SaleDto>? sales = default;
+			if (_user.GetRole() == "Employee")
+			{
+				sales = await saleService.GetSalesForEmployeeAsync();
+			}
+			else {
+				sales = await saleService.GetAllSalesNonDeletedAsync();
+			}
 			return View(sales);
 		}
 		[HttpGet]

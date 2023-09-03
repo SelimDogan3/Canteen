@@ -10,5 +10,9 @@ namespace Cantin.Service.Extensions
 		public static string GetLoggedInUserName(this ClaimsPrincipal principal) {
 			return principal.FindFirstValue(ClaimTypes.NameIdentifier);
 		}
+		public static string GetRole(this ClaimsPrincipal principal)
+		{
+			return principal.FindFirstValue(ClaimTypes.Role);
+		}
 	}
 }

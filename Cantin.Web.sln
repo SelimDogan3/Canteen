@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cantin.Web", "Cantin.Web\Cantin.Web.csproj", "{978E793C-553D-406A-998A-39F9FB7AA192}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cantin.Web", "Cantin.Web\Cantin.Web.csproj", "{978E793C-553D-406A-998A-39F9FB7AA192}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cantin.Core", "Core.Web\Cantin.Core.csproj", "{1046DC5D-C0BA-41A6-8530-ED17B886E0F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cantin.Core", "Core.Web\Cantin.Core.csproj", "{1046DC5D-C0BA-41A6-8530-ED17B886E0F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cantin.Entity", "Entity.Web\Cantin.Entity.csproj", "{5E5FD37C-C755-42D3-BE36-E588C32B7E53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cantin.Entity", "Entity.Web\Cantin.Entity.csproj", "{5E5FD37C-C755-42D3-BE36-E588C32B7E53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cantin.Data", "Data.Web\Cantin.Data.csproj", "{8655D4A2-5A25-4449-AE4D-251DC8A71E89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cantin.Data", "Data.Web\Cantin.Data.csproj", "{8655D4A2-5A25-4449-AE4D-251DC8A71E89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cantin.Service", "Service.Web\Cantin.Service.csproj", "{90B64094-9ED2-4A33-BB31-9AB856373DEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cantin.Service", "Service.Web\Cantin.Service.csproj", "{90B64094-9ED2-4A33-BB31-9AB856373DEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

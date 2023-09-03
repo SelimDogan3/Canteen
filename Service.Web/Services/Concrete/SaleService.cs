@@ -46,6 +46,16 @@ namespace Cantin.Service.Services.Concrete
 			}
 			return map;
 		}
+		public async Task<List<SaleDto>> GetSalesForEmployeeAsync()
+		{
+			List<Sale> sales = await repository.GetAllAsync(x => !x.IsDeleted || DateTime.Compare(x.CreatedDate.AddDays(1.0), DateTime.Now) < 0, x => x.Store);
+			var map = mapper.Map<List<SaleDto>>(sales);
+			foreach (var saleDto in map)
+			{
+				saleDto.ProductLines = await GetProductLineWithSaleId(saleDto.Id);
+			}
+			return map;
+		}
 		public SaleAddDto GetSaleAddDto()
 		{
 			SaleAddDto dto = new SaleAddDto();

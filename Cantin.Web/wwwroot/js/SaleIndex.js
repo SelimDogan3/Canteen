@@ -9,7 +9,6 @@
         { data: 'Mağaza' },
         { data: 'Satış Tarihi' },
         { data: 'Toplam Fiyat' },
-        { data: 'İşlemler' }
     ],
 });
 let tableStart =

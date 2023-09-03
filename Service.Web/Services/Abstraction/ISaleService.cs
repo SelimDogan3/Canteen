@@ -6,6 +6,7 @@ namespace Cantin.Service.Services.Abstraction
 	public interface ISaleService
 	{
 		Task<List<SaleDto>> GetAllSalesNonDeletedAsync();
+		Task<List<SaleDto>> GetSalesForEmployeeAsync();
 		SaleAddDto GetSaleAddDto();
 		Task AddSaleAsync(SaleAddDto dto);
 		Task MatchProductWithSaleAsync(Guid saleId, Guid productId, int quantity);
