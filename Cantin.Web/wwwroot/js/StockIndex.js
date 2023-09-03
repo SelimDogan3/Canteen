@@ -25,15 +25,22 @@ let tableFinish =
         </dl>
     `;
 function CreateStockTr(stockLine) {
+    let start = `<tr product="row" class="even">
+        <td>${stockLine.product.name}</td>`;
+    let body = "";
+    if (stockLine.quantity <= 10) {
+        body = `<td class="text-danger">${stockLine.quantity}</td>`;
+    }
+    else { 
+        body = `<td class="text">${stockLine.quantity}</td>`;
+    }
     return (
+        start+body+
         `
-        <tr product="row" class="even">
-            <td>${stockLine.product.name}</td>
-            <td>${stockLine.quantity}</td>
         </tr>
     ` );
 }
-$(document).ready(function () { 
+$(document).ready(function () {
     table.on('click', 'td.dt-control', function (e) {
         let tr = $(this).closest('tr');
         let row = table.row(tr);
