@@ -1,47 +1,65 @@
 ﻿@model SaleAddDto
-<div class="card-body">
-    <div class="form-group">
-        <label>Ürün Barkodu</label>
-        <input id="barkodInput" class="form-control" placeholder="Ürünün barkodunu girin" name="barcode" type="text" />
-        <button id="myButton">sbm</button>
-    </div>
-</div>
-<div class="card-body">
-    <!--begin: Datatable-->
-    <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-        <div class="row">
-            <div class="col-sm-12">
-                <table class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline" id="ProductsTable" role="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
-                    <thead>
-                        <tr role="row">
-                            <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Ürün Adı</th>
-                            <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Barkodu</th>
-                            <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Birim Fiyatı</th>
-                            <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Miktarı</th>
-                            <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Sütun Fiyatı</th>
-                            <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Reduce</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot> 
-                        <tr>
-                            <td colspan="3" class="text-right"></td>
-                            <td id="total" class=" text-right text-danger">Toplam: 0</td>
-                            <td></td>
-                        </tr>
-                    </tfoot>
-                </table>
-
-            </div>
+<div class="card card-custom">
+    <div class="card-header flex-wrap">
+        <div class="card-title">
+            <h3 class="card-label">
+                Satış Yap
+            </h3>
         </div>
-        <!--end: Datatable-->
+    </div>
+    <div class="card-body">
+        <div>
+            <button class="btn btn-warning">
+                Su
+            </button>
+            <button class="btn btn-danger" >
+                Tost
+            </button>
+        </div>
+        <br />
+        <div class="form-group">
+            <label>Ürün Barkodu</label>
+            <input id="barkodInput" class="form-control" placeholder="Ürünün barkodunu girin" name="barcode" type="text" />
+            <br />
+            <button class="btn btn-primary" id="myButton">sbm</button>
+        </div>
+
+        <br />
+        <!--begin: Datatable-->
+        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline" id="ProductsTable" role="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Ürün Adı</th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Barkodu</th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Birim Fiyatı</th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Miktarı</th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Sütun Fiyatı</th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Reduce</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-right"></td>
+                                <td id="total" class=" text-right text-danger">Toplam: 0</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+            <!--end: Datatable-->
             <input id="productLines" name="productLines" type="hidden" />
             <input id="soldTotal" name="SoldTotal" type="hidden" />
-            <button id="addButton" type="submit">Oluştur</button>
+            <button id="addButton" class="btn btn-primary" type="submit">Satış Yap</button>
+        </div>
     </div>
 </div>
-
 
 
 @section Scripts{
