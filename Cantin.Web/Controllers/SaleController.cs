@@ -31,7 +31,7 @@ namespace Cantin.Web.Controllers
 		}
         public async Task<IActionResult> Index()
 		{
-			List<SaleDto>? sales = default;
+			List<SaleDto> sales;
 			if (_user.GetRole() == "Employee")
 			{
 				sales = await saleService.GetSalesForEmployeeAsync();
