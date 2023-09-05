@@ -10,7 +10,9 @@ using NToastNotify;
 
 namespace Cantin.Web.Controllers
 {
-	[Authorize]
+	[Authorize(
+		Policy = "AdminOnly"
+		)]
 	public class RoleController : Controller
 	{
 		private readonly ILogger<RoleController> logger;

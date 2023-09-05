@@ -6,7 +6,9 @@ using NToastNotify;
 
 namespace Cantin.Web.Controllers
 {
-	[Authorize]
+	[Authorize(
+        Policy = "AdminOnly"
+        )]
 	public class ProductController : Controller
 	{
 		private readonly ILogger<ProductController> logger;

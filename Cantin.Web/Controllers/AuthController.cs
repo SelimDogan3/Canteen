@@ -70,5 +70,10 @@ namespace Cantin.Web.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
+        [Authorize]
+        public IActionResult AccessDenied(string ReturnUrl) {
+            toast.AddAlertToastMessage("Bu sayfaya erişme yetkiniz yoktur");
+            return RedirectToAction("Index","Home");
+        }
     }
 }

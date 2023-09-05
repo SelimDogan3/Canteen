@@ -28,7 +28,7 @@ namespace Cantin.Data.Extensions
 			.AddUserValidator<AppIdentityUserValidator>()
 			.AddErrorDescriber<AppIdentityErrorDescriber>()
 			;
-			services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 			return services;
 		}
 	}

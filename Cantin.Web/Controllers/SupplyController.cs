@@ -7,7 +7,8 @@ using NToastNotify;
 
 namespace Cantin.Web.Controllers
 {
-	[Authorize]
+	[Authorize(
+		Policy ="AdminOnly")]
 	public class SupplyController : Controller
 	{
 		private readonly ILogger<SupplyController> logger;

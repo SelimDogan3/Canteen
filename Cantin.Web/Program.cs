@@ -1,5 +1,6 @@
 using Cantin.Data.Extensions;
 using Cantin.Service.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,11 @@ builder.Services.AddControllersWithViews().AddNToastNotifyToastr(new ToastrOptio
 builder.Services.LoadDataLayerExtensions(builder.Configuration);
 
 builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+builder.Services.AddAuthorization(opt => {
+    opt.AddPolicy("AdminOnly", x => {
+        x.RequireRole("Admin", "Superadmin");
+    });
+});
 builder.Services.AddSession();
 builder.Services.ConfigureApplicationCookie(config =>
 {
