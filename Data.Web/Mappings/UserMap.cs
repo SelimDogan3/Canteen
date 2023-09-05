@@ -86,7 +86,7 @@ namespace Cantin.Data.Mappings
 
             };
 
-            superadmin.PasswordHash = CreatePasswordHash(superadmin, "123456");
+            admin.PasswordHash = CreatePasswordHash(superadmin, "123456");
 
             builder.HasData(superadmin, admin);
 

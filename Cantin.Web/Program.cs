@@ -5,16 +5,16 @@ using NToastNotify;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.LoadServiceLayerExtensions();
 builder.Services.AddControllersWithViews().AddNToastNotifyToastr(new ToastrOptions
 {
     PositionClass = ToastPositions.TopRight,
     TimeOut = 5000
 });
 builder.Services.LoadDataLayerExtensions(builder.Configuration);
-builder.Services.LoadServiceLayerExtensions();
+
 builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
 builder.Services.AddSession();
-
 builder.Services.ConfigureApplicationCookie(config =>
 {
     config.LoginPath = new PathString("/Auth/Login");

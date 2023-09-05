@@ -127,7 +127,7 @@ namespace Cantin.Data.Identity
 			{
 				Code = nameof(PasswordMismatch),
 				Description = $"Kullanıcı ile parola uyuşmadı",
-				key = "password",
+				key = "Password",
 
 			};
 			return error;

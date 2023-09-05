@@ -35,6 +35,7 @@ namespace Cantin.Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Add([FromForm] ProductAddDto addDto)
 		{
+			await productService.ValidateProductAsync(addDto, ModelState); 
 			if (ModelState.IsValid)
 			{
 				string name = await productService.AddProductAsync(addDto);
@@ -55,6 +56,7 @@ namespace Cantin.Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Update(ProductUpdateDto updateDto)
 		{
+			await productService.ValidateProductAsync(updateDto, ModelState);
 			if (ModelState.IsValid)
 			{
 				string name = await productService.UpdateProductAsync(updateDto);

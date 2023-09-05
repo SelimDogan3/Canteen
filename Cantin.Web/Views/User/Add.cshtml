@@ -13,7 +13,7 @@
     </div>
     <!--begin::Form-->
     <form method="post" asp-controller="User" asp-action="Add">
-        <div asp-validation-summary="All"></div>
+        <div asp-validation-summary="None"></div>
         <div class="card-body">
             <div class="form-group">
                 <label asp-for="FirstName">Kullanıcının Adı</label>
@@ -52,12 +52,17 @@
             </div>
             <div class="form-group">
                 <label>Kullanıcı Şifresi</label>
-                <input type="password" class="form-control" placeholder="kullanıcı Şifresini girin" asp-for="pass"/>
-                <span class="text-danger" asp-validation-for="pass"></span>
+                <input type="password" class="form-control" placeholder="kullanıcı Şifresini girin" asp-for="Pass"/>
+                <span class="text-danger" asp-validation-for="Pass"></span>
         </div>
-
+            <div class="form-group">
+                <label>Yönetici Şifresi</label>
+                <input type="password" class="form-control" placeholder="doğrulama için şifrenizi girin" asp-for="Password" />
+                <span class="text-danger" class="text-danger" asp-validation-for="Password"></span>
+            </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-primary mr-2">Ekle</button>
+        </div>
         </div>
     </form>
     <!--end::Form-->

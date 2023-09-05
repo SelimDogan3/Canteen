@@ -15,7 +15,6 @@ namespace Cantin.Web.Controllers
 		private readonly ISaleService saleService;
 		private readonly IMapper mapper;
 		private readonly IProductService productService;
-		private readonly ClaimsPrincipal _user;
 
 		public SaleController(ILogger<SaleController> logger,ISaleService saleService,IMapper mapper,IProductService productService)
         {
@@ -23,7 +22,6 @@ namespace Cantin.Web.Controllers
 			this.saleService = saleService;
 			this.mapper = mapper;
 			this.productService = productService;
-			_user = HttpContext.User;
 		}
 		public async Task<IActionResult> GetProductByBarcode(string barCode) {
 			var product = await productService.GetProductByBarcodeAsync(barCode);
@@ -31,6 +29,7 @@ namespace Cantin.Web.Controllers
 		}
         public async Task<IActionResult> Index()
 		{
+			ClaimsPrincipal _user = HttpContext.User;
 			List<SaleDto> sales;
 			if (_user.GetRole() == "Employee")
 			{

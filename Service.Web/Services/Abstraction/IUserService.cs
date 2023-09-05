@@ -1,6 +1,8 @@
-﻿using Cantin.Entity.Dtos.Users;
+﻿using Cantin.Entity.Dtos.Products;
+using Cantin.Entity.Dtos.Users;
 using Cantin.Entity.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Cantin.Service.Services.Abstraction
 {
@@ -17,8 +19,13 @@ namespace Cantin.Service.Services.Abstraction
         Task<IdentityResult> AddUserWithRoleAsync(UserAddDto dto);
         Task<UserUpdateDto> GetUpdateUserDto(Guid id);
         Task<IdentityResult> UpdateUserWithRoleAsync(UserUpdateDto dto);
-        Task<IdentityResult> DeleteUserAsync(Guid Id);
+        Task<IdentityResult> DeleteUserAsync(Guid Id,string password);
+        Task<IdentityResult> CheckIfPasswordMatch(AppUser user, string password);
+		Task ValidateUserAsync(UserAddDto dto, ModelStateDictionary modelState);
+		Task ValidateUserAsync(UserUpdateDto dto, ModelStateDictionary modelState);
 
 
-    }
+
+
+	}
 }

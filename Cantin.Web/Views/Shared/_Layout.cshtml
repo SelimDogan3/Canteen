@@ -26,7 +26,6 @@
 	<link href="~/demo1/dist/assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
 	<link href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"  />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
 	<!--end::Layout Themes-->
 	<link rel="shortcut icon" href="~/demo1/dist/assets/media/logos/civil-logo-beyaz2.png" />
 </head>
@@ -80,8 +79,8 @@
 				<!--begin::Brand-->
 				<div class="brand flex-column-auto" id="kt_brand">
 					<!--begin::Logo-->
-					<a href="index.html" class="brand-logo">
-						<img alt="Logo" src="~/demo1/dist/assets/media/logos/civil-logo-beyaz2.png" style="width:120px; margin-left:40px;" />
+					<a href="/" class="brand-logo">
+						<img alt="Logo" src="~/img/logo.png" style="width:120px; height:60px; margin-left:40px;" />
 					</a>
 					<!--end::Logo-->
 				</div>
@@ -266,6 +265,8 @@
 				<div id="kt_header" class="header header-fixed">
 					<!--begin::Container-->
 					<div class="container-fluid d-flex align-items-stretch justify-content-between">
+						<div></div>
+						@await Component.InvokeAsync("NavUserManagement")
 					</div>
 					<!--end::Container-->
 				</div>
@@ -1851,7 +1852,7 @@
 
 	<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+	
 	<!--end::Page Scripts-->
 	@await Component.InvokeAsync("NToastNotify")
 	@await RenderSectionAsync("Scripts",false);

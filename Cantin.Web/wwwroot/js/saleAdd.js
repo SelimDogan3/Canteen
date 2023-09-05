@@ -90,6 +90,7 @@ $(document).ready(function () {
         if (line.Quantity === 0) {
             index = lines.ProductLines.indexOf(line);
             lines.ProductLines.splice(index, 1);
+
         }
         else {
             line.calculateSubTotal();
@@ -104,6 +105,7 @@ $(document).ready(function () {
         let index = lines.ProductLines.indexOf(lines.ProductLines.filter(line => line.Product.name === row.data()[0])[0]);
         lines.ProductLines.splice(index, 1);
         lines.reDrawTable(table);
+        document.getElementById('total').innerText = "Toplam: " + "0";
     });
     var calculateTotal = function (lines) {
         var total = 0;

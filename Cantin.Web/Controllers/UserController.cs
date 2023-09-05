@@ -42,13 +42,14 @@ namespace Cantin.Web.Controllers
             return View(dto);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(UserAddDto dto)
+        public async Task<IActionResult> Add(UserAddDto addDto)
         {
+            await userService.ValidateUserAsync(addDto,ModelState);
             if (ModelState.IsValid)
             {
-                var result = await userService.AddUserWithRoleAsync(dto);
+                var result = await userService.AddUserWithRoleAsync(addDto);
                 if (result.Succeeded) {
-                    toastNotification.AddSuccessToastMessage(Messages.Messages.Add(dto.FullName,type));
+                    toastNotification.AddSuccessToastMessage(Messages.Messages.Add(addDto.FullName,type));
                     return RedirectToAction("Index");
                 }
                 else { 
@@ -57,15 +58,15 @@ namespace Cantin.Web.Controllers
                     ModelState.AddModelError(error.key,error.Description);
 
                 }
-                    toastNotification.AddErrorToastMessage(Messages.Messages.AddError(dto.FullName, type));
+                    toastNotification.AddErrorToastMessage(Messages.Messages.AddError(addDto.FullName, type));
 
-                    dto = await userService.GetUserAddDto();
-                return View(dto);
+                    addDto = await userService.GetUserAddDto();
+                return View(addDto);
                 }
             }
-            toastNotification.AddErrorToastMessage(Messages.Messages.AddError(dto.FullName, type));
-            dto = await userService.GetUserAddDto();
-            return View(dto);
+            toastNotification.AddErrorToastMessage(Messages.Messages.AddError(addDto.FullName, type));
+            addDto = await userService.GetUserAddDto();
+            return View(addDto);
         }
         [HttpGet]
         public async Task<IActionResult> Update(Guid id) {
@@ -73,13 +74,14 @@ namespace Cantin.Web.Controllers
             return View(dto);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(UserUpdateDto dto)
+        public async Task<IActionResult> Update(UserUpdateDto updateDto)
         {
-            if (ModelState.IsValid) {
-                IdentityResult result = await userService.UpdateUserWithRoleAsync(dto);
+			await userService.ValidateUserAsync(updateDto, ModelState);
+			if (ModelState.IsValid) {
+                IdentityResult result = await userService.UpdateUserWithRoleAsync(updateDto);
                 if (result.Succeeded)
                 {
-                    toastNotification.AddSuccessToastMessage(Messages.Messages.Update(dto.FullName, type));
+                    toastNotification.AddSuccessToastMessage(Messages.Messages.Update(updateDto.FullName, type));
                     return RedirectToAction("Index");
                 }
                 else {
@@ -88,25 +90,23 @@ namespace Cantin.Web.Controllers
 						ModelState.AddModelError(error.key, error.Description);
 
 					}
-					toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(dto.FullName, type));
-                    dto = await userService.GetUpdateUserDto(dto.Id);
-                        return View(dto);
+					toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.FullName, type));
+                    updateDto = await userService.GetUpdateUserDto(updateDto.Id);
+                        return View(updateDto);
 
                 }
                 
             }
-            toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(dto.FullName, type));
-            dto = await userService.GetUpdateUserDto(dto.Id);
-            return View(dto);
+            toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.FullName, type));
+            updateDto = await userService.GetUpdateUserDto(updateDto.Id);
+            return View(updateDto);
         }
-        public async Task<IActionResult> Delete(Guid Id) {
+        public async Task<IActionResult> Delete([FromRoute]Guid Id, [FromForm] string password) {
             var name =(await userManager.FindByIdAsync(Id.ToString())).FullName;
-            IdentityResult result = await userService.DeleteUserAsync(Id);
+            IdentityResult result = await userService.DeleteUserAsync(Id,password);
             if (result.Succeeded)
             {
                 toastNotification.AddSuccessToastMessage(Messages.Messages.Delete(name, type));
-
-
             }
             else {
                 toastNotification.AddErrorToastMessage(Messages.Messages.DeleteError(name, type));

@@ -1,5 +1,6 @@
 ﻿using Cantin.Entity.Dtos.Products;
 using Cantin.Entity.Entities;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Cantin.Service.Services.Abstraction
 {
@@ -14,5 +15,7 @@ namespace Cantin.Service.Services.Abstraction
 		Task<ProductUpdateDto> GetProductUpdateDtoAsync(Product product);
 		Task<string> UpdateProductAsync(ProductUpdateDto updateDto);
 		Task<string> DeleteProductByIdAsync(Guid Id);
+		Task ValidateProductAsync(ProductAddDto dto,ModelStateDictionary modelState);
+		Task ValidateProductAsync(ProductUpdateDto dto,ModelStateDictionary modelState);
 	}
 }

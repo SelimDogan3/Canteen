@@ -11,6 +11,8 @@ namespace Cantin.Entity.Dtos.Users
         public String FullName => FirstName + " " + LastName;
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public string? NewPassword { get; set; }
+        public string Password { get; set; }
         public string Adress { get; set; }
         public List<AppRole>? Roles { get; set; }
         public Guid RoleId { get; set; }

@@ -5,7 +5,10 @@ using Cantin.Entity.Dtos.Products;
 using Cantin.Entity.Entities;
 using Cantin.Service.Extensions;
 using Cantin.Service.Services.Abstraction;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -15,13 +18,15 @@ namespace Cantin.Service.Services.Concrete
 	{
 		private readonly IUnitOfWork unitOfWork;
 		private readonly IMapper mapper;
+		private readonly IValidator<Product> validator;
 		private readonly ClaimsPrincipal _user;
 
 		private IRepository<Product> repository { get => unitOfWork.GetRepository<Product>(); }
-		public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor contextAccessor)
+		public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor contextAccessor,IValidator<Product> validator)
 		{
 			this.unitOfWork = unitOfWork;
 			this.mapper = mapper;
+			this.validator = validator;
 			_user = contextAccessor.HttpContext.User;
 		}
 
@@ -91,6 +96,26 @@ namespace Cantin.Service.Services.Concrete
 			await repository.UpdateAsync(product);
 			await unitOfWork.SaveAsync();
 			return product.Name;
+		}
+
+		public async Task ValidateProductAsync(ProductAddDto dto, ModelStateDictionary modelState)
+		{
+			Product product = mapper.Map<Product>(dto);
+			ValidationResult result = await validator.ValidateAsync(product);
+			if (!result.IsValid) {
+				result.AddErrorsToModelState(modelState);
+			}
+			
+		}
+
+		public async Task ValidateProductAsync(ProductUpdateDto dto, ModelStateDictionary modelState)
+		{
+			Product product = mapper.Map<Product>(dto);
+			ValidationResult result = await validator.ValidateAsync(product);
+			if (!result.IsValid)
+			{
+				result.AddErrorsToModelState(modelState);
+			}
 		}
 	}
 }

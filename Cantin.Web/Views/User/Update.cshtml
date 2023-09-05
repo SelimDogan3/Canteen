@@ -50,6 +50,11 @@
                 <select id="PublisherList" class="form-control" asp-for="StoreId" value="@Model.StoreId" asp-items="@(new SelectList(Model.Stores,"Id","Name"))"></select>
                 <span class="text-danger" asp-validation-for="StoreId"></span>
             </div>
+            <div class="form-group">
+                <label>Yönetici Şifresi</label>
+                <input type="password" class="form-control" placeholder="doğrulama için şifrenizi girin" asp-for="Password" />
+                <span class="text-danger" class="text-danger" asp-validation-for="Password"></span>
+            </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2">Güncelle</button>
             </div>

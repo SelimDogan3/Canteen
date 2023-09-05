@@ -3,27 +3,39 @@ using Cantin.Data.UnitOfWorks;
 using Cantin.Entity.Dtos.Stores;
 using Cantin.Entity.Dtos.Users;
 using Cantin.Entity.Entities;
+using Cantin.Service.Extensions;
 using Cantin.Service.Services.Abstraction;
+using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Security.Claims;
 
 namespace Cantin.Service.Services.Concrete
 {
-    public class UserService : IUserService
+	public class UserService : IUserService
     {
         private readonly UserManager<AppUser> userManager;
         private readonly RoleManager<AppRole> roleManager;
         private readonly IMapper mapper;
         private readonly IUnitOfWork unitOfWork;
         private readonly IStoreService storeService;
+		private readonly IdentityErrorDescriber errorDescriber;
+		private readonly IValidator<AppUser> validator;
+		private readonly ClaimsPrincipal _user;
 
-        public UserService(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IMapper mapper, IUnitOfWork unitOfWork,IStoreService storeService)
+		public UserService(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IMapper mapper, IUnitOfWork unitOfWork,IStoreService storeService,IdentityErrorDescriber errorDescriber,IHttpContextAccessor contextAccessor,IValidator<AppUser> validator)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
             this.storeService = storeService;
-        }
+			this.errorDescriber = errorDescriber;
+			this.validator = validator;
+			_user = contextAccessor.HttpContext.User;
+		}
         public List<UserDto> GetAllUsers()
         {
             List<UserDto> dto = mapper.Map<List<UserDto>>(userManager.Users.ToList());
@@ -110,11 +122,15 @@ namespace Cantin.Service.Services.Concrete
         }
         public async Task<IdentityResult> AddUserWithRoleAsync(UserAddDto dto)
         {
-            AppUser user = mapper.Map<AppUser>(dto);
+            AppUser loggedInUser = await userManager.FindByEmailAsync(_user.GetLoggedInUserEmail());
+			IdentityResult result = await CheckIfPasswordMatch(loggedInUser, dto.Password);
+			if (!result.Succeeded)
+				return result;
+			AppUser user = mapper.Map<AppUser>(dto);
             user.UserName = dto.Email;
             user.PhoneNumberConfirmed = true;
             user.EmailConfirmed = true;
-			IdentityResult result = await userManager.CreateAsync(user, dto.pass);
+			result = await userManager.CreateAsync(user, dto.Pass);
             if (result.Succeeded)
             {
                 var role = await roleManager.FindByIdAsync(dto.RoleId.ToString());
@@ -136,17 +152,54 @@ namespace Cantin.Service.Services.Concrete
         }
         public async Task<IdentityResult> UpdateUserWithRoleAsync(UserUpdateDto dto)
         {
+            AppUser loggedInUser = await userManager.FindByEmailAsync(_user.GetLoggedInUserEmail());
             AppUser user = await userManager.FindByIdAsync(dto.Id.ToString());
-            AppUser map = mapper.Map(dto, user);
+            IdentityResult result = await CheckIfPasswordMatch(loggedInUser,dto.Password);
+            if (!result.Succeeded)
+                return result;
+			AppUser map = mapper.Map(dto, user);
             AppRole role = await roleManager.FindByIdAsync(dto.RoleId.ToString());
-			IdentityResult result = await UpdateUserRole(map, role);
+			result = await UpdateUserRole(map, role);
             return result;
         }
-        public async Task<IdentityResult> DeleteUserAsync(Guid Id)
+        public async Task<IdentityResult> DeleteUserAsync(Guid Id,string password)
         {
-			AppUser user = await userManager.FindByIdAsync(Id.ToString());
-			IdentityResult result = await userManager.DeleteAsync(user);
+            AppUser loggedInUser = await userManager.FindByEmailAsync(_user.GetLoggedInUserEmail());
+            IdentityResult result = await CheckIfPasswordMatch(loggedInUser, password);
+            if (!result.Succeeded)
+                return result;
+            AppUser user = await userManager.FindByIdAsync(Id.ToString());
+			result = await userManager.DeleteAsync(user);
             return result;
         }
-    }
+        public async Task<IdentityResult> CheckIfPasswordMatch(AppUser user,string password) {
+            List<IdentityError> errors = new List<IdentityError>();
+            bool isMatch = await userManager.CheckPasswordAsync(user,password);
+            if (isMatch) {
+                return IdentityResult.Success;
+            }
+            IdentityError error = errorDescriber.PasswordMismatch();
+            errors.Add(error);
+            return IdentityResult.Failed(errors.ToArray());
+        }
+
+		public async Task ValidateUserAsync(UserAddDto dto, ModelStateDictionary modelState)
+		{
+            AppUser user = mapper.Map<AppUser>(dto);
+            ValidationResult result = await validator.ValidateAsync(user);
+			if (!result.IsValid)
+			{
+				result.AddErrorsToModelState(modelState);
+			}
+		}
+
+		public async Task ValidateUserAsync(UserUpdateDto dto, ModelStateDictionary modelState)
+		{
+			AppUser user = mapper.Map<AppUser>(dto);
+			ValidationResult result = await validator.ValidateAsync(user);
+			if (!result.IsValid) { 
+				result.AddErrorsToModelState(modelState);
+			}
+		}
+	}
 }

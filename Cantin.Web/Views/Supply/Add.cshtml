@@ -13,7 +13,7 @@
     </div>
     <!--begin::Form-->
     <form method="post" asp-controller="Supply" asp-action="Add">
-        <div asp-validation-summary="All"></div>
+        <div asp-validation-summary="None"></div>
         <div class="card-body">
             <div class="form-group">
                 <label asp-for="Supplier">Tedarikçinin Adı</label>
@@ -27,12 +27,12 @@
             </div>
             <div class="form-group">
                 <label>Tedarik Miktarı</label>
-                <input type="text" class="form-control" placeholder="Tedarik miktarını girin" asp-for="Quantity" />
+                <input type="number" min="1" class="form-control" placeholder="Tedarik miktarını girin" asp-for="Quantity" />
                 <span class="text-danger" class="text-danger" asp-validation-for="Quantity"></span>
             </div>
             <div class="form-group">
                 <label>Birim Fiyatı</label>
-                <input type="text" class="form-control" placeholder="Ürünün birim fiyatını girin" asp-for="UnitPrice" />
+                <input type="number" class="form-control" placeholder="Ürünün birim fiyatını girin" asp-for="UnitPrice" />
                 <span class="text-danger" class="text-danger" asp-validation-for="UnitPrice"></span>
             </div>
             <div class="form-group">
