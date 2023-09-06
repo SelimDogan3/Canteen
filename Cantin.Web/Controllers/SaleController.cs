@@ -43,7 +43,6 @@ namespace Cantin.Web.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Add()
 		{
-			
 			var dto = await saleService.GetSaleAddDtoAsync();
 			return View(dto);
 		}

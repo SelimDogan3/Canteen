@@ -25,7 +25,7 @@ namespace Cantin.Service.Services.Concrete
         public async Task AddStockToStoreAsync(Supply supply)
         {
             Stock stock = mapper.Map<Stock>(supply);
-            var baseStock = await repository.GetAsync(x => x.Product.Id == stock.ProductId);
+            var baseStock = await repository.GetAsync(x => x.Product.Id == stock.ProductId & stock.StoreId == x.StoreId);
             if (baseStock == null)
             {
                 await repository.AddAsync(stock);

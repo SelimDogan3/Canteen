@@ -87,6 +87,7 @@ $(document).ready(function () {
             let stocksTable = tableStart;
             var stocksLines = tr[0].dataset.stocksLine;
             stocksLines = JSON.parse(stocksLines);
+            stocksLines.sort((a, b) => a.quantity - b.quantity);
             stocksLines.forEach(function (line) {
                 let tr = CreateStockTr(line);
                 stocksTable += tr;
