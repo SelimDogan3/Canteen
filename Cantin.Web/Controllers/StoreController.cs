@@ -17,8 +17,6 @@ namespace Cantin.Web.Controllers
 		private readonly IStoreService storeService;
 		private readonly IStockService stockService;
 		private readonly IToastNotification toastMessage;
-		private readonly IMapper mapper;
-		private readonly IValidator validator;
 		private readonly string type = "Mağaza";
 
 		public StoreController(ILogger<StoreController> logger, IStoreService storeService, IStockService stockService, IToastNotification toastMessage)

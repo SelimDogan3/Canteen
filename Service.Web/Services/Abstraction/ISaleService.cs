@@ -7,7 +7,7 @@ namespace Cantin.Service.Services.Abstraction
 	{
 		Task<List<SaleDto>> GetAllSalesNonDeletedAsync();
 		Task<List<SaleDto>> GetSalesForEmployeeAsync();
-		SaleAddDto GetSaleAddDto();
+		Task<SaleAddDto> GetSaleAddDtoAsync();
 		Task AddSaleAsync(SaleAddDto dto);
 		Task MatchProductWithSaleAsync(Guid saleId, Guid productId, int quantity);
 	}

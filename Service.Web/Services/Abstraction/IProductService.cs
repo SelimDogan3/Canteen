@@ -15,6 +15,7 @@ namespace Cantin.Service.Services.Abstraction
 		Task<ProductUpdateDto> GetProductUpdateDtoAsync(Product product);
 		Task<string> UpdateProductAsync(ProductUpdateDto updateDto);
 		Task<string> DeleteProductByIdAsync(Guid Id);
+		Task<List<ProductDto>> GetMostUsedProductsAsync();
 		Task ValidateProductAsync(ProductAddDto dto,ModelStateDictionary modelState);
 		Task ValidateProductAsync(ProductUpdateDto dto,ModelStateDictionary modelState);
 	}

@@ -117,5 +117,12 @@ namespace Cantin.Service.Services.Concrete
 				result.AddErrorsToModelState(modelState);
 			}
 		}
-	}
+
+        public async Task<List<ProductDto>> GetMostUsedProductsAsync()
+        {
+			List<Product> products = await repository.GetAllAsync(x => !x.IsDeleted & x.MostUsed);
+			var map = mapper.Map<List<ProductDto>>(products);
+			return map;
+        }
+    }
 }

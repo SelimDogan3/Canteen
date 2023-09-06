@@ -33,7 +33,7 @@ namespace Cantin.Service.Services.Concrete
 			this.storeService = storeService;
 			this.userManager = userManager;
 			this.stockService = stockService;
-			_user = contextAccessor.HttpContext.User;
+			_user = contextAccessor.HttpContext!.User;
 
 		}
 		public async Task<List<SaleDto>> GetAllSalesNonDeletedAsync()
@@ -56,9 +56,10 @@ namespace Cantin.Service.Services.Concrete
 			}
 			return map;
 		}
-		public SaleAddDto GetSaleAddDto()
+		public async Task<SaleAddDto> GetSaleAddDtoAsync()
 		{
 			SaleAddDto dto = new SaleAddDto();
+			dto.MostUsedProducts = await productService.GetMostUsedProductsAsync();
 			return dto;
 		}
 		public async Task AddSaleAsync(SaleAddDto dto)

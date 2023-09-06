@@ -26,6 +26,11 @@
                 <span class="text-danger" asp-validation-for="Barcode"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Name">Çok Satılanlara Ekle</label>
+                <input type="checkbox" class="form-control" asp-for="MostUsed" />
+                <span class="text-danger" asp-validation-for="MostUsed"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Name">Ürün Satış Fiyatı</label>
                 <input type="text" class="form-control" placeholder="Ürünün satış fiyatını girin" asp-for="SalePrice" />
                 <span class="text-danger" asp-validation-for="SalePrice"></span>

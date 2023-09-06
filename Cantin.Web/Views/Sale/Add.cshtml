@@ -9,17 +9,16 @@
     </div>
     <div class="card-body">
         <div>
-            <button class="btn btn-warning">
-                Su
+            @foreach(ProductDto product in Model.MostUsedProducts){
+            <button class="btn btn-warning mostUsed" data-barcode="@product.Barcode">
+                @product.Name
             </button>
-            <button class="btn btn-danger" >
-                Tost
-            </button>
+            }
         </div>
         <br />
         <div class="form-group">
             <label>Ürün Barkodu</label>
-            <input id="barkodInput" class="form-control" placeholder="Ürünün barkodunu girin" name="barcode" type="text" />
+            <input id="barcodeInput" class="form-control" placeholder="Ürünün barkodunu girin" name="barcode" type="text" />
             <br />
             <button class="btn btn-primary" id="myButton">sbm</button>
         </div>
