@@ -57,7 +57,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("2ac8179a-3f45-40d2-ac0e-65d58333e265"),
-                            ConcurrencyStamp = "96a8bbcc-93b6-499b-b1f6-ed27b5e10bea",
+                            ConcurrencyStamp = "43dbd704-2d36-42de-a20a-a89fb982da9c",
                             Description = "",
                             Name = "Superadmin",
                             NormalizedName = "SUPERADMIN"
@@ -65,7 +65,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("eebcd6ba-d079-4fde-a81a-df80076c8002"),
-                            ConcurrencyStamp = "6a081916-c870-478b-8ea7-f95a095e0afb",
+                            ConcurrencyStamp = "7b72e6d0-b7f8-45b8-8c4b-3f6431e6776e",
                             Description = "Admin",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
@@ -73,7 +73,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("bd76b238-de73-447e-bef6-424f84b844c8"),
-                            ConcurrencyStamp = "34b3a828-1025-47ca-aa4e-286da95fb241",
+                            ConcurrencyStamp = "35f8ab6a-197c-4603-b1f5-d028b4d14700",
                             Description = "Çalışan",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
@@ -192,7 +192,7 @@ namespace Cantin.Data.Migrations
                             Id = new Guid("6168a092-56d5-439d-a0b8-940fbda81950"),
                             AccessFailedCount = 0,
                             Adress = "This is an Adress",
-                            ConcurrencyStamp = "baec2915-eee0-41f9-b7a9-1c5d85ea5acb",
+                            ConcurrencyStamp = "9ae45e72-6326-42cf-adb9-7885a374b9ac",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Mutlu",
@@ -200,10 +200,10 @@ namespace Cantin.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPJftauG/d3MQ4BQkQYsNylRXNhszpJKLcp/YIINtk/px7pPIBl+KKBTAW/mKNmVvw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEw+wz595PMS94Kqm4oKnzG+PZRts0qm4ksXUtacwXGKdjz2mdAVkbRvJMYVVdEhCA==",
                             PhoneNumber = "+905000000000",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "8b6a9ef2-b813-4fe6-807c-3b078f5ac295",
+                            SecurityStamp = "6d062369-2ff6-4e36-a8f5-087512ed9480",
                             StoreId = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
@@ -213,7 +213,7 @@ namespace Cantin.Data.Migrations
                             Id = new Guid("4083029d-7624-44d6-acfa-4a54deefbd3f"),
                             AccessFailedCount = 0,
                             Adress = "This is an Adress2",
-                            ConcurrencyStamp = "b443e642-8ca8-437b-b793-3438eba8c749",
+                            ConcurrencyStamp = "dbf3d691-4c88-440f-bd64-1d0565de02f6",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Dilara",
@@ -221,10 +221,10 @@ namespace Cantin.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOgRtz+ioO+dNkSbM+fqI82DERHF1/3VCTFJ3IPFNU2kZSKMhnOmWxvmaWyFFtj87A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH1JA/xmoFmqEDRh0Jq07198awWI4dyI+BzEXFcDOkIpJ/NPI9UgvrevNwPrmCr6Ew==",
                             PhoneNumber = "+905000000000",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "ffc976ba-5b1c-4c50-b679-da9468ecefec",
+                            SecurityStamp = "9ffb4e28-54f5-4fc1-afd0-2d0814a7abb4",
                             StoreId = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
@@ -556,7 +556,7 @@ namespace Cantin.Data.Migrations
                             Id = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
                             Adress = "Depo",
                             CreatedBy = "Admin",
-                            CreatedDate = new DateTime(2023, 9, 6, 1, 5, 13, 781, DateTimeKind.Local).AddTicks(6902),
+                            CreatedDate = new DateTime(2023, 9, 6, 17, 47, 36, 503, DateTimeKind.Local).AddTicks(1073),
                             IsDeleted = false,
                             Name = "Depo",
                             PhoneNumber = "123214512412512"

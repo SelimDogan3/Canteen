@@ -37,32 +37,14 @@ namespace Cantin.Web.Controllers
                     if (result.Succeeded)
                     {
                         await userManager.ResetAccessFailedCountAsync(user);
-                        toast.AddInfoToastMessage(user.FullName+" adlı kullanıcı başarıyla giriş yaptı");
+                        toast.AddInfoToastMessage(user.FullName+" adlı kullanıcı başarıyla giriş yaptı",new ToastrOptions{Title="Oturum Bilgisi"});
                         return Redirect(TempData["returnUrl"] == null || TempData["returnUrl"]?.ToString() == String.Empty ? "/Home/Index" : TempData["returnUrl"]!.ToString()!);
                     }
-                    else
-                    {
-						if (await userManager.IsLockedOutAsync(user))
-						{
-							ModelState.AddModelError("", "Hesabınız kilitnemiştir bir daha denemeden önce biraz daha bekleyiniz");
-						}
-                        else 
-                        { 
-                            int failedCount = await userManager.GetAccessFailedCountAsync(user);
-                            if (failedCount == 3)
-                            {
-                                await userManager.SetLockoutEndDateAsync(user, new DateTimeOffset(DateTime.Now.AddMinutes(1)));
-                                ModelState.AddModelError("", "3 kez hatalı giriş yaptığınız için hesabınız 1 dk kilitlenmiştir");
-                            }
-                            else
-                            { 
-                                ModelState.AddModelError("", $"Hatalı giriş yaptınız Kalan hakkınız {3 - failedCount}");
-                            }
-						}
-					}
                 }
                 
             }
+            ModelState.AddModelError("","Mailiniz veye şifreniz yanlış tekrar kontrol ediniz");
+			toast.AddInfoToastMessage("Giriş Yapmaya çalışırken bir hata oluştu", new ToastrOptions { Title = "Oturum Bilgisi" });
 			return View();
 		}
         [Authorize]

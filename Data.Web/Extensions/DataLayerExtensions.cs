@@ -19,7 +19,7 @@ namespace Cantin.Data.Extensions
 				{
 					opt.Password.RequireNonAlphanumeric = false;
 					opt.Password.RequireLowercase = false;
-					opt.Password.RequireUppercase = true;
+					opt.Password.RequireUppercase = false;
 					opt.User.RequireUniqueEmail = false;
 				})
 			.AddRoleManager<RoleManager<AppRole>>()

@@ -41,10 +41,10 @@ namespace Cantin.Web.Controllers
 			if (ModelState.IsValid)
 			{
 				string name = await productService.AddProductAsync(addDto);
-				toastNotification.AddSuccessToastMessage(Messages.Messages.Add(name, type));
+				toastNotification.AddSuccessToastMessage(Messages.Messages.Add(name, type), new ToastrOptions { Title = "Ürün Ekleme" });
 				return RedirectToAction("Index");
 			}
-			toastNotification.AddErrorToastMessage(Messages.Messages.AddError(addDto.Name, type));
+			toastNotification.AddErrorToastMessage(Messages.Messages.AddError(addDto.Name, type), new ToastrOptions { Title = "Ürün Ekleme" });
 
 			return View(addDto);
 		}
@@ -62,16 +62,16 @@ namespace Cantin.Web.Controllers
 			if (ModelState.IsValid)
 			{
 				string name = await productService.UpdateProductAsync(updateDto);
-				toastNotification.AddSuccessToastMessage(Messages.Messages.Update(name, type));
+				toastNotification.AddSuccessToastMessage(Messages.Messages.Update(name, type), new ToastrOptions { Title = "Ürün Güncelleme" });
 				return RedirectToAction("Index");
 			}
-			toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.Name, type));
+			toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.Name, type), new ToastrOptions { Title = "Ürün Güncelleme" });
 			return View(updateDto);
 		}
 		public async Task<IActionResult> Delete(Guid Id)
 		{
 			string name = await productService.DeleteProductByIdAsync(Id);
-			toastNotification.AddSuccessToastMessage(Messages.Messages.Delete(name, type));
+			toastNotification.AddSuccessToastMessage(Messages.Messages.Delete(name, type), new ToastrOptions { Title = "Ürün Silme" });
 			return RedirectToAction("Index");
 		}
 	}

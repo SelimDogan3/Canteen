@@ -55,14 +55,14 @@ namespace Cantin.Web.Controllers
 						ModelState.AddModelError(error.key, error.Description);
 
 					}
-					toast.AddErrorToastMessage(Messages.Messages.AddError(addDto.Name, type));
+					toast.AddErrorToastMessage(Messages.Messages.AddError(addDto.Name, type), new ToastrOptions { Title = "Rol Ekleme" });
 					addDto = roleService.GetRoleAddDto();
 					return View(addDto);
 				}
-				toast.AddSuccessToastMessage(Messages.Messages.Add(addDto.Name, type));
+				toast.AddSuccessToastMessage(Messages.Messages.Add(addDto.Name, type), new ToastrOptions { Title = "Rol Ekleme" });
 				return RedirectToAction("Index");
 			}
-			toast.AddErrorToastMessage(Messages.Messages.AddError(addDto.Name, type));
+			toast.AddErrorToastMessage(Messages.Messages.AddError(addDto.Name, type), new ToastrOptions { Title = "Rol Ekleme" });
 			var dto = roleService.GetRoleAddDto();
 			return View(dto);
 		}
@@ -86,16 +86,16 @@ namespace Cantin.Web.Controllers
 						ModelState.AddModelError(error.key, error.Description);
 
 					}
-					toast.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.Name, type));
+					toast.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.Name, type), new ToastrOptions { Title = "Rol Güncelleme" });
 					return View(updateDto);
 				}
 				else
 				{
-					toast.AddSuccessToastMessage(Messages.Messages.Update(updateDto.Name, type));
+					toast.AddSuccessToastMessage(Messages.Messages.Update(updateDto.Name, type), new ToastrOptions { Title = "Rol Güncelleme" });
 					return RedirectToAction("Index");
 				}
 			}
-			toast.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.Name, type));
+			toast.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.Name, type), new ToastrOptions { Title = "Rol Güncelleme" });
 			return View(updateDto);
 		}
 		public async Task<IActionResult> Delete(Guid Id)
@@ -104,11 +104,11 @@ namespace Cantin.Web.Controllers
 			var result = await roleService.DeleteRoleAsync(Id);
 			if (result.Succeeded)
 			{
-				toast.AddSuccessToastMessage(Messages.Messages.Delete(name, type));
+				toast.AddSuccessToastMessage(Messages.Messages.Delete(name, type), new ToastrOptions { Title = "Rol Silme" });
 			}
 			else
 			{
-				toast.AddErrorToastMessage(Messages.Messages.DeleteError(name, type));
+				toast.AddErrorToastMessage(Messages.Messages.DeleteError(name, type),new ToastrOptions { Title = "Rol Silme" });
 
 			}
 			return RedirectToAction("Index");

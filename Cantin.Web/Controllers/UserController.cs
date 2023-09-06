@@ -51,7 +51,7 @@ namespace Cantin.Web.Controllers
             {
                 var result = await userService.AddUserWithRoleAsync(addDto);
                 if (result.Succeeded) {
-                    toastNotification.AddSuccessToastMessage(Messages.Messages.Add(addDto.FullName,type));
+                    toastNotification.AddSuccessToastMessage(Messages.Messages.Add(addDto.FullName,type), new ToastrOptions { Title = "Kullanıcı Ekleme" });
                     return RedirectToAction("Index");
                 }
                 else { 
@@ -60,13 +60,13 @@ namespace Cantin.Web.Controllers
                     ModelState.AddModelError(error.key,error.Description);
 
                 }
-                    toastNotification.AddErrorToastMessage(Messages.Messages.AddError(addDto.FullName, type));
+                    toastNotification.AddErrorToastMessage(Messages.Messages.AddError(addDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Ekleme" });
 
                     addDto = await userService.GetUserAddDto();
                 return View(addDto);
                 }
             }
-            toastNotification.AddErrorToastMessage(Messages.Messages.AddError(addDto.FullName, type));
+            toastNotification.AddErrorToastMessage(Messages.Messages.AddError(addDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Ekleme" });
             addDto = await userService.GetUserAddDto();
             return View(addDto);
         }
@@ -83,7 +83,7 @@ namespace Cantin.Web.Controllers
                 IdentityResult result = await userService.UpdateUserWithRoleAsync(updateDto);
                 if (result.Succeeded)
                 {
-                    toastNotification.AddSuccessToastMessage(Messages.Messages.Update(updateDto.FullName, type));
+                    toastNotification.AddSuccessToastMessage(Messages.Messages.Update(updateDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Güncelleme" });
                     return RedirectToAction("Index");
                 }
                 else {
@@ -92,14 +92,14 @@ namespace Cantin.Web.Controllers
 						ModelState.AddModelError(error.key, error.Description);
 
 					}
-					toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.FullName, type));
+					toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Güncelleme" });
                     updateDto = await userService.GetUpdateUserDto(updateDto.Id);
                         return View(updateDto);
 
                 }
                 
             }
-            toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.FullName, type));
+            toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Güncelleme" });
             updateDto = await userService.GetUpdateUserDto(updateDto.Id);
             return View(updateDto);
         }
@@ -108,10 +108,10 @@ namespace Cantin.Web.Controllers
             IdentityResult result = await userService.DeleteUserAsync(Id,password);
             if (result.Succeeded)
             {
-                toastNotification.AddSuccessToastMessage(Messages.Messages.Delete(name, type));
+                toastNotification.AddSuccessToastMessage(Messages.Messages.Delete(name, type), new ToastrOptions { Title = "Kullanıcı Silme" });
             }
             else {
-                toastNotification.AddErrorToastMessage(Messages.Messages.DeleteError(name, type));
+                toastNotification.AddErrorToastMessage(Messages.Messages.DeleteError(name, type), new ToastrOptions { Title = "Kullanıcı Silme" });
 
             }
             return RedirectToAction("Index");

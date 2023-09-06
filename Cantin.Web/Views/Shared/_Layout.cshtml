@@ -91,7 +91,7 @@
 						<ul class="menu-nav">
 							@{var role = Context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;}
 							
-							@if (role == "Employee")
+							@if (role != "Admin" & role != "Superadmin")
 							{
 								<li class="menu-section">
 									<h4 class="menu-text">Satış</h4>
@@ -260,7 +260,7 @@
 			<!--begin::Wrapper-->
 			<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 				<!--begin::Header-->
-				<div id="kt_header" style="background-color: #1a1a27;color: #a2a3b7;" class="header header-fixed">
+				<div id="kt_header" style="background-color: #1e1e2d;color: #a2a3b7;" class="header header-fixed">
 					<!--begin::Container-->
 					<div class="container-fluid d-flex align-items-stretch justify-content-between">
 						<div></div>

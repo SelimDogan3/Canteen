@@ -36,7 +36,8 @@ namespace Cantin.Data.Mappings
             {
                 Id = Guid.Parse("2AC8179A-3F45-40D2-AC0E-65D58333E265"),
                 Name = "Superadmin",
-                NormalizedName = "SUPERADMIN",
+				Description = "Super Admin",
+				NormalizedName = "SUPERADMIN",
                 ConcurrencyStamp = Guid.NewGuid().ToString()
             },
             new AppRole

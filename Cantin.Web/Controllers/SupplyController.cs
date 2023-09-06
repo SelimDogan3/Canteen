@@ -46,10 +46,10 @@ namespace Cantin.Web.Controllers
 			if (ModelState.IsValid)
 			{
 				await supplyService.AddSupplyAsync(addDto);
-				toast.AddSuccessToastMessage($"{addDto.Supplier} tarafından alınan tedarik başarıyla eklenmiştir");
+				toast.AddSuccessToastMessage($"{addDto.Supplier} tarafından alınan tedarik başarıyla eklenmiştir", new ToastrOptions { Title = "Tedarik Ekleme" });
 				return RedirectToAction("Index");
 			}
-			toast.AddErrorToastMessage($"{addDto.Supplier} tarafından alınan tedarik eklenirken bir sorun oluştu");
+			toast.AddErrorToastMessage($"{addDto.Supplier} tarafından alınan tedarik eklenirken bir sorun oluştu", new ToastrOptions { Title = "Tedarik Ekleme" });
 			addDto.Products = await productService.GetAllProductsNonDeletedAsync();
 			addDto.Stores = await storeService.GetAllStoreDtosNonDeleted();
 			return View(addDto);
@@ -68,10 +68,10 @@ namespace Cantin.Web.Controllers
 			if (ModelState.IsValid)
 			{
 				await supplyService.UpdateSupplyAsync(updateDto);
-				toast.AddSuccessToastMessage($"{updateDto.Supplier} tarafından alınan tedarik başarıyla güncellenmiştir");
+				toast.AddSuccessToastMessage($"{updateDto.Supplier} tarafından alınan tedarik başarıyla güncellenmiştir", new ToastrOptions { Title = "Tedarik Güncelleme" });
 				return RedirectToAction("Index");
 			}
-			toast.AddErrorToastMessage($"{updateDto.Supplier} tarafından alınan tedarik güncellenirken bir sorun oluştu ");
+			toast.AddErrorToastMessage($"{updateDto.Supplier} tarafından alınan tedarik güncellenirken bir sorun oluştu ", new ToastrOptions { Title = "Tedarik Güncelleme" });
 			updateDto.Products = await productService.GetAllProductsNonDeletedAsync();
 
 			return View(updateDto);
@@ -79,7 +79,7 @@ namespace Cantin.Web.Controllers
 		public async Task<IActionResult> Delete(Guid Id)
 		{
 			var name = await supplyService.DeleteStockAsync(Id);
-			toast.AddSuccessToastMessage($"{name} tarafından alınan tedarik başarıyla silinmiştir");
+			toast.AddSuccessToastMessage($"{name} tarafından alınan tedarik başarıyla silinmiştir", new ToastrOptions { Title = "Tedarik Silme" });
 
 			return RedirectToAction("Index");
 		}
