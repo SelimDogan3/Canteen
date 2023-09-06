@@ -1,4 +1,7 @@
 ﻿@model SaleAddDto
+@section Css{
+    <link rel="stylesheet" href="~/css/saleAddStyles.css">
+}
 <div class="card card-custom">
     <div class="card-header flex-wrap">
         <div class="card-title">
@@ -19,15 +22,11 @@
         <div class="form-group">
             <label>Ürün Barkodu</label>
             <input id="barcodeInput" class="form-control" placeholder="Ürünün barkodunu girin" name="barcode" type="text" />
-            <br />
-            <button class="btn btn-primary" id="myButton">sbm</button>
         </div>
 
         <br />
         <!--begin: Datatable-->
-        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-            <div class="row">
-                <div class="col-sm-12">
+        <div class="table-responsive">
                     <table class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline" id="ProductsTable" role="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
                         <thead>
                             <tr role="row">
@@ -36,8 +35,8 @@
                                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Birim Fiyatı</th>
                                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Miktarı</th>
                                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Sütun Fiyatı</th>
-                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Reduce</th>
-                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">DeleteButton</th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;"></th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,13 +50,9 @@
                             </tr>
                         </tfoot>
                     </table>
-
-                </div>
-            </div>
             <!--end: Datatable-->
-            <input id="productLines" name="productLines" type="hidden" />
             <input id="soldTotal" name="SoldTotal" type="hidden" />
-            <button id="addButton" class="btn btn-primary" type="submit">Satış Yap</button>
+            <button id="addButton" class="btn btn-primary" type="submit">Bitir</button>
         </div>
     </div>
 </div>

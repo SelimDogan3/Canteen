@@ -13,8 +13,40 @@
       "PackagePath": "staticwebassets\\Cantin.Web.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\productIndexStyles.css",
+      "PackagePath": "staticwebassets\\css\\productIndexStyles.css"
+    },
+    {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\roleStyles.css",
+      "PackagePath": "staticwebassets\\css\\roleStyles.css"
+    },
+    {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\saleAddStyles.css",
+      "PackagePath": "staticwebassets\\css\\saleAddStyles.css"
+    },
+    {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\saleIndexStyles.css",
+      "PackagePath": "staticwebassets\\css\\saleIndexStyles.css"
+    },
+    {
       "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\storeStockStyles.css",
+      "PackagePath": "staticwebassets\\css\\storeStockStyles.css"
+    },
+    {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\storeStyles.css",
+      "PackagePath": "staticwebassets\\css\\storeStyles.css"
+    },
+    {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\supplyIndexStyles.css",
+      "PackagePath": "staticwebassets\\css\\supplyIndexStyles.css"
+    },
+    {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\userStyles.css",
+      "PackagePath": "staticwebassets\\css\\userStyles.css"
     },
     {
       "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\demo1\\dist\\assets\\css\\pages\\error\\error-3.css",

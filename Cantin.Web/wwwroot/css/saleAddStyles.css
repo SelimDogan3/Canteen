@@ -1,0 +1,46 @@
+﻿/* Genel card stilleri */
+.card-custom {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Card başlığı için özelleştirmeler */
+.card-header {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Card başlığındaki metin için stiller */
+.card-label {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Card araçları için stiller */
+.card-toolbar {
+    margin-left: auto;
+}
+
+/* Tablo başlıkları için özelleştirmeler */
+.table-head-custom th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+/* Düğmeler için özelleştirmeler */
+.btn-clean {
+    background: none;
+    border: none;
+}
+
+/* Mobil için düğmeleri düzenlemek */
+@media (max-width: 767px) {
+    .d-flex.flex-wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-sm.btn-clean.btn-icon {
+        margin-bottom: 5px;
+    }
+}

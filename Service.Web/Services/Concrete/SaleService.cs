@@ -48,7 +48,8 @@ namespace Cantin.Service.Services.Concrete
 		}
 		public async Task<List<SaleDto>> GetSalesForEmployeeAsync()
 		{
-			List<Sale> sales = await repository.GetAllAsync(x => !x.IsDeleted || DateTime.Compare(x.CreatedDate.AddDays(1.0), DateTime.Now) < 0, x => x.Store);
+			//24 saate göre hesaplar DateTime.Compare(x.CreatedDate.AddDays(1.0), DateTime.Now) > 0
+			List<Sale> sales = await repository.GetAllAsync(x => !x.IsDeleted & x.CreatedDate.Day == DateTime.Now.Day , x => x.Store);
 			var map = mapper.Map<List<SaleDto>>(sales);
 			foreach (var saleDto in map)
 			{

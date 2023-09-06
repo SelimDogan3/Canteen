@@ -1,4 +1,5 @@
 ﻿let table = $('#SalesTable').DataTable({
+    responsive: true,
     dom:
         "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
         "<'row'<'col-sm-12'tr>>" +
@@ -40,13 +41,11 @@
 let tableStart =
     `
         <dl>
-        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-        <div class="row" >
-            <div class="col-sm-12">
-                <table id="SalesTable" class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline" product="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
+        <div class="table-responsive">
+        
+                <table id="ProductsTable" class="table table-separate table-head-custom table-checkable" product="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
                     <thead>
                         <tr product="row">
-
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün İsmi</th>
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Miktarı</th>
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Tane Fiyatı</th>
@@ -59,8 +58,6 @@ let tableStart =
 let tableFinish =
     `
                    </table>
-            </div>
-		</div >
 	</div >
         </dl>
     

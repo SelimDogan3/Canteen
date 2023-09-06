@@ -1,4 +1,7 @@
 ﻿@model List<SaleDto>
+@section Css{
+	<link rel="stylesheet" href="~/css/saleIndexStyles.css">
+}
 <!--begin::Card-->
 <div class="card card-custom">
 	<div class="card-header flex-wrap">
@@ -15,10 +18,8 @@
 	</div>
 	<div class="card-body">
 		<!--begin: Datatable-->
-		<div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-			<div class="row">
-				<div class="col-sm-12">
-					<table id="SalesTable" class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline" product="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
+		<div class="table-responsive">
+			<table id="SalesTable" class="table table-separate table-head-custom table-checkable" product="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
 						<thead>
 							<tr product="row">
 								<th class="dt-control sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 31px;"></th>
@@ -35,13 +36,10 @@
 									<td>@sale.Store!.Name</td>
 									<td>@sale.CreatedDate.ToString()</td>
 									<td>@sale.SoldTotal₺</td>
-
 								</tr>
 							}
 						</tbody>
 					</table>
-				</div>
-			</div>
 			<!--end: Datatable-->
 		</div>
 	</div>

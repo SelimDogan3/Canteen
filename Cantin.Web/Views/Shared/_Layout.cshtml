@@ -28,6 +28,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<!--end::Layout Themes-->
 	<link rel="shortcut icon" href="~/demo1/dist/assets/media/logos/civil-logo-beyaz2.png" />
+	@await RenderSectionAsync("Css",false)
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -36,9 +37,6 @@
 	<!--begin::Header Mobile-->
 	<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 		<!--begin::Logo-->
-		<a href="index.html">
-			<img alt="Logo" src="~/img/logo.png" />
-		</a>
 		<!--end::Logo-->
 		<!--begin::Toolbar-->
 		<div class="d-flex align-items-center">
@@ -262,7 +260,7 @@
 			<!--begin::Wrapper-->
 			<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 				<!--begin::Header-->
-				<div id="kt_header" class="header header-fixed">
+				<div id="kt_header" style="background-color: #1a1a27;color: #a2a3b7;" class="header header-fixed">
 					<!--begin::Container-->
 					<div class="container-fluid d-flex align-items-stretch justify-content-between">
 						<div></div>
@@ -1851,6 +1849,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	
 	<!--end::Page Scripts-->

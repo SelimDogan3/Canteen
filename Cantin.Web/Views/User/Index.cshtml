@@ -1,4 +1,7 @@
 ﻿@model List<UserDto>
+@section Css{
+    <link rel="stylesheet" href="~/css/userStyles.css">
+}
 <!--begin::Card-->
 <div class="card card-custom">
     <div class="card-header flex-wrap">
@@ -20,7 +23,8 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>Kullanıcı Ekle
+                </span>
+                Kullanıcı Ekle
             </a>
             <!--end::Button-->
         </div>
@@ -28,14 +32,11 @@
     </div>
     <div class="card-body">
         <!--begin: Datatable-->
-        <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="UsersTable" class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline" role="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
+        <div class="table-responsive">
+            <table id="UsersTable" class="table table-separate table-head-custom table-checkable" role="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
                         <thead>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Kullanıcı Adı</th>
-                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Kullanıcı Soyadı</th>
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Kullanıcı AdıSoyadı</th>
                                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Kullanıcı Telefon Numarası</th>
                                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Kullanıcı Maili</th>
                                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Kullanıcı Adresi</th>
@@ -49,25 +50,15 @@
                             @foreach (var user in Model)
                             {
                                 <tr role="row" class="even">
-                                    <td>@user.FirstName</td>
-                                    <td>@user.LastName</td>
+                                    <td>@user.FullName</td>
                                     <td>@user.PhoneNumber</td>
                                     <td>@user.Email</td>
                                     <td>@user.Adress</td>
                                     <td>@user.Role</td>
                                     <td>@user.Store.Name</td>
                                     <td nowrap="nowrap">
-                                        <a asp-controller="User" asp-action="Detail" class="btn btn-sm btn-clean btn-icon mr-2" title="Düzenle">
-                                            <span class="svg-icon svg-icon-primary svg-icon-2x">
-                                                <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Clip.svg-->
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24" />
-                                                        <path d="M14,16 L12,16 L12,12.5 C12,11.6715729 11.3284271,11 10.5,11 C9.67157288,11 9,11.6715729 9,12.5 L9,17.5 C9,19.4329966 10.5670034,21 12.5,21 C14.4329966,21 16,19.4329966 16,17.5 L16,7.5 C16,5.56700338 14.4329966,4 12.5,4 L12,4 C10.3431458,4 9,5.34314575 9,7 L7,7 C7,4.23857625 9.23857625,2 12,2 L12.5,2 C15.5375661,2 18,4.46243388 18,7.5 L18,17.5 C18,20.5375661 15.5375661,23 12.5,23 C9.46243388,23 7,20.5375661 7,17.5 L7,12.5 C7,10.5670034 8.56700338,9 10.5,9 C12.4329966,9 14,10.5670034 14,12.5 L14,16 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.500000, 12.500000) rotate(-315.000000) translate(-12.500000, -12.500000) " />
-                                                    </g>
-                                                </svg><!--end::Svg Icon-->
-                                            </span>
-                                        </a>
+                                <div class="d-flex flex-wrap">
+                                    <!-- Add flexbox layout for mobile -->
                                         <a asp-controller="User" asp-action="Update" asp-route-Id="@user.Id" data-id="@user.Id" class="btn btn-sm btn-clean btn-icon mr-2" title="Düzenle">
                                             <span class="svg-icon svg-icon-primary svg-icon-2x">
                                                 <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Design\Edit.svg-->
@@ -116,13 +107,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
-                </div>
-            </div>
             <!--end: Datatable-->
         </div>
     </div>
