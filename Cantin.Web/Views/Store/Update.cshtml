@@ -2,7 +2,7 @@
 <div class="card card-custom">
     <div class="card-header">
         <h3 class="card-title">
-            Mağaza Güncelle
+            Kantin Güncelle
         </h3>
         <div class="card-toolbar">
             <div class="example-tools justify-content-center">
@@ -16,17 +16,17 @@
         <div asp-validation-summary="All"></div>
         <div class="card-body">
             <div class="form-group">
-                <label asp-for="Name">Mağazanın Adı</label>
-                <input type="text" class="form-control" placeholder="Mağaza adını girin" asp-for="Name" />
+                <label asp-for="Name">Kantinin Adı</label>
+                <input type="text" class="form-control" placeholder="Kantin adını girin" asp-for="Name" />
                 <span class="text-danger" asp-validation-for="Name"></span>
             </div>
             <div class="form-group">
-                <label>Mağaza Tel. No</label>
-                <input type="text" class="form-control" placeholder="Mağaza tel. nosunu girin" asp-for="PhoneNumber" />
+                <label>Kantin Tel. No</label>
+                <input type="text" class="form-control" placeholder="Kantin tel. nosunu girin" asp-for="PhoneNumber" />
                 <span class="text-danger" class="text-danger" asp-validation-for="PhoneNumber"></span>
             </div>
             <div class="form-group mb-1">
-                <label for="exampleTextarea">Mağazanın Adresi</label>
+                <label for="exampleTextarea">Kantinin Adresi</label>
                 <textarea class="form-control" id="exampleTextarea" rows="3" asp-for="Adress"></textarea>
                 <span class="text-danger" class="text-danger" asp-validation-for="Adress"></span>
             </div>

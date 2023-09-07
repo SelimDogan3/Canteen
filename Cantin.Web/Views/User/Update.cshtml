@@ -46,7 +46,7 @@
                 <span class="text-danger" asp-validation-for="RoleId"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StoreId">YayınEvi</label>
+                <label asp-for="StoreId">Kantin Seçin</label>
                 <select id="PublisherList" class="form-control" asp-for="StoreId" value="@Model.StoreId" asp-items="@(new SelectList(Model.Stores,"Id","Name"))"></select>
                 <span class="text-danger" asp-validation-for="StoreId"></span>
             </div>

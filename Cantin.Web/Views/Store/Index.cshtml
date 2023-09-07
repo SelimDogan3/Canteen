@@ -7,7 +7,7 @@
     <div class="card-header flex-wrap">
         <div class="card-title">
             <h3 class="card-label">
-                Mağazalar
+                Kantinler
             </h3>
         </div>
         <div class="card-toolbar">
@@ -21,7 +21,7 @@
                         </g>
                     </svg>
                 </span>
-                Mağaza Ekle
+                Kantin Ekle
             </a>
         </div>
     </div>
@@ -32,23 +32,23 @@
             <table id="StoresTable" class="table table-separate table-head-custom table-checkable">
                 <thead>
                     <tr>
-                        <th>Mağaza Adı</th>
-                        <th>Mağaza Telefon Numarası</th>
-                        <th>Mağaza Adresi</th>
+                        <th>Kantin Adı</th>
+                        <th>Kantin Telefon Numarası</th>
+                        <th>Kantin Adresi</th>
                         <th>İşlemler</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var store in Model)
+                    @foreach (var canteen in Model)
                     {
                         <tr>
-                            <td>@store.Name</td>
-                            <td>@store.PhoneNumber</td>
-                            <td>@store.Adress</td>
+                            <td>@canteen.Name</td>
+                            <td>@canteen.PhoneNumber</td>
+                            <td>@canteen.Adress</td>
                             <td>
                                 <div class="d-flex flex-wrap">
                                     <!-- Add flexbox layout for mobile -->
-                                    <a asp-controller="Store" asp-action="Update" asp-route-Id="@store.Id" data-id="@store.Id" class="btn btn-sm btn-clean btn-icon mr-2" title="Düzenle">
+                                    <a asp-controller="Store" asp-action="Update" asp-route-Id="@canteen.Id" data-id="@canteen.Id" class="btn btn-sm btn-clean btn-icon mr-2" title="Düzenle">
                                         <span class="svg-icon svg-icon-primary svg-icon-2x">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -60,7 +60,7 @@
                                         </span>
 
                                     </a>
-                                    <a asp-controller="Store" asp-action="Delete" asp-route-Id="@store.Id" data-id="@store.Id" class="btn btn-sm btn-clean btn-icon" title="Sil">
+                                    <a asp-controller="Store" asp-action="Delete" asp-route-Id="@canteen.Id" data-id="@canteen.Id" class="btn btn-sm btn-clean btn-icon" title="Sil">
                                         <span class="svg-icon svg-icon-primary svg-icon-2x">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

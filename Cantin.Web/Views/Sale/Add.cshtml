@@ -51,8 +51,31 @@
                         </tfoot>
                     </table>
             <!--end: Datatable-->
-            <input id="soldTotal" name="SoldTotal" type="hidden" />
-            <button id="addButton" class="btn btn-primary" type="submit">Satış Yap</button>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="Ödeme Yöntemi">Ödeme Yöntemi:</label>
+                        <select id="paymentType" class="form-control" disabled>
+                            <option value="Nakit">Nakit</option>
+                            <option value="Kredi Kartı">Kredi Kartı</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="Ödenen Tutar">Ödenen Tutar:</label>
+                        <input id="paidAmount" type="number" step="0.01" minValue="0" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="Para Üstü">Para Üstü:</label>
+                        <input id="exchange" class="form-control" type="text" disabled />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <button id="addButton" class="btn btn-primary" type="submit" disabled>Satış Yap</button>
         </div>
     </div>
 </div>

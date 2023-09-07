@@ -1,5 +1,4 @@
 ﻿let table = $('#SalesTable').DataTable({
-    responsive: true,
     dom:
         "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
         "<'row'<'col-sm-12'tr>>" +

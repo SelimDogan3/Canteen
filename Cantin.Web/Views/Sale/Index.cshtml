@@ -1,51 +1,57 @@
 ﻿@model List<SaleDto>
 @section Css{
-	<link rel="stylesheet" href="~/css/saleIndexStyles.css">
+    <link rel="stylesheet" href="~/css/saleIndexStyles.css">
 }
 <!--begin::Card-->
 <div class="card card-custom">
-	<div class="card-header flex-wrap">
-		<div class="card-title">
-			<h3 class="card-label">
-				Satışlar
-			</h3>
-		</div>
-		<div class="card-toolbar">
-			<!--begin::Button-->
-			<!--end::Button-->
-		</div>
+    <div class="card-header flex-wrap">
+        <div class="card-title">
+            <h3 class="card-label">
+                Satışlar
+            </h3>
+        </div>
+        <div class="card-toolbar">
+            <!--begin::Button-->
+            <!--end::Button-->
+        </div>
 
-	</div>
-	<div class="card-body">
-		<!--begin: Datatable-->
-		<div class="table-responsive">
-			<table id="SalesTable" class="table table-separate table-head-custom table-checkable" product="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
-						<thead>
-							<tr product="row">
-								<th class="dt-control sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 31px;"></th>
-								<th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Mağaza</th>
-								<th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Satış Tarihi</th>
-								<th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Toplam Fiyat</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach (var sale in Model)
-							{
-								<tr data-products-line ='@Json.Serialize(sale.ProductLines?.ToArray())' product="row" class="even">
-									<td class="dt-control"></td>
-									<td>@sale.Store!.Name</td>
-									<td>@sale.CreatedDate.ToString()</td>
-									<td>@sale.SoldTotal₺</td>
-								</tr>
-							}
-						</tbody>
-					</table>
-			<!--end: Datatable-->
-		</div>
-	</div>
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <div class="table-responsive">
+            <table id="SalesTable" class="table table-separate table-head-custom table-checkable" product="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
+                <thead>
+                    <tr product="row">
+                        <th class="dt-control sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 31px;"></th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Kantin</th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Satış Tarihi</th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ödeme Şekli</th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Toplam Fiyat</th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ödenilen Para</th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Paranın Üssü</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var sale in Model)
+                    {
+                        <tr data-products-line='@Json.Serialize(sale.ProductLines?.ToArray())' product="row" class="even">
+                            <td class="dt-control"></td>
+                            <td>@sale.Store!.Name</td>
+                            <td>@sale.CreatedDate.ToString()</td>
+                            <td>@sale.PaymentType</td>
+                            <td>@sale.SoldTotal.ToString()₺</td>
+                            <td>@sale.PaidAmount₺</td>
+                            <td>@sale.Exchange.ToString()₺</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!--end: Datatable-->
+        </div>
+    </div>
 </div>
 
 <!--end::Card-->
 @section Scripts{
-	<script src="~/js/SaleIndex.js"></script>
+    <script src="~/js/SaleIndex.js"></script>
 }
