@@ -1,5 +1,4 @@
 ﻿let table = $('#StocksTable').DataTable({
-    responsive: true,
     dom:
         "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
         "<'row'<'col-sm-12'tr>>" +
@@ -42,7 +41,7 @@ let tableStart =
     `
         <dl>
         <div class="table-responsive">
-                <table id="ProductsTable" class="table table-separate table-head-custom table-checkable" product="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
+                <table id="StocksChildTable" class="table table-separate table-head-custom table-checkable responsive nowrap" Supply="grid" aria-describedby="kt_datatable_info" style="width:100%">
                     <thead>
                         <tr product="row">
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün İsmi</th>
@@ -54,9 +53,10 @@ let tableStart =
     ;
 let tableFinish =
     `
-                   </table>
-            </div>
-        </dl>
+            </tbody>
+        </table>
+    </div>
+</dl>
     `;
 function CreateStockTr(stockLine) {
     let start = `<tr product="row" class="even">

@@ -32,7 +32,9 @@
     background: none;
     border: none;
 }
-
+.dataTables_wrapper .dataTables_scrollBody .myColumn {
+    border-bottom: none !important; /* Alt çizgiyi kaldır */
+}
 /* Mobil için düğmeleri düzenlemek */
 @media (max-width: 767px) {
     .d-flex.flex-wrap {

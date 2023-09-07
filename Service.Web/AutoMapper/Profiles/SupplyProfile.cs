@@ -10,6 +10,7 @@ namespace Cantin.Service.AutoMapper.Profiles
 			CreateMap<Supply,SupplyDto>();
 			CreateMap<SupplyAddDto,Supply>();
 			CreateMap<Supply, SupplyUpdateDto>().ReverseMap();
+			CreateMap<Supply, SupplyLine>();
 		
 		
 		}

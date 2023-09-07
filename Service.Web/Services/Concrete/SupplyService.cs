@@ -39,9 +39,25 @@ namespace Cantin.Service.Services.Concrete
 		public async Task<List<SupplyDto>> GetAllSuppliesNonDeleted()
 		{
 			List<Supply> supplies = await repository.GetAllAsync(x => !x.IsDeleted, x => x.Product, x => x.Store);
-			List<SupplyDto> map = mapper.Map<List<SupplyDto>>(supplies);
-			return map;
-		}
+			var dtos = new List<SupplyDto>();
+            foreach (var supply in supplies)
+            {
+				var match = dtos.FirstOrDefault(x => x.Supplier == supply.Supplier);
+				if (match != null)
+				{
+					var line = mapper.Map<SupplyLine>(supply);
+					match.SupplyLines.Add(line);
+				}
+				else {
+					var line = mapper.Map<SupplyLine>(supply);
+                    var dto = new SupplyDto {Supplier = supply.Supplier};
+					dto.SupplyLines.Add(line);
+					dtos.Add(dto);
+				}
+            }
+			return dtos;
+
+        }
 		public async Task<Supply> GetSupplyById(Guid Id)
 		{
 			Supply supply = await repository.GetByGuidAsync(Id);

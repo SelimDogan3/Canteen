@@ -42,7 +42,7 @@ let tableStart =
         <dl>
         <div class="table-responsive">
         
-                <table id="ProductsTable" class="table table-separate table-head-custom table-checkable" product="grid" aria-describedby="kt_datatable_info" style="width: 1150px;">
+                <table id="ProductsTable" class="table table-separate table-head-custom table-checkable responsive nowrap" Supply="grid" aria-describedby="kt_datatable_info" style="width:100%">
                     <thead>
                         <tr product="row">
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün İsmi</th>
