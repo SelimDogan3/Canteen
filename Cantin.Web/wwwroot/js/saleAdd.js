@@ -33,6 +33,10 @@ class ProductLines {
         this.SoldTotal = total;
         return total;
     }
+    removeLine(line) {
+        let index = this.ProductLines.indexOf(line); //getting index of the line
+        this.ProductLines.splice(index, 1); //deleting the line from lines.ProductLines
+    }
 }
 class ProductLine {
     constructor(product) {
@@ -45,25 +49,72 @@ class ProductLine {
         //Test
         this.Quantity = this.Quantity + 1;
     }
+    decrease() {
+        this.Quantity = this.Quantity - 1;
+
+    }
 
     calculateSubTotal() {
-        this.SubTotal = parseFloat(this.Product.salePrice).toFixed(1) * this.Quantity;
+        this.SubTotal = Math.round(parseFloat(this.Product.salePrice).toFixed(1) * this.Quantity * 100) / 100;
         return this.SubTotal;
     }
 }
+//Nondisables all inputs
 function NonDisableInputs() {
     $('#paidAmount').prop('disabled', false);
     $('#paymentType').prop('disabled', false);
 }
+//Disables all inputs
 function DisableInputs() {
     $('#paidAmount').prop('disabled', true);
     $('#paymentType').prop('disabled', true);
+    $('#addButton').prop('disabled', true);
 }
+//checking if ProductLines.length 0 for reseting and disableing Inputs
+function CheckLinesForDisable(lines) {
+    if (lines.ProductLines.length === 0) {
+        ResetInputs();
+        DisableInputs();
+    }
+    else {
+        NonDisableInputs();
+    }
+}
+//filling with default values of inputs
 function ResetInputs() {
     $('#paidAmount').val("");
     $('#paymentType').val("Nakit");
-    $('#exchange').val("");
+    $('#exchange').val("0");
 }
+//exchange is calculated, set to exchange input, #addButton is disabled according to the situation
+function CalculateAndSetExchange(lines) {
+    let paidAmount = $('#paidAmount').val();
+    if (paidAmount != "") {
+        let total = lines.calculateTotal();
+        let exchange = total = Math.round((paidAmount - total) * 100) / 100;
+        if (exchange >= 0) {
+            $('#exchange').val(exchange);
+            $('#addButton').prop("disabled", false);
+        }
+        else {
+            $('#exchange').val("Ödenen tutar toplama eşit veya fazla olmalı");
+            $('#addButton').prop("disabled", true);
+        }
+    }
+    else {
+        $('#addButton').prop("disabled", true);
+        $('#exchange').val("0");
+
+    }
+}
+//Calculates lines total and set it to #total
+function CalculateAndSetTotal(lines) {
+    let total = lines.calculateTotal();
+    let index = total.toString().indexOf(".");
+    total = Math.round(total * 100) / 100;
+    document.getElementById('total').innerText = "Toplam: " + total.toString();
+}
+//Querying from barcode and adds it to lines
 async function GetAndSetProductsWithAjax(barcode, lines) {
     await $.ajax({
         url: "/Sale/GetProductByBarcode?barCode=" + barcode,
@@ -81,18 +132,18 @@ async function GetAndSetProductsWithAjax(barcode, lines) {
                 line = new ProductLine(data);
                 line.ProductId = data.id;
                 lines.ProductLines.push(line);
-                if (lines.ProductLines.length === 1) { 
-                    NonDisableInputs();
-                }
+                CheckLinesForDisable(lines);
             } else {
                 line = line[0]; // filter returns an array, take the first element
                 line.increase(); // Increase the quantity
                 line.calculateSubTotal(); // Recalculate the SubTotal
             }
+            CalculateAndSetExchange(lines);
         }
     });
 }
 $(document).ready(function () {
+    //creating dataTable
     let table = $('#ProductsTable').DataTable({
         dom:
             "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
@@ -132,74 +183,78 @@ $(document).ready(function () {
             }
         }
     });
-    let lines = new ProductLines();
-    $('#paidAmount').on('input', function () {
-        let total = lines.calculateTotal();
-        let exchange = $(this).val() - total;
-        if (exchange >= 0) {
-            $('#exchange').val(exchange);
-            $('#addButton').prop("disabled",false);
-        }
-        else {
-            $('#exchange').val("Ödenen tutar toplama eşit veya fazla olmalı");
-            $('#addButton').prop("disabled", true);
-        }
-    });
+    let lines = new ProductLines(); //creating first lines
     table.on('click', 'button.reduce', function (e) {
-        let tr = $(this).closest('tr');
-        let row = table.row(tr);
-        let line = lines.ProductLines.filter(line => line.Product.name === row.data()[0])[0];
-        line.Quantity -= 1;
-        if (line.Quantity === 0) {
-            index = lines.ProductLines.indexOf(line);
-            lines.ProductLines.splice(index, 1);
-            if (lines.ProductLines.length === 0) { // controls if its last or not
-                DisableInputs();
-            }
+        let tr = $(this).closest('tr'); //getting tr
+        let row = table.row(tr); //getting row from tr
+        let line = lines.ProductLines.filter(line => line.Product.name === row.data()[0])[0]; //getting which line this in lines.ProductLines
+        line.decrease(); //reduceing the Quantity value of line
+        if (line.Quantity === 0) { //if line's Quantity value equals to 0 
+            lines.removeLine(line);
+            CheckLinesForDisable(lines); //checking lines.Productlines'es length if its zero 'than disable inputs and #addButton 
         }
         else {
-            line.calculateSubTotal();
+            line.calculateSubTotal(); //if its not the last product in line then recalcualte SubTotal
         }
-        lines.reDrawTable(table);
-        let total = lines.calculateTotal();
-        document.getElementById('total').innerText = "Toplam: " + total.toString();
+        CalculateAndSetExchange(lines); //exchange is calculated, set to exchange input, #addButton is disabled according to the situation
+        lines.reDrawTable(table); //redrawing table for new Lines version
+        CalculateAndSetTotal(lines); //Calculating total and setting it to #total 
     });
     table.on('click', 'button.deleteLine', function (e) {
         let tr = $(this).closest('tr');
         let row = table.row(tr);
-        let index = lines.ProductLines.indexOf(lines.ProductLines.filter(line => line.Product.name === row.data()[0])[0]);
-        lines.ProductLines.splice(index, 1);
-        if (lines.ProductLines.length === 0) { // controls if its last or not
-            DisableInputs();
-        }
-        lines.reDrawTable(table);
-        document.getElementById('total').innerText = "Toplam: " + "0";
+        let line = lines.ProductLines.filter(line => line.Product.name === row.data()[0])[0];
+        lines.removeLine(line);
+        CheckLinesForDisable(lines);   //The length of the Product Lines of the lines is checked, if 0, the inputs are disabled
+        CalculateAndSetExchange(lines); //exchange is calculated, set to exchange input, #addButton is disabled according to the situation
+        lines.reDrawTable(table); //redrawing table for new Lines version
+        CalculateAndSetTotal(lines); //Calculating total and setting it to #total 
     });
     $('button.mostUsed').each(function () {
         let button = $(this);
         button.on('click', async function () {
             let barcode = $(this).data('barcode');
-            $('#barcodeInput').val(barcode);
-            await GetAndSetProductsWithAjax(barcode, lines);
-            lines.reDrawTable(table);
-            let total = lines.calculateTotal();
-            document.getElementById('total').innerText = "Toplam: " + total.toString();
+            $('#barcodeInput').val(barcode); //getting barcode value
+            await GetAndSetProductsWithAjax(barcode, lines); //querying barcode and get product then add it to lines.ProductLines
+            lines.reDrawTable(table); //redrawing table for new Lines version
+            CalculateAndSetTotal(lines); //Calculating total and setting it to #total 
         });
 
     });
     $('#barcodeInput').on('input', async function () {
-        var barcode = $("#barcodeInput").val();
-        if (barcode.length === barcodeLength) {
-            await GetAndSetProductsWithAjax(barcode,lines);
-            lines.reDrawTable(table);
+        var barcode = $("#barcodeInput").val(); //getting barcode value
+        if (barcode.length === barcodeLength) { //checking if barcode value's length equal to barcodeLength(at the start of the file)
+            await GetAndSetProductsWithAjax(barcode, lines); //querying barcode and get product then add it to lines.ProductLines
+            lines.reDrawTable(table); //redrawing table for new Lines version
+            CalculateAndSetTotal(lines); //Calculating total and setting it to #total 
+        }
+    });
+    $('#paidAmount').on('input', function () {
+        CalculateAndSetExchange(lines);
+        $(this).data("oldValue", $(this).val());
+
+    });
+    $('#paymentType').on('change', function () {
+        if ($(this).val() == "Kredi Kartı") {
             let total = lines.calculateTotal();
-            document.getElementById('total').innerText = "Toplam: " + total.toString();
+            $('#paidAmount').val(total.toString());
+            $('#paidAmount').prop('disabled', true);
+            CalculateAndSetExchange(lines);
+        }
+        else {
+            let paidAmount = $('#paidAmount');
+            ResetInputs();
+            paidAmount.prop('disabled', false);
+            let oldValue = paidAmount.data('oldValue');
+            paidAmount.val(oldValue);
+            CalculateAndSetExchange(lines);
         }
     });
     $('#addButton').click(function () {
         lines.calculateTotal();
         lines.Exchange = $('#exchange').val();
         lines.PaidAmount = $('#paidAmount').val();
+        lines.PaymentType = $('#paymentType').val();
         $.ajax({
             url: "/Sale/Add",
             type: 'POST',
