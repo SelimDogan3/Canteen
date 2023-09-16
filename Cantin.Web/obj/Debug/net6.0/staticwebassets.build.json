@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "I7FIEsZvp2jX8X0CGISTROBlTKHHQOngz1lEv6svhqw=",
+  "Hash": "NcFV6tECa3zMnyIJr+l6G2ta6NRlWOefkyzIn7Yfl8E=",
   "Source": "Cantin.Web",
   "BasePath": "_content/Cantin.Web",
   "Mode": "Default",
@@ -84301,6 +84301,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\logo.png"
+    },
+    {
+      "Identity": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\img\\logo1.png",
+      "SourceId": "Cantin.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\",
+      "BasePath": "_content/Cantin.Web",
+      "RelativePath": "img/logo1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\logo1.png"
     },
     {
       "Identity": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\DebtIndex.js",
