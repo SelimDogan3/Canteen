@@ -32,6 +32,29 @@
     background: none;
     border: none;
 }
+a.noHref {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+    a.noHref:hover {
+        background-color: #0056b3;
+        cursor: pointer;
+    }
+.custom-dropdown-align {
+    left: 100%; /* Tetikleyici elementin sağ tarafına konumlandırır */
+    top: 0; /* Tetikleyici elementin üstüyle hizalar */
+    margin-left: 50px; /* Biraz boşluk ekler */
+}
+.dataTables_wrapper .dataTables_scrollBody .table.dataTable.select tbody tr,
+.dataTables_wrapper .dataTables_scrollBody .table.dataTable.select tbody tr:hover {
+    background-color: inherit !important;
+}
 
 /* Mobil için düğmeleri düzenlemek */
 @media (max-width: 767px) {

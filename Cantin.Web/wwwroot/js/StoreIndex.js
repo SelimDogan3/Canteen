@@ -1,10 +1,33 @@
 ﻿let table = $('#StoresTable').DataTable({
     dom:
-        "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+        "<'row'<'col-sm-3'l><'col-sm-6 text-center'><'col-sm-3'f>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-    buttons: [  
-    ],
+    buttons: [
+        {
+            extend: "pdf",
+            filename: function () { return "KantinlerPdf" },
+            customize: function (pdf) {
+                pdf.content[0].text = "Kantinler";
+
+            },
+            exportOptions: {
+                columns: [0, 1, 2]
+            }
+        },
+        {
+            extend: "excel",
+            filename: function () { return "KantinlerExcel" },
+            exportOptions: {
+                columns: [0, 1, 2]
+            },
+            customize: function (xlsx) {
+                sheet = xlsx.xl.worksheets["sheet1.xml"];
+                let a1Cell = $('c[r=A1] t', sheet);
+                a1Cell.text("Kantinler");
+            }
+        }
+    ], 
     language: {
         "sDecimal": ",",
         "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
@@ -36,4 +59,40 @@
             }
         }
     }
+});
+function CopyTableToBoard() {
+
+    var copyData = [];
+    table.rows({ search: 'applied' }).every(function () {
+        var row = this.data();
+        row.pop();
+        copyData.push(row.join('\t')); // \t ile tab delimited olarak veriyi ayarlayın
+
+    });
+
+    var textArea = document.createElement("textarea");
+    textArea.value = copyData.join('\n');
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    toastr.success("panoya kopyalandı");
+
+}
+$(document).ready(function () {
+    $('#copyButton').on('click', function () {
+        CopyTableToBoard(table);
+    });
+    $('#csvButton').on('click', function () {
+        table.button('.buttons-csv').trigger();
+    });
+    $('#excelButton').on('click', function () {
+        table.button('.buttons-excel').trigger();
+    });
+    $('#pdfButton').on('click', function () {
+        table.button('.buttons-pdf').trigger();
+    });
+    $('#printButton').on('click', function () {
+        table.button('.buttons-print').trigger();
+    });
 });

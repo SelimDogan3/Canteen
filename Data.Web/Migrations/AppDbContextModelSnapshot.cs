@@ -57,7 +57,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("2ac8179a-3f45-40d2-ac0e-65d58333e265"),
-                            ConcurrencyStamp = "d981ea09-8a5b-44c1-ad88-980af5e1584b",
+                            ConcurrencyStamp = "70931e0c-34cf-4c48-8d4f-f051fb1860cd",
                             Description = "Super Admin",
                             Name = "Superadmin",
                             NormalizedName = "SUPERADMIN"
@@ -65,7 +65,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("eebcd6ba-d079-4fde-a81a-df80076c8002"),
-                            ConcurrencyStamp = "68e16453-ac80-4cd3-aaf3-bbd952ec01ff",
+                            ConcurrencyStamp = "851375b8-04e9-4f08-8317-5f6351360cc3",
                             Description = "Admin",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
@@ -73,7 +73,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("bd76b238-de73-447e-bef6-424f84b844c8"),
-                            ConcurrencyStamp = "615703d8-c7f6-4a3d-9b80-25d7b9d28e8a",
+                            ConcurrencyStamp = "c8b0e476-3bbb-4da4-af5a-598ae3d4d432",
                             Description = "Çalışan",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
@@ -192,7 +192,7 @@ namespace Cantin.Data.Migrations
                             Id = new Guid("6168a092-56d5-439d-a0b8-940fbda81950"),
                             AccessFailedCount = 0,
                             Adress = "This is an Adress",
-                            ConcurrencyStamp = "17d62e39-30ed-481c-8982-e3bb1a46a530",
+                            ConcurrencyStamp = "d084e1b1-12a5-41ad-989b-6f3d7f768f2a",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Mutlu",
@@ -200,10 +200,10 @@ namespace Cantin.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECOwiacTOgIGzM0KMgU1T3gF24Z74rlErHXyDjgY23BR6VVSjHKSd/et4CEM8asfOg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC8edOXBcg4XslYUI1wmZNhuX62xtMtGGf2GycCooaPipQKjz6HFuJjzOwMwUSipxA==",
                             PhoneNumber = "+905000000000",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "87fae6ae-3a3f-4a2a-a523-8ccf4221d5aa",
+                            SecurityStamp = "9af13ee9-00b5-430b-9a63-1cadd83946b3",
                             StoreId = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
@@ -213,7 +213,7 @@ namespace Cantin.Data.Migrations
                             Id = new Guid("4083029d-7624-44d6-acfa-4a54deefbd3f"),
                             AccessFailedCount = 0,
                             Adress = "This is an Adress2",
-                            ConcurrencyStamp = "b21bc668-6472-455d-a3ce-1efefb83b686",
+                            ConcurrencyStamp = "05b12c88-f7c3-4f08-b6d8-4d4c6c3bb652",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Dilara",
@@ -221,10 +221,10 @@ namespace Cantin.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI/lQxykNM44fFe5MhwdIz1UkJtL312z+rCJlM6t2AgwTSCeOQn3mAd1BHpYkMSd0Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEABIRLQF2nuF8pqVCmgkSwm7v0imCo6B18swcuvIpjrD1AjK7W6AP76uELya7JCz/g==",
                             PhoneNumber = "+905000000000",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "0428dd3c-d834-4db8-a057-5f600b71e3c0",
+                            SecurityStamp = "6abc6e78-9e35-4f11-8ecb-27453f83c2b5",
                             StoreId = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
@@ -322,6 +322,119 @@ namespace Cantin.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Cantin.Entity.Entities.Debt", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float?>("Exchange")
+                        .HasColumnType("real");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Paid")
+                        .HasColumnType("bit");
+
+                    b.Property<float?>("PaidAmount")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime?>("PaidDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<float>("TotalPrice")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoreId");
+
+                    b.ToTable("Debts");
+                });
+
+            modelBuilder.Entity("Cantin.Entity.Entities.DebtProduct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DebtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DebtId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("DebtProducts");
                 });
 
             modelBuilder.Entity("Cantin.Entity.Entities.Product", b =>
@@ -562,7 +675,7 @@ namespace Cantin.Data.Migrations
                             Id = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
                             Adress = "Depo",
                             CreatedBy = "Admin",
-                            CreatedDate = new DateTime(2023, 9, 7, 1, 10, 25, 742, DateTimeKind.Local).AddTicks(3249),
+                            CreatedDate = new DateTime(2023, 9, 14, 1, 0, 40, 917, DateTimeKind.Local).AddTicks(667),
                             IsDeleted = false,
                             Name = "Depo",
                             PhoneNumber = "123214512412512"
@@ -684,6 +797,36 @@ namespace Cantin.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Cantin.Entity.Entities.Debt", b =>
+                {
+                    b.HasOne("Cantin.Entity.Entities.Store", "Store")
+                        .WithMany("Debts")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("Cantin.Entity.Entities.DebtProduct", b =>
+                {
+                    b.HasOne("Cantin.Entity.Entities.Debt", "Debt")
+                        .WithMany("DebtProducts")
+                        .HasForeignKey("DebtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cantin.Entity.Entities.Product", "Product")
+                        .WithMany("DebtProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Debt");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Cantin.Entity.Entities.Sale", b =>
                 {
                     b.HasOne("Cantin.Entity.Entities.Store", "Store")
@@ -748,8 +891,15 @@ namespace Cantin.Data.Migrations
                     b.Navigation("Store");
                 });
 
+            modelBuilder.Entity("Cantin.Entity.Entities.Debt", b =>
+                {
+                    b.Navigation("DebtProducts");
+                });
+
             modelBuilder.Entity("Cantin.Entity.Entities.Product", b =>
                 {
+                    b.Navigation("DebtProducts");
+
                     b.Navigation("SaleProducts");
 
                     b.Navigation("Stocks");
@@ -765,6 +915,8 @@ namespace Cantin.Data.Migrations
             modelBuilder.Entity("Cantin.Entity.Entities.Store", b =>
                 {
                     b.Navigation("AppUsers");
+
+                    b.Navigation("Debts");
 
                     b.Navigation("Sales");
 

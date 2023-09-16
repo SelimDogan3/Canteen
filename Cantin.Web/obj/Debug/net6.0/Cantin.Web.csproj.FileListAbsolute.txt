@@ -950,6 +950,7 @@ C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Cantin.Web\obj\Debug\net6.0\static
 C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Cantin.Web\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Cantin.Web\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Cantin.Web\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Cantin.Web\obj\Debug\net6.0\scopedcss\Views\_Layout.cshtml.rz.scp.css
 C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Cantin.Web\obj\Debug\net6.0\scopedcss\bundle\Cantin.Web.styles.css
 C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Cantin.Web\obj\Debug\net6.0\scopedcss\projectbundle\Cantin.Web.bundle.scp.css
 C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Cantin.Web\obj\Debug\net6.0\Cantin.Web.csproj.CopyComplete

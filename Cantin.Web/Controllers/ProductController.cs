@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 
-namespace Cantin.Web.Controllers
+namespace Cantin.Web.Areas.Admin.Controllers
 {
-	[Authorize(
+    [Authorize(
         Policy = "AdminOnly"
         )]
-	public class ProductController : Controller
+
+
+    public class ProductController : Controller
 	{
 		private readonly ILogger<ProductController> logger;
 		private readonly IProductService productService;

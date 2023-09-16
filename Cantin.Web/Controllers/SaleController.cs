@@ -36,21 +36,26 @@ namespace Cantin.Web.Controllers
 				sales = await saleService.GetSalesForEmployeeAsync();
 			}
 			else {
-				sales = await saleService.GetAllSalesNonDeletedAsync();
+				var filterDto = new SaleFilterDto {SaleTotalMaxValue = (float)80,PaymentType="Nakit"};
+				sales = await saleService.GetAllSalesNonDeletedAsync(filterDto);
 			}
 			return View(sales);
 		}
 		[HttpGet]
 		public async Task<IActionResult> Add()
 		{
-			var dto = await saleService.GetSaleAddDtoAsync();
-			return View(dto);
+			ViewBag.MostUsedProducts = await productService.GetMostUsedProductsAsync();
+			return View();
 		}
 		[HttpPost]
 		public async Task<IActionResult> Add([FromBody]SaleAddDto addDto) {
 			await saleService.AddSaleAsync(addDto);
 			return Ok();
-
+		}
+		[HttpPost]
+		public async Task<ActionResult<SaleDto>> GetWithFilter([FromBody] SaleFilterDto filterDto) {
+			var sales = await saleService.GetAllSalesNonDeletedAsync(filterDto);
+			return Ok(sales);
 		}
 	}
 }

@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 
-namespace Cantin.Web.Controllers
+namespace Cantin.Web.Areas.Admin.Controllers
 {
     [Authorize(
         Policy = "AdminOnly"
         )]
+
+
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> userManager;

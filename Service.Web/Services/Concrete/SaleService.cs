@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cantin.Data.Filters;
 using Cantin.Data.Repository.Abstract;
 using Cantin.Data.UnitOfWorks;
 using Cantin.Entity.Dtos.Products;
@@ -9,6 +10,7 @@ using Cantin.Service.Services.Abstraction;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Globalization;
+using System.Linq.Expressions;
 using System.Security.Claims;
 
 namespace Cantin.Service.Services.Concrete
@@ -36,9 +38,16 @@ namespace Cantin.Service.Services.Concrete
 			_user = contextAccessor.HttpContext!.User;
 
 		}
-		public async Task<List<SaleDto>> GetAllSalesNonDeletedAsync()
+		public async Task<List<SaleDto>> GetAllSalesNonDeletedAsync(SaleFilterDto? filterDto = null)
 		{
-			List<Sale> sales = await repository.GetAllAsync(x => !x.IsDeleted, x => x.Store);
+			Expression<Func<Sale,bool>> query;
+            if (filterDto != null) { 
+			query = await SaleFilter.FilterAsync(filterDto);
+            }
+			else { 
+				query = x => !x.IsDeleted;
+            }
+            List<Sale> sales = await repository.GetAllAsync(query, x => x.Store,x => x.SaleProducts);
 			List<SaleDto> map = mapper.Map<List<SaleDto>>(sales);
 			foreach (var saleDto in map)
 			{
@@ -58,12 +67,6 @@ namespace Cantin.Service.Services.Concrete
 			}
 			return map;
 		}
-		public async Task<SaleAddDto> GetSaleAddDtoAsync()
-		{
-			SaleAddDto dto = new SaleAddDto();
-			dto.MostUsedProducts = await productService.GetMostUsedProductsAsync();
-			return dto;
-		}
 		public async Task AddSaleAsync(SaleAddDto dto)
 		{
 			Sale sale = mapper.Map<Sale>(dto);
@@ -80,7 +83,7 @@ namespace Cantin.Service.Services.Concrete
 		}
 		public async Task MatchProductWithSaleAsync(Guid saleId, Guid productId, int quantity)
 		{
-			SaleProduct saleProduct = new SaleProduct() { SaleId = saleId, ProductId = productId, Quantity = quantity };
+			SaleProduct saleProduct = new SaleProduct() { SaleId = saleId, ProductId = productId, Quantity = quantity};
 			saleProduct.CreatedBy = _user.GetLoggedInUserEmail();
 			await unitOfWork.GetRepository<SaleProduct>().AddAsync(saleProduct);
 		}
@@ -92,7 +95,7 @@ namespace Cantin.Service.Services.Concrete
 			{
 				var product = await productService.GetProductByIdAsync(saleProduct.ProductId);
 				var dto = mapper.Map<ProductDto>(product);
-				ProductLine line = new() { Product = dto, Quantity = saleProduct.Quantity, SubTotal = saleProduct.Quantity * decimal.Parse(dto.SalePrice, CultureInfo.InvariantCulture) };
+				ProductLine line = new() { Product = dto, Quantity = saleProduct.Quantity};
 				lines.Add(line);
 			}
 			return lines;

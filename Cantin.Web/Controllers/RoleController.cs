@@ -5,15 +5,16 @@ using Cantin.Service.Services.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using NToastNotify;
 
-namespace Cantin.Web.Controllers
+namespace Cantin.Web.Areas.Admin.Controllers
 {
-	[Authorize(
+    [Authorize(
 		Policy = "AdminOnly"
 		)]
-	public class RoleController : Controller
+
+
+    public class RoleController : Controller
 	{
 		private readonly ILogger<RoleController> logger;
 		private readonly RoleManager<AppRole> roleManager;

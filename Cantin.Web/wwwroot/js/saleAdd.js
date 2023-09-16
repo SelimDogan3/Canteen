@@ -1,5 +1,6 @@
 ﻿//let table = new DataTable("#ProductsTable");
-let barcodeLength = 10;
+let barcodeLength = 12;
+let moneyBool = false;
 class ProductLines {
     constructor() {
         this.ProductLines = [];
@@ -20,12 +21,15 @@ class ProductLines {
                         Sil
                         </button>
                     `;
-                table.row.add([product.name, product.barcode, product.salePrice, line.Quantity, line.SubTotal, reduceButton, deleteLineButton]).draw();
+                table.row.add([product.name, product.salePrice, line.Quantity, line.SubTotal, reduceButton, deleteLineButton]).draw();
             });
         }
 
     }
     calculateTotal() {
+        this.ProductLines.forEach(function (line) {
+            line.calculateSubTotal();
+        });
         let total = 0;
         this.ProductLines.forEach(function (line) {
             total += parseFloat(line.SubTotal);
@@ -36,6 +40,7 @@ class ProductLines {
     removeLine(line) {
         let index = this.ProductLines.indexOf(line); //getting index of the line
         this.ProductLines.splice(index, 1); //deleting the line from lines.ProductLines
+
     }
 }
 class ProductLine {
@@ -71,46 +76,43 @@ function DisableInputs() {
     $('#addButton').prop('disabled', true);
 }
 //checking if ProductLines.length 0 for reseting and disableing Inputs
-function CheckLinesForDisable(lines) {
-    if (lines.ProductLines.length === 0) {
-        ResetInputs();
-        DisableInputs();
-    }
-    else {
-        NonDisableInputs();
-    }
-}
 //filling with default values of inputs
 function ResetInputs() {
     $('#paidAmount').val("");
     $('#paymentType').val("Nakit");
     $('#exchange').val("0");
+    $('#firstNameInput').val('');
+    $('#lastNameInput').val('');
 }
 //exchange is calculated, set to exchange input, #addButton is disabled according to the situation
-function CalculateAndSetExchange(lines) {
+function GetExchange(lines) {
     let paidAmount = $('#paidAmount').val();
     if (paidAmount != "") {
         let total = lines.calculateTotal();
         let exchange = total = Math.round((paidAmount - total) * 100) / 100;
-        if (exchange >= 0) {
-            $('#exchange').val(exchange);
-            $('#addButton').prop("disabled", false);
+        return exchange;
+    }
+}
+function CalculateAndSetExchange(lines) {
+    if (!$('debtBox').prop('checked')) {
+        let exchange = GetExchange(lines);
+        if ($('#paymentType').val() === "Kredi Kartı") {
+            $('#exchange').val("0");
+            $('#paidAmount').val(lines.calculateTotal());
         }
         else {
-            $('#exchange').val("Ödenen tutar toplama eşit veya fazla olmalı");
-            $('#addButton').prop("disabled", true);
+            if (exchange >= 0) {
+                $('#exchange').val(exchange);
+            }
+            else {
+                $('#exchange').val("Ödenen tutar toplama eşit veya fazla olmalı");
+            }
         }
-    }
-    else {
-        $('#addButton').prop("disabled", true);
-        $('#exchange').val("0");
-
     }
 }
 //Calculates lines total and set it to #total
 function CalculateAndSetTotal(lines) {
     let total = lines.calculateTotal();
-    let index = total.toString().indexOf(".");
     total = Math.round(total * 100) / 100;
     document.getElementById('total').innerText = "Toplam: " + total.toString();
 }
@@ -132,13 +134,17 @@ async function GetAndSetProductsWithAjax(barcode, lines) {
                 line = new ProductLine(data);
                 line.ProductId = data.id;
                 lines.ProductLines.push(line);
-                CheckLinesForDisable(lines);
+
             } else {
                 line = line[0]; // filter returns an array, take the first element
                 line.increase(); // Increase the quantity
                 line.calculateSubTotal(); // Recalculate the SubTotal
             }
-            CalculateAndSetExchange(lines);
+            if (!document.getElementById("debtBox").checked) {
+                CalculateAndSetExchange(lines);
+            }
+            CheckIfInputsHaveToDisable(lines);
+            CheckIfAddButtonCanBeAble(lines);
         }
     });
 }
@@ -184,6 +190,7 @@ $(document).ready(function () {
         }
     });
     let lines = new ProductLines(); //creating first lines
+
     table.on('click', 'button.reduce', function (e) {
         let tr = $(this).closest('tr'); //getting tr
         let row = table.row(tr); //getting row from tr
@@ -191,7 +198,8 @@ $(document).ready(function () {
         line.decrease(); //reduceing the Quantity value of line
         if (line.Quantity === 0) { //if line's Quantity value equals to 0 
             lines.removeLine(line);
-            CheckLinesForDisable(lines); //checking lines.Productlines'es length if its zero 'than disable inputs and #addButton 
+            CheckIfInputsHaveToDisable(lines); //checking lines.Productlines'es length if its zero 'than disable inputs and #addButton 
+            CheckIfAddButtonCanBeAble(lines);
         }
         else {
             line.calculateSubTotal(); //if its not the last product in line then recalcualte SubTotal
@@ -205,7 +213,8 @@ $(document).ready(function () {
         let row = table.row(tr);
         let line = lines.ProductLines.filter(line => line.Product.name === row.data()[0])[0];
         lines.removeLine(line);
-        CheckLinesForDisable(lines);   //The length of the Product Lines of the lines is checked, if 0, the inputs are disabled
+        CheckIfInputsHaveToDisable(lines);   //The length of the Product Lines of the lines is checked, if 0, the inputs are disabled
+        CheckIfAddButtonCanBeAble(lines);
         CalculateAndSetExchange(lines); //exchange is calculated, set to exchange input, #addButton is disabled according to the situation
         lines.reDrawTable(table); //redrawing table for new Lines version
         CalculateAndSetTotal(lines); //Calculating total and setting it to #total 
@@ -214,7 +223,7 @@ $(document).ready(function () {
         let button = $(this);
         button.on('click', async function () {
             let barcode = $(this).data('barcode');
-            $('#barcodeInput').val(barcode); //getting barcode value
+            $('#barcodeInput').val(barcode); //setting barcode value
             await GetAndSetProductsWithAjax(barcode, lines); //querying barcode and get product then add it to lines.ProductLines
             lines.reDrawTable(table); //redrawing table for new Lines version
             CalculateAndSetTotal(lines); //Calculating total and setting it to #total 
@@ -231,14 +240,16 @@ $(document).ready(function () {
     });
     $('#paidAmount').on('input', function () {
         CalculateAndSetExchange(lines);
-        $(this).data("oldValue", $(this).val());
+        $(this).data("oldValue", $(this).val()); //every change writen to oldValue DataSet
+        CheckIfAddButtonCanBeAble(lines);
 
     });
+
     $('#paymentType').on('change', function () {
         if ($(this).val() == "Kredi Kartı") {
             let total = lines.calculateTotal();
             $('#paidAmount').val(total.toString());
-            $('#paidAmount').prop('disabled', true);
+            $('#paidAmount').prop('disabled',true);
             CalculateAndSetExchange(lines);
         }
         else {
@@ -247,30 +258,121 @@ $(document).ready(function () {
             paidAmount.prop('disabled', false);
             let oldValue = paidAmount.data('oldValue');
             paidAmount.val(oldValue);
+            $('#paidAmount').prop('disabled',false);
+
             CalculateAndSetExchange(lines);
         }
+        CheckIfAddButtonCanBeAble(lines);
+    });
+    $('#debtBox').on('click', function (e) {
+        let checked = $(this).prop('checked');
+        if (checked) {
+            document.getElementById('addButton').innerText = "Veresiyeyi Kaydet";
+            document.getElementById('firstNameInput').style.display = "block";
+            document.getElementById('lastNameInput').style.display = "block";
+        }
+        else {
+            document.getElementById('addButton').innerText = "Satış Yap";
+            document.getElementById('firstNameInput').style.display = "none";
+            document.getElementById('lastNameInput').style.display = "none";
+            CalculateAndSetExchange(lines);
+            CalculateAndSetTotal(lines);
+        }
+        CheckIfAddButtonCanBeAble(lines);
+        CheckIfInputsHaveToDisable(lines);
+    });
+    $('#firstNameInput').on('input', function (e) {
+        CheckIfAddButtonCanBeAble(lines);
+
     });
     $('#addButton').click(function () {
-        lines.calculateTotal();
-        lines.Exchange = $('#exchange').val();
-        lines.PaidAmount = $('#paidAmount').val();
-        lines.PaymentType = $('#paymentType').val();
-        $.ajax({
-            url: "/Sale/Add",
-            type: 'POST',
-            data: JSON.stringify(lines),
-            contentType: "application/json",
-            success: function () {
-                table.clear().draw();
-                $('#barcodeInput').val("");
-                document.getElementById("total").innerText = "Toplam: 0";
-                DisableInputs();
-                ResetInputs();
-                $('#addButton').prop('disabled', true);
-                lines = new ProductLines();
+        if (!$('#debtBox').prop('checked')) {
+            lines.calculateTotal();
+            lines.Exchange = $('#exchange').val();
+            lines.PaidAmount = $('#paidAmount').val();
+            lines.PaymentType = $('#paymentType').val();
+            $.ajax({
+                url: "/Sale/Add",
+                type: 'POST',
+                data: JSON.stringify(lines),
+                contentType: "application/json",
+                success: function () {
+                    table.clear().draw();
+                    $('#barcodeInput').val("");
+                    document.getElementById("total").innerText = "Toplam: 0";
+                    DisableInputs();
+                    ResetInputs();
+                    document.getElementById("firstNameInput").style.display = "none";
+                    document.getElementById("lastNameInput").style.display = "none";
+                    $('#addButton').prop('disabled', true);
+                    lines = new ProductLines();
 
-            }
-        })
+                }
+            });
+        }
+        else { 
+            lines.calculateTotal();
+            let data = {
+                ProductLines: lines.ProductLines,
+                FirstName: $('#firstNameInput').val(),
+                LastName: $('#lastNameInput').val(),
+
+            };
+            let jsonData = JSON.stringify(data);
+            $.ajax({
+                url: "/Debt/Add",
+                type: 'POST',
+                data: jsonData,
+                contentType: "application/json",
+                success: function () {
+                    table.clear().draw();
+                    $('#barcodeInput').val("");
+                    document.getElementById("total").innerText = "Toplam: 0";
+                    DisableInputs();
+                    ResetInputs();
+                    $('#debtBox').prop('checked', false);
+                    $('#addButton').prop('disabled', true);
+                    document.getElementById("firstNameInput").style.display = "none";
+                    document.getElementById("lastNameInput").style.display = "none";
+                    lines = new ProductLines();
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    console.error("Server response: ", jqXHR.responseText);
+                }
+
+            });
+        }
     });
-
 });
+function CheckIfInputsHaveToDisable(lines) {
+    if (!document.getElementById('debtBox').checked & lines.ProductLines.length > 0) {
+        NonDisableInputs();
+        if ($('#paymentType').val() === "Kredi Kartı") { 
+            $('#paidAmount').prop('disabled', true);
+        }
+    }
+    else {
+        DisableInputs();
+    }
+}
+function CheckIfAddButtonCanBeAble(lines) {
+    if (document.getElementById('debtBox').checked) {
+        if (document.getElementById('firstNameInput').value !== "" & lines.ProductLines.length > 0) {
+            document.getElementById('addButton').disabled = false;
+
+        }
+        else {
+            document.getElementById('addButton').disabled = true;
+        }
+    }
+    else {
+        if (GetExchange(lines) >= 0 & lines.ProductLines.length > 0) {
+            document.getElementById('addButton').disabled = false;
+        }
+        else {
+            document.getElementById('addButton').disabled = true;
+        }
+    }
+}

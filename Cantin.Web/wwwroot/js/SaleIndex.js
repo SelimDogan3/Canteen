@@ -37,6 +37,7 @@
         }
     }
 });
+
 let tableStart =
     `
         <dl>
@@ -63,7 +64,7 @@ let tableFinish =
     
     `
 function CreateProductTr(productLine) {
-    console.log(productLine);   
+    console.log(productLine);
     return (
         `
         <tr product="row" class="even">
@@ -74,7 +75,7 @@ function CreateProductTr(productLine) {
         </tr>
     ` );
 
-} 
+}
 table.on('click', 'td.dt-control', function (e) {
     let tr = $(this).closest('tr');
     let row = table.row(tr);
@@ -94,7 +95,7 @@ table.on('click', 'td.dt-control', function (e) {
             var tr = CreateProductTr(line);
             productsTable += tr;
         });
-        productsTable +=` <tr  product="row" class="even">
+        productsTable += ` <tr  product="row" class="even">
             <td colspan = "2" class="text-right" ></td>
                             <td class=" text-right text-danger">Toplam: </td>
                             <td>${total}₺</td>
@@ -102,4 +103,5 @@ table.on('click', 'td.dt-control', function (e) {
         productsTable += tableFinish;
         row.child(productsTable).show();
     }
+
 });

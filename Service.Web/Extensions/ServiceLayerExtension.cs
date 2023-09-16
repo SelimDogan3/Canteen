@@ -26,6 +26,8 @@ namespace Cantin.Service.Extensions
             services.AddScoped<ISupplyService, SupplyService>();
             services.AddScoped<IStockService, StockService>();
             services.AddScoped<ISaleService, SaleService>();
+            services.AddScoped<IDebtService, DebtService>();
+
             return services;
         }
     }

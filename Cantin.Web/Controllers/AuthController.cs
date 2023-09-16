@@ -1,5 +1,6 @@
 ﻿using Cantin.Entity.Dtos.Users;
 using Cantin.Entity.Entities;
+using Cantin.Service.Services.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,15 +12,17 @@ namespace Cantin.Web.Controllers
     {
         private readonly ILogger<AuthController> logger;
         private readonly IToastNotification toast;
+        private readonly IUserService userService;
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
-		public AuthController(ILogger<AuthController> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IToastNotification toast)
+		public AuthController(ILogger<AuthController> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IToastNotification toast,IUserService userService)
 		{
 			this.logger = logger;
 			this.userManager = userManager;
 			this.signInManager = signInManager;
 			this.toast = toast;
-		}
+            this.userService = userService;
+        }
 		[HttpGet]
         public IActionResult Login(string? returnUrl) {
             TempData["returnUrl"] = returnUrl;
@@ -38,7 +41,7 @@ namespace Cantin.Web.Controllers
                     {
                         await userManager.ResetAccessFailedCountAsync(user);
                         toast.AddInfoToastMessage(user.FullName+" adlı kullanıcı başarıyla giriş yaptı",new ToastrOptions{Title="Oturum Bilgisi"});
-                        return Redirect(TempData["returnUrl"] == null || TempData["returnUrl"]?.ToString() == String.Empty ? "/Home/Index" : TempData["returnUrl"]!.ToString()!);
+                        return Redirect("/");
                     }
                 }
                 

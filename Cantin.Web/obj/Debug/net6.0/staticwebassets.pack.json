@@ -19821,6 +19821,14 @@
       "PackagePath": "staticwebassets\\img\\logo.png"
     },
     {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\DebtIndex.js",
+      "PackagePath": "staticwebassets\\js\\DebtIndex.js"
+    },
+    {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\DebtPay.js",
+      "PackagePath": "staticwebassets\\js\\DebtPay.js"
+    },
+    {
       "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\ProductIndex.js",
       "PackagePath": "staticwebassets\\js\\ProductIndex.js"
     },

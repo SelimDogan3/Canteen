@@ -1,17 +1,17 @@
-﻿using AutoMapper;
-using Cantin.Entity.Dtos.Stores;
+﻿using Cantin.Entity.Dtos.Stores;
 using Cantin.Service.Services.Abstraction;
-using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 
-namespace Cantin.Web.Controllers
+namespace Cantin.Web.Areas.Admin.Controllers
 {
-	[Authorize(
+    [Authorize(
 		Policy = "AdminOnly"
 		)]
-	public class StoreController : Controller
+
+
+    public class StoreController : Controller
 	{
 		private readonly ILogger<StoreController> logger;
 		private readonly IStoreService storeService;

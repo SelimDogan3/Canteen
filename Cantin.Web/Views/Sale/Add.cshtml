@@ -12,7 +12,7 @@
     </div>
     <div class="card-body">
         <div>
-            @foreach(ProductDto product in Model.MostUsedProducts){
+            @foreach(ProductDto product in ViewBag.MostUsedProducts){
             <button class="btn btn-warning mostUsed" data-barcode="@product.Barcode">
                 @product.Name
             </button>
@@ -23,7 +23,41 @@
             <label>Ürün Barkodu</label>
             <input id="barcodeInput" class="form-control" placeholder="Ürünün barkodunu girin" name="barcode" type="text" />
         </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="Ödeme Yöntemi">Ödeme Yöntemi:</label>
+                    <select id="paymentType" class="form-control" disabled>
+                        <option value="Nakit">Nakit</option>
+                        <option value="Kredi Kartı">Kredi Kartı</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="Ödenen Tutar">Ödenen Tutar:</label>
+                    <input id="paidAmount" type="number" step="0.01" minValue="0" class="form-control" disabled />
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="Para Üstü">Para Üssü:</label>
+                    <input id="exchange" class="form-control" type="text" value="0" disabled />
+                </div>
+            </div>
+        </div>
+        <label>Veresiye:</label>
+        <input id="debtBox" type="checkbox" />
+        <br />
+        <label id="firstNameLabel" style="display:none">Veresiye Alan Kişinin adını giriniz: </label>
+        <input id="firstNameInput" type="text" style="display:none" />
+        <br />
+        <label id="lastNameLabel" style="display:none">Veresiye Alan Kişinin soyadını giriniz: </label>
 
+        <input id="lastNameInput" type="text" style="display:none" />
+        <br />
+        <button id="addButton" class="btn btn-primary" type="submit" disabled>Satış Yap</button>
+        <br />
         <br />
         <!--begin: Datatable-->
         <div class="table-responsive">
@@ -31,7 +65,6 @@
                         <thead>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Ürün Adı</th>
-                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Barkodu</th>
                                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Birim Fiyatı</th>
                                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Miktarı</th>
                                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px;">Sütun Fiyatı</th>
@@ -43,7 +76,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="4" class="text-right"></td>
+                                <td colspan="3" class="text-right"></td>
                                 <td id="total" class=" text-right text-danger">Toplam: 0</td>
                                 <td></td>
                                 <td></td>
@@ -51,31 +84,7 @@
                         </tfoot>
                     </table>
             <!--end: Datatable-->
-            <div class="row">
-                <div class="col-4">
-                    <div class="form-group">
-                        <label for="Ödeme Yöntemi">Ödeme Yöntemi:</label>
-                        <select id="paymentType" class="form-control" disabled>
-                            <option value="Nakit">Nakit</option>
-                            <option value="Kredi Kartı">Kredi Kartı</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-group">
-                        <label for="Ödenen Tutar">Ödenen Tutar:</label>
-                        <input id="paidAmount" type="number" step="0.01" minValue="0" class="form-control" disabled />
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-group">
-                        <label for="Para Üstü">Para Üssü:</label>
-                        <input id="exchange" class="form-control" type="text" value="0" disabled />
-                    </div>
-                </div>
-            </div>
-            <br />
-            <button id="addButton" class="btn btn-primary" type="submit" disabled>Satış Yap</button>
+            
         </div>
     </div>
 </div>

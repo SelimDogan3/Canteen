@@ -1,15 +1,16 @@
-﻿using Cantin.Entity.Dtos.Products;
-using Cantin.Entity.Dtos.Supplies;
+﻿using Cantin.Entity.Dtos.Supplies;
 using Cantin.Service.Services.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 
-namespace Cantin.Web.Controllers
+namespace Cantin.Web.Areas.Admin.Controllers
 {
-	[Authorize(
+    [Authorize(
 		Policy ="AdminOnly")]
-	public class SupplyController : Controller
+
+
+    public class SupplyController : Controller
 	{
 		private readonly ILogger<SupplyController> logger;
 		private readonly IToastNotification toast;

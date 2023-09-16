@@ -33,6 +33,115 @@
     border: none;
 }
 
+.filter-item label,
+.filter-item input,
+.filter-item select {
+    display: block;
+    margin-bottom: 5px; /* isteğe bağlı olarak aralarında biraz boşluk bırakmak için */
+}
+
+.filter-item {
+    margin-right: 20px; /* filter item'lar arasında biraz boşluk bırakmak için */
+}
+
+.filter-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+    .filter-item label {
+        display: block;
+        font-weight: bold;
+        color: #555;
+        font-size: 16px;
+    }
+
+    .filter-item input, .filter-item select {
+        width: 100%;
+        padding: 10px 8px; /* X eksenindeki padding değerini azalttım */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+    }
+
+    .filter-item select {
+        appearance: none;
+        background-color: #f9f9f9;
+        border: 1px solid #c8c8c8;
+        position: relative;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="black" d="M2 0L0 2h4L2 0zm0 5L0 3h4l-2 2z"/></svg>') no-repeat right .3rem center; /* X eksenindeki arkaplan resmi pozisyonunu azalttım */
+        background-size: 8px;
+    }
+
+        .filter-item select[multiple] {
+            height: 100px;
+            background-image: none;
+        }
+
+.select2-container {
+    width: 100% !important;
+    font-family: Arial, sans-serif;
+}
+
+.select2-selection__choice {
+    background-color: #5c6bc0 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 15px !important;
+    padding: 5px 8px !important; /* X eksenindeki padding değerini azalttım */
+    position: relative !important;
+}
+
+.select2-selection__choice__remove {
+    color: transparent !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    background-color: transparent !important;
+    border-radius: 50% !important;
+    transition: 0.3s !important;
+    z-index: 2 !important;
+}
+
+.select2-selection__choice:focus .select2-selection__choice__remove,
+.select2-selection__choice:hover .select2-selection__choice__remove {
+    color: #FFF !important;
+}
+
+.select2-dropdown {
+    border: 1px solid #5c6bc0 !important;
+}
+
+.select2-results__option {
+    padding: 6px 10px; /* X eksenindeki padding değerini azalttım */
+}
+
+.select2-results__option--highlighted {
+    background-color: #5c6bc0 !important;
+    color: white !important;
+}
+
+.select2-search__field:focus {
+    outline: none !important;
+}
+
+
+
+
 /* Mobil için düğmeleri düzenlemek */
 @media (max-width: 767px) {
     .d-flex.flex-wrap {

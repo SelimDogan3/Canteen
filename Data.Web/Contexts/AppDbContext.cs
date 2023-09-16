@@ -21,7 +21,11 @@ namespace Cantin.Data.Contexts
         public DbSet<Supply> Supplies { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<Stock> Stocks { get; set; }
+        public DbSet<Debt> Debts { get; set; }
         public DbSet<SaleProduct> SaleProducts { get; set; }
+        public DbSet<DebtProduct> DebtProducts { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

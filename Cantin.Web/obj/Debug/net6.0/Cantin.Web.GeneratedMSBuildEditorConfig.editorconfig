@@ -20,6 +20,22 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Components/DebtAuthorizationViewHandler/AdminDebtView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVidFxDb21wb25lbnRzXERlYnRBdXRob3JpemF0aW9uVmlld0hhbmRsZXJcQWRtaW5EZWJ0Vmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Components/DebtAuthorizationViewHandler/EmployeeDebtView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVidFxDb21wb25lbnRzXERlYnRBdXRob3JpemF0aW9uVmlld0hhbmRsZXJcRW1wbG95ZWVEZWJ0Vmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVidFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Pay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVidFxQYXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -123,3 +139,7 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-atb818dkou
+
+[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-i9eilfuluj

@@ -45,6 +45,7 @@ let tableStart =
                     <thead>
                         <tr product="row">
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Tedarik Edilen Kantin</th>
+                            <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Tedarik Edilme Tarihi</th>
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün İsmi</th>
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Miktarı</th>
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Alış Birim Fiyatı</th>
@@ -65,6 +66,7 @@ let tableFinish =
 function CreateSupplyTr(supplyLine) {
     let start = `<tr product="row" class="even">
         <td>${supplyLine.store.name}</td>
+        <td>${supplyLine.stringCreatedDate}</td>
         <td>${supplyLine.product.name}</td>
         <td>${supplyLine.quantity}</td>
         <td>${supplyLine.unitPrice}₺</td>
