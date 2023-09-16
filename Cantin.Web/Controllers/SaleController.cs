@@ -51,6 +51,7 @@ namespace Cantin.Web.Controllers
 		public async Task<IActionResult> Add([FromBody]SaleAddDto addDto) {
 			await saleService.AddSaleAsync(addDto);
 			return Ok();
+			//s
 		}
 		[HttpPost]
 		public async Task<ActionResult<SaleDto>> GetWithFilter([FromBody] SaleFilterDto filterDto) {
