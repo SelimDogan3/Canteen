@@ -41,7 +41,13 @@ namespace Cantin.Web.Controllers
                     {
                         await userManager.ResetAccessFailedCountAsync(user);
                         toast.AddInfoToastMessage(user.FullName+" adlı kullanıcı başarıyla giriş yaptı",new ToastrOptions{Title="Oturum Bilgisi"});
+                        var userRole = await userService.GetUserRoleAsync(user.Id);
+                        if (userRole.Name == "Employee")
+                        {
+                            return RedirectToAction("Add","Sale");
+                        }
                         return Redirect("/");
+
                     }
                 }
                 

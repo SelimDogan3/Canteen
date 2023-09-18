@@ -6,7 +6,13 @@ namespace Cantin.Web.Controllers
     [Authorize()]
     public class HomeController : Controller
 	{
-		[HttpGet]
+        private readonly ILogger<HomeController> logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            this.logger = logger;
+        }
+        [HttpGet]
 		public IActionResult Index()
 		{
 			return View();
