@@ -1,44 +1,4 @@
-﻿let table = $('#SalesTable').DataTable({
-    dom:
-        "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-        "<'row'<'col-sm-12'tr>>" +
-        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-    buttons: [
-    ],
-    language: {
-        "sDecimal": ",",
-        "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
-        "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
-        "sInfoEmpty": "Kayıt yok",
-        "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
-        "sInfoPostFix": "",
-        "sInfoThousands": ".",
-        "sLengthMenu": "Sayfada _MENU_ kayıt göster",
-        "sLoadingRecords": "Yükleniyor...",
-        "sProcessing": "İşleniyor...",
-        "sSearch": "Ara:",
-        "sZeroRecords": "Eşleşen kayıt bulunamadı",
-        "oPaginate": {
-            "sFirst": "İlk",
-            "sLast": "Son",
-            "sNext": "Sonraki",
-            "sPrevious": "Önceki"
-        },
-        "oAria": {
-            "sSortAscending": ": artan sütun sıralamasını aktifleştir",
-            "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
-        },
-        "select": {
-            "rows": {
-                "_": "%d kayıt seçildi",
-                "0": "",
-                "1": "1 kayıt seçildi"
-            }
-        }
-    }
-});
-
-let tableStart =
+﻿let tableStart =
     `
         <dl>
         <div class="table-responsive">
@@ -76,32 +36,139 @@ function CreateProductTr(productLine) {
     ` );
 
 }
-table.on('click', 'td.dt-control', function (e) {
-    let tr = $(this).closest('tr');
-    let row = table.row(tr);
-    // Şartlarınızı burada kontrol edin, örneğin:
-    console.log(row.child.isShown());
-    if (row.child.isShown()) {
-        // This row is already open - close it
-        row.child.hide();
-    } else {
-        // Open this row
-        let productsTable = tableStart;
-        var productsLines = tr[0].dataset.productsLine;
-        productsLines = JSON.parse(productsLines);
-        let total = 0.0;
-        productsLines.forEach(function (line) {
-            total += line.quantity * parseFloat(line.product.salePrice);
-            var tr = CreateProductTr(line);
-            productsTable += tr;
-        });
-        productsTable += ` <tr  product="row" class="even">
+$(document).ready(function () {
+    let table = $('#SalesTable').DataTable({
+        dom:
+            "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [
+        ],
+        language: {
+            "sDecimal": ",",
+            "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+            "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+            "sInfoEmpty": "Kayıt yok",
+            "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+            "sLoadingRecords": "Yükleniyor...",
+            "sProcessing": "İşleniyor...",
+            "sSearch": "Ara:",
+            "sZeroRecords": "Eşleşen kayıt bulunamadı",
+            "oPaginate": {
+                "sFirst": "İlk",
+                "sLast": "Son",
+                "sNext": "Sonraki",
+                "sPrevious": "Önceki"
+            },
+            "oAria": {
+                "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+            },
+            "select": {
+                "rows": {
+                    "_": "%d kayıt seçildi",
+                    "0": "",
+                    "1": "1 kayıt seçildi"
+                }
+            }
+        }
+    });
+    table.on('click', 'td.dt-control', function (e) {
+        let tr = $(this).closest('tr');
+        let row = table.row(tr);
+        // Şartlarınızı burada kontrol edin, örneğin:
+        console.log(row.child.isShown());
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+        } else {
+            // Open this row
+            let productsTable = tableStart;
+            var productsLines = tr[0].dataset.productsLine;
+            productsLines = JSON.parse(productsLines);
+            let total = 0.0;
+            productsLines.forEach(function (line) {
+                total += line.quantity * parseFloat(line.product.salePrice);
+                var tr = CreateProductTr(line);
+                productsTable += tr;
+            });
+            productsTable += ` <tr  product="row" class="even">
             <td colspan = "2" class="text-right" ></td>
                             <td class=" text-right text-danger">Toplam: </td>
                             <td>${total}₺</td>
                         </tr> `;
-        productsTable += tableFinish;
-        row.child(productsTable).show();
+            productsTable += tableFinish;
+            row.child(productsTable).show();
+        }
+    });
+    let filterBtn = $('#filterButton');
+    filterBtn.on('click', function (e) {
+        let salePriceMinValue = $('#minValueForSalePrice').val();
+        let salePriceMaxValue = $('#maxValueForSalePrice').val();
+        let startDate = $('#startDate').val();
+        let finishDate = $('#endDate').val();
+        let productIds = $('#ProductIdSelect').val();
+        let storeIds = $('#StoreIdSelect').val();
+        let paymentType = $('#paymentTypeSelect').val();
+
+        let jsonData = GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDate, productIds, storeIds, paymentType);
+
+        
+        let stringJsonData = JSON.stringify(jsonData);
+        $.ajax({
+            url: "/Sale/GetWithFilter",
+            type: 'POST',
+            data: stringJsonData,
+            contentType: "application/json",
+            success: function (data) {
+                table.clear();
+                data.forEach(function (sale) {
+                    let row = table.row.add(['', sale.store.name, sale.createdDate, sale.paymentType, sale.soldTotal, sale.paidAmount, sale.exchange]);
+                    let tr = row.node();
+                    $(tr).find('td:first').attr({
+                        class: "dt-control dtr-control sorting_1",
+                        tabindex: "0"
+                    });
+                    tr.dataset.productsLine = JSON.stringify(sale.productLines);
+                });
+                table.draw();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+                console.log(xhr.responseText);
+            }
+        });
+        console.log("s");
+
+    });
+});
+function GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDate, productIds, storeIds,paymentType) {
+    salePriceMaxValue = salePriceMaxValue === "" ? null : salePriceMaxValue;
+    salePriceMinValue = salePriceMinValue === "" ? null : salePriceMinValue;
+    paymentType = paymentType === "" || paymentType === "Hepsi" ? null : paymentType;
+    startDate = startDate === "" ? null : startDate;
+    finishDate = finishDate === "" ? null : finishDate;
+    productIds = productIds.length === 0 ? null : productIds;
+    storeIds = storeIds.length === 0 ? null : storeIds;
+
+    if (salePriceMaxValue != null) {
+        salePriceMaxValue = parseFloat(salePriceMaxValue);
     }
 
-});
+    if (salePriceMinValue != null) {
+        salePriceMinValue = parseFloat(salePriceMinValue);
+    }
+    return {
+        StringFirstDate: startDate,
+        StringLastDate: finishDate,
+        ItemIdList: productIds,
+        StoreIdList: storeIds,
+        PaymentType: paymentType,
+        SaleTotalMinValue: salePriceMinValue,
+        SaleTotalMaxValue : salePriceMaxValue
+    };
+}

@@ -15,14 +15,16 @@ namespace Cantin.Web.Controllers
 		private readonly ISaleService saleService;
 		private readonly IMapper mapper;
 		private readonly IProductService productService;
+        private readonly IStoreService storeService;
 
-		public SaleController(ILogger<SaleController> logger,ISaleService saleService,IMapper mapper,IProductService productService)
+        public SaleController(ILogger<SaleController> logger,ISaleService saleService,IMapper mapper,IProductService productService, IStoreService storeService)
         {
 			this.logger = logger;
 			this.saleService = saleService;
 			this.mapper = mapper;
 			this.productService = productService;
-		}
+            this.storeService = storeService;
+        }
 		public async Task<IActionResult> GetProductByBarcode(string barCode) {
 			var product = await productService.GetProductByBarcodeAsync(barCode);
 			return Ok(product);
@@ -39,6 +41,10 @@ namespace Cantin.Web.Controllers
 				var filterDto = new SaleFilterDto {SaleTotalMaxValue = (float)80,PaymentType="Nakit"};
 				sales = await saleService.GetAllSalesNonDeletedAsync(filterDto);
 			}
+			var products = await productService.GetAllProductsNonDeletedAsync();
+			var stores = await storeService.GetAllStoreDtosNonDeleted();
+			ViewBag.Products = products;
+			ViewBag.Stores = stores;
 			return View(sales);
 		}
 		[HttpGet]
@@ -56,7 +62,7 @@ namespace Cantin.Web.Controllers
 		[HttpPost]
 		public async Task<ActionResult<SaleDto>> GetWithFilter([FromBody] SaleFilterDto filterDto) {
 			var sales = await saleService.GetAllSalesNonDeletedAsync(filterDto);
-			return Ok(sales);
+			return Json(sales);
 		}
 	}
 }

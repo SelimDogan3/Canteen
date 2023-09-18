@@ -74,44 +74,53 @@
     </div>
     <div class="card-body">
         <div class="row">
-            
-                <!-- Tarih Aralığı için Date Picker -->
-                <div class="filter-item">
-                    <label for="startDate">Başlangıç Tarihi:</label>
-                    <input type="date" id="startDate" name="startDate">
-                </div>
-
-                <div class="filter-item">
-                    <label for="endDate">Bitiş Tarihi:</label>
-                    <input type="date" id="endDate" name="endDate">
-                </div>
-
-                <!-- Sayı Aralığı için Inputlar -->
-                <div class="filter-item">
-                    <label for="minValue">Min Değer:</label>
-                    <input type="number" id="minValue" name="minValue">
-                </div>
-
-                <div class="filter-item">
-                    <label for="maxValue">Max Değer:</label>
-                    <input type="number" id="maxValue" name="maxValue">
-                </div>
-
-                <!-- Birden Fazla Seçim Yapabileceğiniz Select Kutusu -->
-                
-        </div>
-        <div class="row">
+            <!-- Tarih Aralığı için Date Picker -->
             <div class="filter-item">
-                <label for="multiSelect">Seçim Yap:</label>
-                <select id="ProductIdSelect" class="form-control" multiple="multiple">
-                    <!-- Örnek itemler, backend'ten dinamik olarak doldurulabilir -->
-                    <option value="all">All</option>
-                    <option value="item1">Item 1</option>
-                    <option value="item2">Item 2</option>
-                    <option value="item3">Item 3</option>
-                </select>
+                <label for="startDate">Başlangıç Tarihi:</label>
+                <input type="date" id="startDate">
+            </div>
+            <div class="filter-item">
+                <label for="endDate">Bitiş Tarihi:</label>
+                <input type="date" id="endDate">
+            </div>
+
+            <!-- Sayı Aralığı için Inputlar -->
+            <div class="filter-item">
+                <label for="minValue">Min Değer:</label>
+                <input type="number" id="minValueForSalePrice">
+            </div>
+
+            <div class="filter-item">
+                <label for="maxValue">Max Değer:</label>
+                <input type="number" id="maxValueForSalePrice">
+            </div>
+
+            <!-- Birden Fazla Seçim Yapabileceğiniz Select Kutusu -->
+
+
+            <div class="row">
+                <div class="filter-item">
+                    <label for="multiSelect">Seçim Yap:</label>
+                    <select id="ProductIdSelect" class="form-control" asp-items="@(new SelectList(ViewBag.Products,"Id","Name"))" multiple="multiple">
+                    </select>
+                </div>
+
+                <div class="filter-item">
+                    <label for="multiSelect">Seçim Yap:</label>
+                    <select id="StoreIdSelect" class="form-control" asp-items="@(new SelectList(ViewBag.Stores,"Id","Name"))" multiple="multiple">
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="multiSelect">Seçim Yap:</label>
+                    <select id="paymentTypeSelect" class="form-control">
+                        <option value="Hepsi">Hepsi</option>
+                        <option value="Nakit">Nakit</option>
+                        <option value="Kredi Kartı">Kredi Kartı</option>
+                    </select>
+                </div>
             </div>
         </div>
+        <button class="btn btn-primary" id="filterButton">Filtrele</button>
         <!--begin: Datatable-->
         <div class="table-responsive">
             <table id="SalesTable" class="table table-separate table-head-custom table-checkable responsive nowrap" Supply="grid" aria-describedby="kt_datatable_info" style="width:100%">

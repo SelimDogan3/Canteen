@@ -1,4 +1,5 @@
-﻿using Cantin.Entity.Entities;
+﻿using Cantin.Entity.Dtos.Stores;
+using Cantin.Entity.Entities;
 
 namespace Cantin.Entity.Dtos.Sales
 {
@@ -7,7 +8,7 @@ namespace Cantin.Entity.Dtos.Sales
         public Guid Id { get; set; }
         public DateTime CreatedDate { get; set; }
         public Guid StoreId { get; set; }
-        public Store? Store { get; set; }
+        public StoreDto? Store { get; set; }
         public float SoldTotal { get; set; } = 0;
 		public float PaidAmount { get; set; }
 		public float Exchange => (float) Math.Round((PaidAmount - SoldTotal),3);

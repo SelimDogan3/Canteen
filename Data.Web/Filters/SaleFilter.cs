@@ -71,13 +71,16 @@ namespace Cantin.Data.Filters
             return null;
         }
 
-        private static Expression<Func<T, bool>> CombineFilters<T>(List<Expression<Func<T, bool>>> filters)
+        private static Expression<Func<T, bool>>? CombineFilters<T>(List<Expression<Func<T, bool>>> filters)
         {
+            if (filters.Count > 0) { 
             var parameter = Expression.Parameter(typeof(T), "x");
             var body = filters.Select(filter => Expression.Invoke(filter, parameter))
                               .Aggregate<Expression, Expression>(null, (current, next) => current == null ? (Expression)next : Expression.AndAlso(current, next));
 
             return Expression.Lambda<Func<T, bool>>(body, parameter);
+            }
+            return null;
         }
 
 
