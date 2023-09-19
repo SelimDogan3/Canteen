@@ -93,6 +93,7 @@ namespace Cantin.Service.Services.Concrete
 			product.IsDeleted = true;
 			product.DeletedBy = _user.GetLoggedInUserEmail();
 			product.DeletedDate = DateTime.Now;
+			product.Barcode += "OLD";
 			await repository.UpdateAsync(product);
 			await unitOfWork.SaveAsync();
 			return product.Name;

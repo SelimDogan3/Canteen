@@ -48,6 +48,7 @@ let tableStart =
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Tedarik Edilme Tarihi</th>
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün İsmi</th>
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Miktarı</th>
+                            <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Son Tüketim Tarihi</th>
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ürün Alış Birim Fiyatı</th>
                             <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Toplam</th>
                         </tr>
@@ -69,6 +70,7 @@ function CreateSupplyTr(supplyLine) {
         <td>${supplyLine.stringCreatedDate}</td>
         <td>${supplyLine.product.name}</td>
         <td>${supplyLine.quantity}</td>
+        <td>${supplyLine.stringExpirationDate}</td>
         <td>${supplyLine.unitPrice}₺</td>
         <td>${supplyLine.total}₺</td>
 

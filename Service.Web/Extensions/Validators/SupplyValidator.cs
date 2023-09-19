@@ -22,6 +22,10 @@ namespace Cantin.Service.Extensions.Validators
 				.GreaterThanOrEqualTo(1)
 				.WithName("Ürün Miktarı")
 				;
+			RuleFor(x => x.ExpirationDate)
+				.NotNull()
+				.WithName("Son Tüketim Tarihi")
+				;
 		}
 	}
 }

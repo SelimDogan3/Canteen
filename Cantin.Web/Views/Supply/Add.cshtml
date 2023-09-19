@@ -31,6 +31,11 @@
                 <span class="text-danger" class="text-danger" asp-validation-for="Quantity"></span>
             </div>
             <div class="form-group">
+                <label>Tedarik Son Tüketim Tarihi</label>
+                <input type="date" class="form-control" asp-for="ExpirationDate" />
+                <span class="text-danger" class="text-danger" asp-validation-for="ExpirationDate"></span>
+            </div>
+            <div class="form-group">
                 <label>Birim Fiyatı</label>
                 <input type="number" class="form-control" placeholder="Ürünün birim fiyatını girin" asp-for="UnitPrice" />
                 <span class="text-danger" step="0.01" class="text-danger" asp-validation-for="UnitPrice"></span>
