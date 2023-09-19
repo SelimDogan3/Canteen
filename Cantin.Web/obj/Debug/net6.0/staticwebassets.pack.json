@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\Cantin.Web.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\debtIndexStyles.css",
+      "PackagePath": "staticwebassets\\css\\debtIndexStyles.css"
+    },
+    {
       "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\productIndexStyles.css",
       "PackagePath": "staticwebassets\\css\\productIndexStyles.css"
     },

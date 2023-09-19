@@ -68,11 +68,19 @@ namespace Cantin.Data.Filters
 
             return null;
         }
-        private static Expression<Func<Debt, bool>> GetPaidFilter(bool? paid = false) {
-            return debt => debt.Paid == paid;
-        }
-        private static Expression<Func<T, bool>> CombineFilters<T>(List<Expression<Func<T, bool>>> filters)
+        private static Expression<Func<Debt, bool>>? GetPaidFilter(bool? paid)
         {
+            if (paid.HasValue)
+            {
+                return debt => debt.Paid == paid;
+            }
+            return null;
+        }
+        private static Expression<Func<T, bool>>? CombineFilters<T>(List<Expression<Func<T, bool>>> filters)
+        {
+            if (filters.Count == 0) {
+                return null;
+            }
             var parameter = Expression.Parameter(typeof(T), "x");
             var body = filters.Select(filter => Expression.Invoke(filter, parameter))
                               .Aggregate<Expression, Expression>(null, (current, next) => current == null ? (Expression)next : Expression.AndAlso(current, next));

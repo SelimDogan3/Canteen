@@ -7,14 +7,20 @@ namespace Cantin.Web.Controllers
     public class DebtController : Controller
     {
         private readonly IDebtService debtService;
+        private readonly IProductService productService;
+        private readonly IStoreService storeService;
 
-        public DebtController(IDebtService debtService)
+        public DebtController(IDebtService debtService,IProductService productService,IStoreService storeService)
         {
             this.debtService = debtService;
+            this.productService = productService;
+            this.storeService = storeService;
         }
         public async Task<IActionResult> Index()
         {
             var debts = await debtService.GetAllDebtsNonDeletedAsync();
+            ViewBag.Products = await productService.GetAllProductsNonDeletedAsync();
+            ViewBag.Stores = await storeService.GetAllStoreDtosNonDeleted();
             return View(debts);
         }
         [HttpPost]
@@ -36,6 +42,8 @@ namespace Cantin.Web.Controllers
         public async Task<ActionResult<List<DebtDto>>> GetWithFilter([FromBody]DebtFilterDto filterDto) {
             var debts = await debtService.GetAllDebtsNonDeletedAsync(filterDto);
             return Ok(debts);
+
+
         }
     }
 }

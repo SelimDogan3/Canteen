@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NcFV6tECa3zMnyIJr+l6G2ta6NRlWOefkyzIn7Yfl8E=",
+  "Hash": "BTWLi4OR1/Fev24VZXAcyz87Nu987RSoFWu9Bfkjl1I=",
   "Source": "Cantin.Web",
   "BasePath": "_content/Cantin.Web",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Cantin.Web.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\debtIndexStyles.css",
+      "SourceId": "Cantin.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\",
+      "BasePath": "_content/Cantin.Web",
+      "RelativePath": "css/debtIndexStyles.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\debtIndexStyles.css"
     },
     {
       "Identity": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\css\\productIndexStyles.css",

@@ -38,8 +38,7 @@ namespace Cantin.Web.Controllers
 				sales = await saleService.GetSalesForEmployeeAsync();
 			}
 			else {
-				var filterDto = new SaleFilterDto {SaleTotalMaxValue = (float)80,PaymentType="Nakit"};
-				sales = await saleService.GetAllSalesNonDeletedAsync(filterDto);
+				sales = await saleService.GetAllSalesNonDeletedAsync();
 			}
 			var products = await productService.GetAllProductsNonDeletedAsync();
 			var stores = await storeService.GetAllStoreDtosNonDeleted();
