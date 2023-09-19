@@ -122,29 +122,34 @@ async function GetAndSetProductsWithAjax(barcode, lines) {
         url: "/Sale/GetProductByBarcode?barCode=" + barcode,
         type: 'GET',
         success: function (data) {
-            var line;
-            if (lines.ProductLines.length > 0) {
-                console.log(data.id);
-                line = lines.ProductLines.filter(x => x.Product.id === data.id);
-                lines.ProductLines.forEach(function (myline) {
-                    console.log(myline);
-                });
-            }
-            if (!line || line.length === 0) {
-                line = new ProductLine(data);
-                line.ProductId = data.id;
-                lines.ProductLines.push(line);
+            if (data !== null && data !== undefined) {
+                var line;
+                if (lines.ProductLines.length > 0) {
+                    console.log(data.id);
+                    line = lines.ProductLines.filter(x => x.Product.id === data.id);
+                    lines.ProductLines.forEach(function (myline) {
+                        console.log(myline);
+                    });
+                }
+                if (!line || line.length === 0) {
+                    line = new ProductLine(data);
+                    line.ProductId = data.id;
+                    lines.ProductLines.push(line);
 
-            } else {
-                line = line[0]; // filter returns an array, take the first element
-                line.increase(); // Increase the quantity
-                line.calculateSubTotal(); // Recalculate the SubTotal
+                } else {
+                    line = line[0]; // filter returns an array, take the first element
+                    line.increase(); // Increase the quantity
+                    line.calculateSubTotal(); // Recalculate the SubTotal
+                }
+                if (!document.getElementById("debtBox").checked) {
+                    CalculateAndSetExchange(lines);
+                }
+                CheckIfInputsHaveToDisable(lines);
+                CheckIfAddButtonCanBeAble(lines);
             }
-            if (!document.getElementById("debtBox").checked) {
-                CalculateAndSetExchange(lines);
+            else {
+                console.log('null');
             }
-            CheckIfInputsHaveToDisable(lines);
-            CheckIfAddButtonCanBeAble(lines);
         }
     });
 }
@@ -230,14 +235,6 @@ $(document).ready(function () {
         });
 
     });
-    $('#barcodeInput').on('input', async function () {
-        var barcode = $("#barcodeInput").val(); //getting barcode value
-        if (barcode.length === barcodeLength) { //checking if barcode value's length equal to barcodeLength(at the start of the file)
-            await GetAndSetProductsWithAjax(barcode, lines); //querying barcode and get product then add it to lines.ProductLines
-            lines.reDrawTable(table); //redrawing table for new Lines version
-            CalculateAndSetTotal(lines); //Calculating total and setting it to #total 
-        }
-    });
     $('#paidAmount').on('input', function () {
         CalculateAndSetExchange(lines);
         $(this).data("oldValue", $(this).val()); //every change writen to oldValue DataSet
@@ -249,7 +246,7 @@ $(document).ready(function () {
         if ($(this).val() == "Kredi Kartı") {
             let total = lines.calculateTotal();
             $('#paidAmount').val(total.toString());
-            $('#paidAmount').prop('disabled',true);
+            $('#paidAmount').prop('disabled', true);
             CalculateAndSetExchange(lines);
         }
         else {
@@ -258,7 +255,7 @@ $(document).ready(function () {
             paidAmount.prop('disabled', false);
             let oldValue = paidAmount.data('oldValue');
             paidAmount.val(oldValue);
-            $('#paidAmount').prop('disabled',false);
+            $('#paidAmount').prop('disabled', false);
 
             CalculateAndSetExchange(lines);
         }
@@ -310,7 +307,7 @@ $(document).ready(function () {
                 }
             });
         }
-        else { 
+        else {
             lines.calculateTotal();
             let data = {
                 ProductLines: lines.ProductLines,
@@ -345,11 +342,27 @@ $(document).ready(function () {
             });
         }
     });
+    $(document).on('keypress', async function (e) {
+        if (e.which === 13) {
+
+            var barcode = $("#barcodeInput").val();
+            if (barcode.length > 10) {
+                await GetAndSetProductsWithAjax(barcode, lines); //querying barcode and get product then add it to lines.ProductLines
+                lines.reDrawTable(table); //redrawing table for new Lines version
+                CalculateAndSetTotal(lines); //Calculating total and setting it to #total 
+                $("#barcodeInput").val('');
+            }
+            else { 
+                toastr.error("Lütfen Barkod Alanına tıklayıp okutma işlemini yapınız","Uyarı")
+            }
+            
+        }
+    });
 });
 function CheckIfInputsHaveToDisable(lines) {
     if (!document.getElementById('debtBox').checked & lines.ProductLines.length > 0) {
         NonDisableInputs();
-        if ($('#paymentType').val() === "Kredi Kartı") { 
+        if ($('#paymentType').val() === "Kredi Kartı") {
             $('#paidAmount').prop('disabled', true);
         }
     }
