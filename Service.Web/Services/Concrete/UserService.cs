@@ -201,5 +201,11 @@ namespace Cantin.Service.Services.Concrete
 				result.AddErrorsToModelState(modelState);
 			}
 		}
-	}
+
+        public async Task<AppUser> GetUserByEmail(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            return user;
+        }
+    }
 }

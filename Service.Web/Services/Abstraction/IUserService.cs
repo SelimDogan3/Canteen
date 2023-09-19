@@ -11,6 +11,7 @@ namespace Cantin.Service.Services.Abstraction
         List<UserDto> GetAllUsers();
         Task<List<UserDto>> GetAllUsersWithRolesAsync();
         Task<List<UserDto>> GetAllUsersWithRolesAndStoresAsync();
+        Task<AppUser> GetUserByEmail(string email);
         Task<AppRole> GetUserRoleAsync(Guid id);
         Task<IdentityResult> UpdateUserRole(AppUser user, string roleName);
         Task<IdentityResult> UpdateUserRole(AppUser user, AppRole role);
