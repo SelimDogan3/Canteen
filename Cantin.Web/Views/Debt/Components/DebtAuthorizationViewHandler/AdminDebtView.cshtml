@@ -81,11 +81,11 @@
                     <td>@debt.FirstName</td>
                     <td>@debt.LastName</td>
                     <td>@debt.TotalPrice₺</td>
-                    <td>@debt.CreatedDate.ToString()</td>
+                    <td>@DateTimeFormatter.FormatForTr(debt.CreatedDate)</td>
                     <td>@(debt.Paid ? "Ödendi" : "Ödenmedi")</td>
-                    @if (debt.Paid)
+                    @if (debt.PaidDate != null)
                     {
-                        <td>@debt.PaidDate.ToString()</td>
+                        <td>@DateTimeFormatter.FormatForTr(debt.PaidDate)</td>
                     }
                     else
                     {
