@@ -76,6 +76,15 @@ $(document).ready(function () {
             }
         }
     });
+    //$('#ProductIdSelect').select2({
+
+    //});
+    //$('#StoreIdSelect').select2({
+
+    //});
+    //$('#paymentTypeSelect').select2({
+
+    //});
     table.on('click', 'td.dt-control', function (e) {
         let tr = $(this).closest('tr');
         let row = table.row(tr);

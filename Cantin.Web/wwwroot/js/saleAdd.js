@@ -232,6 +232,7 @@ $(document).ready(function () {
             await GetAndSetProductsWithAjax(barcode, lines); //querying barcode and get product then add it to lines.ProductLines
             lines.reDrawTable(table); //redrawing table for new Lines version
             CalculateAndSetTotal(lines); //Calculating total and setting it to #total 
+            $('#barcodeInput').val("");
         });
 
     });

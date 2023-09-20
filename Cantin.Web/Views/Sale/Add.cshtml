@@ -13,9 +13,9 @@
     <div class="card-body">
         <div>
             @foreach(ProductDto product in ViewBag.MostUsedProducts){
-            <button class="btn btn-warning mostUsed" data-barcode="@product.Barcode">
-                @product.Name
-            </button>
+            <button class="btn btn-warning mostUsed" data-barcode="@product.Barcode" style="width:85px; height:70px; margin-right:10px; margin-bottom:10px;">
+                @product.Name                                                                                                          
+            </button>                                                                                                                  
             }
         </div>
         <br />
