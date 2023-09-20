@@ -1,11 +1,13 @@
-﻿namespace Cantin.Entity.Dtos.Debts
+﻿using Cantin.Core.Helpers;
+
+namespace Cantin.Entity.Dtos.Debts
 {
     public class DebtFilterDto
     {
         public string? StringFirstDate { get; set; }
-        public DateTime? FirstDate => StringFirstDate != null && StringFirstDate != "" ? Convert.ToDateTime(StringFirstDate) : null;
+        public DateTime? FirstDate => DateTimeFormatter.GetDateTimeForFiltersForStartDate(StringFirstDate);
         public string? StringLastDate { get; set; }
-        public DateTime? LastDate => StringLastDate != null && StringLastDate != "" ? Convert.ToDateTime(StringLastDate) : null;
+        public DateTime? LastDate => DateTimeFormatter.GetDateTimeForFiltersForFinishDate(StringLastDate);
         public List<Guid>? ItemIdList { get; set; }
         public List<Guid>? StoreIdList { get; set; }
         public string? PaymentType { get; set; }

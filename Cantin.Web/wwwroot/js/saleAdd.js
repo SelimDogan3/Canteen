@@ -276,8 +276,9 @@ $(document).ready(function () {
             CalculateAndSetExchange(lines);
             CalculateAndSetTotal(lines);
         }
-        CheckIfAddButtonCanBeAble(lines);
         CheckIfInputsHaveToDisable(lines);
+        CheckIfAddButtonCanBeAble(lines);
+
     });
     $('#firstNameInput').on('input', function (e) {
         CheckIfAddButtonCanBeAble(lines);
@@ -305,6 +306,11 @@ $(document).ready(function () {
                     $('#addButton').prop('disabled', true);
                     lines = new ProductLines();
 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    console.log(xhr.responseText);
                 }
             });
         }

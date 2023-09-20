@@ -45,7 +45,7 @@ namespace Cantin.Service.Services.Concrete
 		}
 		public async Task<ProductDto> GetProductByBarcodeAsync(string barcode)
 		{
-			Product product = await repository.GetAsync(x => x.Barcode == barcode);
+			Product? product = await repository.GetAsync(x => x.Barcode == barcode);
 			ProductDto map = mapper.Map<ProductDto>(product);
 			return map;
 		}

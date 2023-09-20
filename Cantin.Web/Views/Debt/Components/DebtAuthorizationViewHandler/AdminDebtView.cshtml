@@ -2,12 +2,23 @@
 <div class="row">
     <!-- Tarih Aralığı için Date Picker -->
     <div class="filter-item col-md-5 mb-3">
+        <label for="startDate">Aralık Seçin:</label>
+        <select id="datePeriodSelect">
+            <option value="">Herzaman</option>
+            <option value="today">Bugün</option>
+            <option value="thisWeek">Bu Hafta</option>
+            <option value="thisMonth">Bu Ay</option>
+            <option value="thisYear">Bu Yıl</option>
+            <option value="specificPeriod">Özel</option>
+        </select>
+    </div>
+    <div class="filter-item col-md-5 mb-3">
         <label for="startDate">Başlangıç Tarihi:</label>
-        <input type="date" id="startDate">
+        <input type="date" id="startDate" disabled>
     </div>
     <div class="filter-item col-md-5 mb-3">
         <label for="endDate">Bitiş Tarihi:</label>
-        <input type="date" id="endDate">
+        <input type="date" id="endDate" disabled>
     </div>
 
     <!-- Sayı Aralığı için Inputlar -->

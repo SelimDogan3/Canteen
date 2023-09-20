@@ -106,6 +106,9 @@ $(document).ready(function () {
             row.child(productsTable).show();
         }
     });
+    $('#datePeriodSelect').on('change', function (e) {
+        disableOrNotDatePicker($(this).val());
+    });
     let filterBtn = $('#filterButton');
     filterBtn.on('click', function (e) {
         let salePriceMinValue = $('#minValueForSalePrice').val();
@@ -116,7 +119,8 @@ $(document).ready(function () {
         let storeIds = $('#StoreIdSelect').val();
         let paymentType = $('#paymentTypeSelect').val();
         let paid = $('#paidSelect').val();
-        let jsonData = GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDate, productIds, storeIds, paymentType, paid);
+        let timePeriod = $('#datePeriodSelect').val();
+        let jsonData = GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDate, productIds, storeIds, paymentType, paid,timePeriod);
         let stringJsonData = JSON.stringify(jsonData);
         $.ajax({
             url: "/Debt/GetWithFilter",
@@ -141,7 +145,11 @@ $(document).ready(function () {
         });
     });
 });
-function GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDate, productIds, storeIds, paymentType, paid) {
+function GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDate, productIds, storeIds, paymentType, paid, timePeriod) {
+    if (timePeriod !== "specificPeriod") {
+        startDate = timePeriod;
+        finishDate = timePeriod;
+    }
     salePriceMaxValue = salePriceMaxValue === "" ? null : salePriceMaxValue;
     salePriceMinValue = salePriceMinValue === "" ? null : salePriceMinValue;
     paid = paid === "" || paid === "Hepsi" ? null : paid;
@@ -151,11 +159,11 @@ function GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDat
     productIds = productIds.length === 0 ? null : productIds;
     storeIds = storeIds.length === 0 ? null : storeIds;
 
-    if (salePriceMaxValue != null) {
+    if (salePriceMaxValue != null && !isNaN(salePriceMaxValue)) {
         salePriceMaxValue = parseFloat(salePriceMaxValue);
     }
 
-    if (salePriceMinValue != null) {
+    if (salePriceMinValue != null && !isNaN(salePriceMinValue)) {
         salePriceMinValue = parseFloat(salePriceMinValue);
     }
     if (paid !== null) {
@@ -171,4 +179,15 @@ function GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDat
         SaleTotalMaxValue: salePriceMaxValue,
         Paid: paid
     };
+}
+function disableOrNotDatePicker(selectValue) {
+    if (selectValue !== "specificPeriod") {
+        $('#startDate').prop('disabled', true);
+        $('#endDate').prop('disabled', true);
+    }
+    else if (selectValue === "specificPeriod") {
+        $('#startDate').prop('disabled', false);
+        $('#endDate').prop('disabled', false);
+    }
+
 }

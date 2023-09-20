@@ -113,6 +113,9 @@ $(document).ready(function () {
             row.child(productsTable).show();
         }
     });
+    $('#datePeriodSelect').on('change', function (e) {
+        disableOrNotDatePicker($(this).val());
+    });
     let filterBtn = $('#filterButton');
     filterBtn.on('click', function (e) {
         let salePriceMinValue = $('#minValueForSalePrice').val();
@@ -122,8 +125,8 @@ $(document).ready(function () {
         let productIds = $('#ProductIdSelect').val();
         let storeIds = $('#StoreIdSelect').val();
         let paymentType = $('#paymentTypeSelect').val();
-
-        let jsonData = GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDate, productIds, storeIds, paymentType);
+        let timePeriod = $('#datePeriodSelect').val();
+        let jsonData = GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDate, productIds, storeIds, paymentType,timePeriod);
 
         
         let stringJsonData = JSON.stringify(jsonData);
@@ -155,7 +158,11 @@ $(document).ready(function () {
 
     });
 });
-function GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDate, productIds, storeIds,paymentType) {
+function GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDate, productIds, storeIds, paymentType, timePeriod) {
+    if (timePeriod !== "specificPeriod") {
+        startDate = timePeriod;
+        finishDate = timePeriod;
+    }
     salePriceMaxValue = salePriceMaxValue === "" ? null : salePriceMaxValue;
     salePriceMinValue = salePriceMinValue === "" ? null : salePriceMinValue;
     paymentType = paymentType === "" || paymentType === "Hepsi" ? null : paymentType;
@@ -163,12 +170,12 @@ function GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDat
     finishDate = finishDate === "" ? null : finishDate;
     productIds = productIds.length === 0 ? null : productIds;
     storeIds = storeIds.length === 0 ? null : storeIds;
-
-    if (salePriceMaxValue != null) {
+    
+    if (salePriceMaxValue != null && !isNaN(salePriceMaxValue)) {
         salePriceMaxValue = parseFloat(salePriceMaxValue);
     }
 
-    if (salePriceMinValue != null) {
+    if (salePriceMinValue != null && !isNaN(salePriceMinValue)) {
         salePriceMinValue = parseFloat(salePriceMinValue);
     }
     return {
@@ -180,4 +187,15 @@ function GetReadyData(salePriceMinValue, salePriceMaxValue, startDate, finishDat
         SaleTotalMinValue: salePriceMinValue,
         SaleTotalMaxValue : salePriceMaxValue
     };
+}
+function disableOrNotDatePicker(selectValue) {
+    if (selectValue !== "specificPeriod") { 
+        $('#startDate').prop('disabled', true);
+        $('#endDate').prop('disabled', true);
+    }
+    else if(selectValue === "specificPeriod") {
+        $('#startDate').prop('disabled', false);
+        $('#endDate').prop('disabled', false);
+    }
+
 }
