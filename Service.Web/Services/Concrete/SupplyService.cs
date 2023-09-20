@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cantin.Data.Filters;
 using Cantin.Data.Repository.Abstract;
 using Cantin.Data.UnitOfWorks;
 using Cantin.Entity.Dtos.Products;
@@ -11,6 +12,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Linq.Expressions;
 using System.Security.Claims;
 
 namespace Cantin.Service.Services.Concrete
@@ -36,9 +38,18 @@ namespace Cantin.Service.Services.Concrete
 			this.validator = validator;
 			_user = contextAccessor.HttpContext!.User;
 		}
-		public async Task<List<SupplyDto>> GetAllSuppliesNonDeleted()
-		{
-			List<Supply> supplies = await repository.GetAllAsync(x => !x.IsDeleted, x => x.Product, x => x.Store);
+		public async Task<List<SupplyDto>> GetAllSuppliesNonDeleted(SupplyFilterDto? filterDto = null)
+        {
+            Expression<Func<Supply, bool>> query;
+            if (filterDto != null)
+            {
+                query = await SupplyFilter.FilterAsync(filterDto);
+            }
+            else
+            {
+                query = x => !x.IsDeleted;
+            }
+            List<Supply> supplies = await repository.GetAllAsync(query, x => x.Product, x => x.Store);
 			var dtos = new List<SupplyDto>();
             foreach (var supply in supplies)
             {

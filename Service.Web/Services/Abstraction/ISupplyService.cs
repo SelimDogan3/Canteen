@@ -7,7 +7,7 @@ namespace Cantin.Service.Services.Abstraction
 {
     public interface ISupplyService
 	{
-		Task<List<SupplyDto>> GetAllSuppliesNonDeleted();
+		Task<List<SupplyDto>> GetAllSuppliesNonDeleted(SupplyFilterDto? filterDto = null);
 		Task<Supply> GetSupplyById(Guid Id);
 		Task<SupplyAddDto> GetSupplyAddDtoAsync();
 		Task<string> AddSupplyAsync(SupplyAddDto addDto);

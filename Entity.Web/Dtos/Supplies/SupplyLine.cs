@@ -2,7 +2,6 @@
 using Cantin.Entity.Dtos.Stores;
 using System.Globalization;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
 
 namespace Cantin.Entity.Dtos.Supplies
 {

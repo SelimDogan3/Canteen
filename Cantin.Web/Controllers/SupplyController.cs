@@ -1,4 +1,5 @@
-﻿using Cantin.Entity.Dtos.Supplies;
+﻿using Cantin.Entity.Dtos.Debts;
+using Cantin.Entity.Dtos.Supplies;
 using Cantin.Service.Services.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,7 @@ namespace Cantin.Web.Areas.Admin.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var supplies = await supplyService.GetAllSuppliesNonDeleted();
+			ViewBag.Products = await productService.GetAllProductsNonDeletedAsync();
 			return View(supplies);
 		}
 		[HttpGet]
@@ -84,5 +86,11 @@ namespace Cantin.Web.Areas.Admin.Controllers
 
 			return RedirectToAction("Index");
 		}
-	}
+        [HttpPost]
+        public async Task<ActionResult<SupplyDto>> GetWithFilter([FromBody] SupplyFilterDto filterDto)
+        {
+            var supplies = await supplyService.GetAllSuppliesNonDeleted(filterDto);
+            return Json(supplies);
+        }
+    }
 }
