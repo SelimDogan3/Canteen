@@ -24,6 +24,7 @@ namespace Cantin.Service.Services.Abstraction
         Task<IdentityResult> CheckIfPasswordMatch(AppUser user, string password);
 		Task ValidateUserAsync(UserAddDto dto, ModelStateDictionary modelState);
 		Task ValidateUserAsync(UserUpdateDto dto, ModelStateDictionary modelState);
+        Task<IdentityResult> ChangeUserPasswordWithoutConfig(AppUser user,string newPassword);
 
 
 

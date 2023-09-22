@@ -51,6 +51,11 @@
                 <span class="text-danger" asp-validation-for="StoreId"></span>
             </div>
             <div class="form-group">
+                <label>Kullanıcı Yeni Şifresi(Opsiyonel)</label>
+                <input type="password" class="form-control" placeholder="yeni şifreyi girin" asp-for="NewPassword" />
+                <span class="text-danger" class="text-danger" asp-validation-for="NewPassword"></span>
+            </div>
+            <div class="form-group">
                 <label>Yönetici Şifresi</label>
                 <input type="password" class="form-control" placeholder="doğrulama için şifrenizi girin" asp-for="Password" />
                 <span class="text-danger" class="text-danger" asp-validation-for="Password"></span>

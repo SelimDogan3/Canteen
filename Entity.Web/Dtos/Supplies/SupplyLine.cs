@@ -1,4 +1,5 @@
-﻿using Cantin.Entity.Dtos.Products;
+﻿using Cantin.Core.Helpers;
+using Cantin.Entity.Dtos.Products;
 using Cantin.Entity.Dtos.Stores;
 using System.Globalization;
 using System.Text.Json.Serialization;
@@ -9,7 +10,7 @@ namespace Cantin.Entity.Dtos.Supplies
     {
         [JsonIgnore]
         public DateTime CreatedDate { get; set; }
-        public string StringCreatedDate => CreatedDate.ToString("dd.MM.yyyy HH:mm:ss", new CultureInfo("tr-TR"));
+        public string StringCreatedDate => DateTimeFormatter.FormatForTr(CreatedDate);
         public DateTime ExpirationDate { get; set; }
         public string StringExpirationDate => ExpirationDate.ToString("dd.MM.yyyy", new CultureInfo("tr-TR"));
         public int Quantity { get; set; }

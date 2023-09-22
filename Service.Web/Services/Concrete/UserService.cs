@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cantin.Data.Identity;
 using Cantin.Data.UnitOfWorks;
 using Cantin.Entity.Dtos.Stores;
 using Cantin.Entity.Dtos.Users;
@@ -14,28 +15,28 @@ using System.Security.Claims;
 
 namespace Cantin.Service.Services.Concrete
 {
-	public class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly UserManager<AppUser> userManager;
         private readonly RoleManager<AppRole> roleManager;
         private readonly IMapper mapper;
         private readonly IUnitOfWork unitOfWork;
         private readonly IStoreService storeService;
-		private readonly IdentityErrorDescriber errorDescriber;
-		private readonly IValidator<AppUser> validator;
-		private readonly ClaimsPrincipal _user;
+        private readonly IdentityErrorDescriber errorDescriber;
+        private readonly IValidator<AppUser> validator;
+        private readonly ClaimsPrincipal _user;
 
-		public UserService(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IMapper mapper, IUnitOfWork unitOfWork,IStoreService storeService,IdentityErrorDescriber errorDescriber,IHttpContextAccessor contextAccessor,IValidator<AppUser> validator)
+        public UserService(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IMapper mapper, IUnitOfWork unitOfWork, IStoreService storeService, IdentityErrorDescriber errorDescriber, IHttpContextAccessor contextAccessor, IValidator<AppUser> validator)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
             this.storeService = storeService;
-			this.errorDescriber = errorDescriber;
-			this.validator = validator;
-			_user = contextAccessor.HttpContext.User;
-		}
+            this.errorDescriber = errorDescriber;
+            this.validator = validator;
+            _user = contextAccessor.HttpContext.User;
+        }
         public List<UserDto> GetAllUsers()
         {
             List<UserDto> dto = mapper.Map<List<UserDto>>(userManager.Users.ToList());
@@ -44,7 +45,7 @@ namespace Cantin.Service.Services.Concrete
         public async Task<List<UserDto>> GetAllUsersWithRolesAsync()
         {
             IQueryable<AppUser> users = userManager.Users;
-			List<UserDto> map = mapper.Map<List<UserDto>>(users);
+            List<UserDto> map = mapper.Map<List<UserDto>>(users);
             foreach (var item in map)
             {
                 AppUser user = await userManager.FindByIdAsync(item.Id.ToString());
@@ -56,11 +57,11 @@ namespace Cantin.Service.Services.Concrete
         public async Task<List<UserDto>> GetAllUsersWithRolesAndStoresAsync()
         {
             IQueryable<AppUser> users = userManager.Users;
-			List<UserDto> map = mapper.Map<List<UserDto>>(users);
+            List<UserDto> map = mapper.Map<List<UserDto>>(users);
             foreach (var item in map)
             {
-				AppUser user = await userManager.FindByIdAsync(item.Id.ToString());
-				AppRole role = await GetUserRoleAsync(user.Id);
+                AppUser user = await userManager.FindByIdAsync(item.Id.ToString());
+                AppRole role = await GetUserRoleAsync(user.Id);
                 item.Role = role.Name;
             }
             foreach (var item in map)
@@ -78,8 +79,8 @@ namespace Cantin.Service.Services.Concrete
         }
         public async Task<IdentityResult> UpdateUserRole(AppUser user, string roleName)
         {
-			AppRole oldRole = await GetUserRoleAsync(user.Id);
-			IdentityResult result = await userManager.RemoveFromRoleAsync(user, oldRole.Name);
+            AppRole oldRole = await GetUserRoleAsync(user.Id);
+            IdentityResult result = await userManager.RemoveFromRoleAsync(user, oldRole.Name);
             if (!result.Succeeded)
                 return result;
             result = await userManager.AddToRoleAsync(user, roleName);
@@ -87,8 +88,8 @@ namespace Cantin.Service.Services.Concrete
         }
         public async Task<IdentityResult> UpdateUserRole(AppUser user, AppRole newRole)
         {
-			AppRole oldRole = await GetUserRoleAsync(user.Id);
-			IdentityResult result = await userManager.RemoveFromRoleAsync(user, oldRole.Name);
+            AppRole oldRole = await GetUserRoleAsync(user.Id);
+            IdentityResult result = await userManager.RemoveFromRoleAsync(user, oldRole.Name);
             if (!result.Succeeded)
                 return result;
             result = await userManager.AddToRoleAsync(user, newRole.Name);
@@ -97,9 +98,9 @@ namespace Cantin.Service.Services.Concrete
         }
         public async Task<IdentityResult> UpdateUserRole(AppUser user, Guid roleId)
         {
-			AppRole oldRole = await GetUserRoleAsync(user.Id);
-			AppRole newRole = await roleManager.FindByIdAsync(roleId.ToString());
-			IdentityResult result = await userManager.RemoveFromRoleAsync(user, oldRole.Name);
+            AppRole oldRole = await GetUserRoleAsync(user.Id);
+            AppRole newRole = await roleManager.FindByIdAsync(roleId.ToString());
+            IdentityResult result = await userManager.RemoveFromRoleAsync(user, oldRole.Name);
             if (!result.Succeeded)
                 return result;
             result = await userManager.AddToRoleAsync(user, newRole.Name);
@@ -111,7 +112,7 @@ namespace Cantin.Service.Services.Concrete
 
             List<Store> stores = await unitOfWork.GetRepository<Store>().GetAllAsync(x => !x.IsDeleted);
             List<StoreDto> storesMap = mapper.Map<List<StoreDto>>(stores);
-			IQueryable<AppRole> roles = roleManager.Roles;
+            IQueryable<AppRole> roles = roleManager.Roles;
             UserAddDto dto = new()
             {
                 Roles = roles.ToList(),
@@ -123,14 +124,14 @@ namespace Cantin.Service.Services.Concrete
         public async Task<IdentityResult> AddUserWithRoleAsync(UserAddDto dto)
         {
             AppUser loggedInUser = await userManager.FindByEmailAsync(_user.GetLoggedInUserEmail());
-			IdentityResult result = await CheckIfPasswordMatch(loggedInUser, dto.Password);
-			if (!result.Succeeded)
-				return result;
-			AppUser user = mapper.Map<AppUser>(dto);
+            IdentityResult result = await CheckIfPasswordMatch(loggedInUser, dto.Password);
+            if (!result.Succeeded)
+                return result;
+            AppUser user = mapper.Map<AppUser>(dto);
             user.UserName = dto.Email;
             user.PhoneNumberConfirmed = true;
             user.EmailConfirmed = true;
-			result = await userManager.CreateAsync(user, dto.Pass);
+            result = await userManager.CreateAsync(user, dto.Pass);
             if (result.Succeeded)
             {
                 var role = await roleManager.FindByIdAsync(dto.RoleId.ToString());
@@ -142,11 +143,11 @@ namespace Cantin.Service.Services.Concrete
         public async Task<UserUpdateDto> GetUpdateUserDto(Guid id)
         {
             AppUser user = await userManager.FindByIdAsync(id.ToString());
-			UserUpdateDto dto = mapper.Map<UserUpdateDto>(user);
+            UserUpdateDto dto = mapper.Map<UserUpdateDto>(user);
             List<StoreDto> stores = await storeService.GetAllStoreDtosNonDeleted();
             AppRole userRole = await GetUserRoleAsync(user.Id);
             dto.RoleId = userRole.Id;
-			dto.Roles = roleManager.Roles.ToList();
+            dto.Roles = roleManager.Roles.ToList();
             dto.Stores = stores;
             return dto;
         }
@@ -154,28 +155,36 @@ namespace Cantin.Service.Services.Concrete
         {
             AppUser loggedInUser = await userManager.FindByEmailAsync(_user.GetLoggedInUserEmail());
             AppUser user = await userManager.FindByIdAsync(dto.Id.ToString());
-            IdentityResult result = await CheckIfPasswordMatch(loggedInUser,dto.Password);
+            IdentityResult result = await CheckIfPasswordMatch(loggedInUser, dto.Password);
             if (!result.Succeeded)
                 return result;
-			AppUser map = mapper.Map(dto, user);
+            if (dto.NewPassword != null){
+                 result = await ChangeUserPasswordWithoutConfig(user, dto.NewPassword);
+                if (!result.Succeeded)
+                    result.Errors.Cast<ModelAddIdentityError>().First().key = "NewPassword";
+                    return result;
+            }
+            AppUser map = mapper.Map(dto, user);
             AppRole role = await roleManager.FindByIdAsync(dto.RoleId.ToString());
-			result = await UpdateUserRole(map, role);
+            result = await UpdateUserRole(map, role);
             return result;
         }
-        public async Task<IdentityResult> DeleteUserAsync(Guid Id,string password)
+        public async Task<IdentityResult> DeleteUserAsync(Guid Id, string password)
         {
             AppUser loggedInUser = await userManager.FindByEmailAsync(_user.GetLoggedInUserEmail());
             IdentityResult result = await CheckIfPasswordMatch(loggedInUser, password);
             if (!result.Succeeded)
                 return result;
             AppUser user = await userManager.FindByIdAsync(Id.ToString());
-			result = await userManager.DeleteAsync(user);
+            result = await userManager.DeleteAsync(user);
             return result;
         }
-        public async Task<IdentityResult> CheckIfPasswordMatch(AppUser user,string password) {
+        public async Task<IdentityResult> CheckIfPasswordMatch(AppUser user, string password)
+        {
             List<IdentityError> errors = new List<IdentityError>();
-            bool isMatch = await userManager.CheckPasswordAsync(user,password);
-            if (isMatch) {
+            bool isMatch = await userManager.CheckPasswordAsync(user, password);
+            if (isMatch)
+            {
                 return IdentityResult.Success;
             }
             IdentityError error = errorDescriber.PasswordMismatch();
@@ -183,37 +192,45 @@ namespace Cantin.Service.Services.Concrete
             return IdentityResult.Failed(errors.ToArray());
         }
 
-		public async Task ValidateUserAsync(UserAddDto dto, ModelStateDictionary modelState)
-		{
-            if (dto.Password == null)
-            {
-                modelState.AddModelError("Password","Yönetici Şifresi boş olamaz");
-            }
-            AppUser user = mapper.Map<AppUser>(dto);
-            ValidationResult result = await validator.ValidateAsync(user);
-			if (!result.IsValid)
-			{
-				result.AddErrorsToModelState(modelState);
-			}
-		}
-
-		public async Task ValidateUserAsync(UserUpdateDto dto, ModelStateDictionary modelState)
-		{
+        public async Task ValidateUserAsync(UserAddDto dto, ModelStateDictionary modelState)
+        {
             if (dto.Password == null)
             {
                 modelState.AddModelError("Password", "Yönetici Şifresi boş olamaz");
             }
             AppUser user = mapper.Map<AppUser>(dto);
-			ValidationResult result = await validator.ValidateAsync(user);
-			if (!result.IsValid) { 
-				result.AddErrorsToModelState(modelState);
-			}
-		}
+            ValidationResult result = await validator.ValidateAsync(user);
+            if (!result.IsValid)
+            {
+                result.AddErrorsToModelState(modelState);
+            }
+        }
+
+        public async Task ValidateUserAsync(UserUpdateDto dto, ModelStateDictionary modelState)
+        {
+            if (dto.Password == null)
+            {
+                modelState.AddModelError("Password", "Yönetici Şifresi boş olamaz");
+            }
+            AppUser user = mapper.Map<AppUser>(dto);
+            ValidationResult result = await validator.ValidateAsync(user);
+            if (!result.IsValid)
+            {
+                result.AddErrorsToModelState(modelState);
+            }
+        }
 
         public async Task<AppUser> GetUserByEmail(string email)
         {
             var user = await userManager.FindByEmailAsync(email);
             return user;
+        }
+
+        public async Task<IdentityResult> ChangeUserPasswordWithoutConfig(AppUser user, string newPassword)
+        {
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+            IdentityResult result = await userManager.ResetPasswordAsync(user, token, newPassword);
+            return result;
         }
     }
 }
