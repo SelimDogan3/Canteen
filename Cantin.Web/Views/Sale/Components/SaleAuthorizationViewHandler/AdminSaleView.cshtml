@@ -73,12 +73,14 @@
             </tr>
         </thead>
         <tbody>
+            @{var total = 0;}
             @foreach (var sale in Model)
             {
+                total += Convert.ToInt32(sale.SoldTotal);
                 <tr data-products-line='@Json.Serialize(sale.ProductLines?.ToArray())' product="row" class="even">
                     <td class="dt-control"></td>
                     <td>@sale.Store!.Name</td>
-                    <td>@DateTimeFormatter.FormatForTr(sale.CreatedDate).ToString()</td>
+                    <td>@sale.StringCreatedDate</td>
                     <td>@sale.PaymentType</td>
                     <td>@sale.SoldTotal.ToString()₺</td>
                     <td>@sale.PaidAmount₺</td>
@@ -86,6 +88,12 @@
                 </tr>
             }
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6" class="text-right"></td>
+                <td id="total" class=" text-right text-danger">Toplam: @total</td>
+            </tr>
+        </tfoot>
     </table>
     <!--end: Datatable-->
 </div>

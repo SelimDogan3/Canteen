@@ -1,4 +1,5 @@
-﻿using Cantin.Entity.Dtos.Stores;
+﻿using Cantin.Core.Helpers;
+using Cantin.Entity.Dtos.Stores;
 using Cantin.Entity.Entities;
 
 namespace Cantin.Entity.Dtos.Debts
@@ -14,6 +15,8 @@ namespace Cantin.Entity.Dtos.Debts
         public float TotalPrice { get; set; }
         public bool Paid { get; set; }
         public DateTime? PaidDate { get; set; }
+        public string? StringPaidDate => DateTimeFormatter.FormatForTr(PaidDate);
         public DateTime CreatedDate { get; set; }
+        public string StringCreatedDate => DateTimeFormatter.FormatForTr(CreatedDate);
     }
 }

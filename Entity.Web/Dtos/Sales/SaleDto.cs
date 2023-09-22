@@ -1,4 +1,5 @@
-﻿using Cantin.Entity.Dtos.Stores;
+﻿using Cantin.Core.Helpers;
+using Cantin.Entity.Dtos.Stores;
 using Cantin.Entity.Entities;
 
 namespace Cantin.Entity.Dtos.Sales
@@ -7,6 +8,7 @@ namespace Cantin.Entity.Dtos.Sales
     {
         public Guid Id { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string StringCreatedDate => DateTimeFormatter.FormatForTr(CreatedDate);
         public Guid StoreId { get; set; }
         public StoreDto? Store { get; set; }
         public float SoldTotal { get; set; } = 0;

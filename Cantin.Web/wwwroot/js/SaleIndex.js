@@ -137,8 +137,10 @@ $(document).ready(function () {
             contentType: "application/json",
             success: function (data) {
                 table.clear();
+                let total = 0;
                 data.forEach(function (sale) {
-                    let row = table.row.add(['', sale.store.name, sale.createdDate, sale.paymentType, sale.soldTotal, sale.paidAmount, sale.exchange]);
+                    total += sale.soldTotal;
+                    let row = table.row.add(['', sale.store.name, sale.stringCreatedDate, sale.paymentType, sale.soldTotal, sale.paidAmount, sale.exchange]);
                     let tr = row.node();
                     $(tr).find('td:first').attr({
                         class: "dt-control dtr-control sorting_1",
@@ -146,6 +148,7 @@ $(document).ready(function () {
                     });
                     tr.dataset.productsLine = JSON.stringify(sale.productLines);
                 });
+                setTotal(total);
                 table.draw();
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -198,4 +201,8 @@ function disableOrNotDatePicker(selectValue) {
         $('#endDate').prop('disabled', false);
     }
 
+}
+let totalStringStart = "Toplam: "
+function setTotal(x) {
+    $('#total').text(totalStringStart + x);
 }

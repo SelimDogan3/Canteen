@@ -84,19 +84,23 @@
             </tr>
         </thead>
         <tbody>
+            @{
+                var total = 0;
+            }
             @foreach (DebtDto debt in Model)
             {
+                total += Convert.ToInt32(debt.TotalPrice);
                 <tr data-products-line='@Json.Serialize(debt.ProductLines?.ToArray())' product="row" class="even">
                     <td class="dt-control"></td>
                     <td>@debt.Store.Name</td>
                     <td>@debt.FirstName</td>
                     <td>@debt.LastName</td>
                     <td>@debt.TotalPrice₺</td>
-                    <td>@DateTimeFormatter.FormatForTr(debt.CreatedDate)</td>
+                    <td>@debt.StringCreatedDate</td>
                     <td>@(debt.Paid ? "Ödendi" : "Ödenmedi")</td>
                     @if (debt.PaidDate != null)
                     {
-                        <td>@DateTimeFormatter.FormatForTr(debt.PaidDate)</td>
+                        <td>@debt.StringPaidDate</td>
                     }
                     else
                     {
@@ -105,6 +109,12 @@
                 </tr>
             }
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="7" class="text-right"></td>
+                <td id="total" class=" text-right text-danger">Toplam: @total</td>
+            </tr>
+        </tfoot>
     </table>
     <!--end: Datatable-->
 </div>
