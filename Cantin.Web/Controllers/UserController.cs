@@ -24,7 +24,7 @@ namespace Cantin.Web.Areas.Admin.Controllers
         private readonly IToastNotification toastNotification;
         private readonly string type = "kullanıcı";
 
-        public UserController(ILogger<UserController> logger, IUserService userService, UserManager<AppUser> userManager, IMapper mapper,IToastNotification toastNotification)
+        public UserController(ILogger<UserController> logger, IUserService userService, UserManager<AppUser> userManager, IMapper mapper, IToastNotification toastNotification)
         {
             this.userManager = userManager;
             this.logger = logger;
@@ -48,24 +48,26 @@ namespace Cantin.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(UserAddDto addDto)
         {
-            await userService.ValidateUserAsync(addDto,ModelState);
+            await userService.ValidateUserAsync(addDto, ModelState);
             if (ModelState.IsValid)
             {
                 var result = await userService.AddUserWithRoleAsync(addDto);
-                if (result.Succeeded) {
-                    toastNotification.AddSuccessToastMessage(Messages.Messages.Add(addDto.FullName,type), new ToastrOptions { Title = "Kullanıcı Ekleme" });
+                if (result.Succeeded)
+                {
+                    toastNotification.AddSuccessToastMessage(Messages.Messages.Add(addDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Ekleme" });
                     return RedirectToAction("Index");
                 }
-                else { 
-                foreach (ModelAddIdentityError error in result.Errors.Cast<ModelAddIdentityError>())
+                else
                 {
-                    ModelState.AddModelError(error.key,error.Description);
+                    foreach (ModelAddIdentityError error in result.Errors.Cast<ModelAddIdentityError>())
+                    {
+                        ModelState.AddModelError(error.key, error.Description);
 
-                }
+                    }
                     toastNotification.AddErrorToastMessage(Messages.Messages.AddError(addDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Ekleme" });
 
                     addDto = await userService.GetUserAddDto();
-                return View(addDto);
+                    return View(addDto);
                 }
             }
             toastNotification.AddErrorToastMessage(Messages.Messages.AddError(addDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Ekleme" });
@@ -73,50 +75,62 @@ namespace Cantin.Web.Areas.Admin.Controllers
             return View(addDto);
         }
         [HttpGet]
-        public async Task<IActionResult> Update(Guid id) {
+        public async Task<IActionResult> Update(Guid id)
+        {
             var dto = await userService.GetUpdateUserDto(id);
             return View(dto);
         }
         [HttpPost]
         public async Task<IActionResult> Update(UserUpdateDto updateDto)
         {
-			await userService.ValidateUserAsync(updateDto, ModelState);
-			if (ModelState.IsValid) {
+            await userService.ValidateUserAsync(updateDto, ModelState);
+            if (ModelState.IsValid)
+            {
                 IdentityResult result = await userService.UpdateUserWithRoleAsync(updateDto);
                 if (result.Succeeded)
                 {
                     toastNotification.AddSuccessToastMessage(Messages.Messages.Update(updateDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Güncelleme" });
                     return RedirectToAction("Index");
                 }
-                else {
-					foreach (ModelAddIdentityError error in result.Errors.Cast<ModelAddIdentityError>())
-					{
-						ModelState.AddModelError(error.key, error.Description);
+                else
+                {
+                    foreach (ModelAddIdentityError error in result.Errors.Cast<ModelAddIdentityError>())
+                    {
+                        ModelState.AddModelError(error.key, error.Description);
 
-					}
-					toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Güncelleme" });
+                    }
+                    toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Güncelleme" });
                     updateDto = await userService.GetUpdateUserDto(updateDto.Id);
-                        return View(updateDto);
+                    return View(updateDto);
 
                 }
-                
+
             }
             toastNotification.AddErrorToastMessage(Messages.Messages.UpdateError(updateDto.FullName, type), new ToastrOptions { Title = "Kullanıcı Güncelleme" });
             updateDto = await userService.GetUpdateUserDto(updateDto.Id);
             return View(updateDto);
         }
-        public async Task<IActionResult> Delete([FromRoute]Guid Id, [FromForm] string password) {
-            var name =(await userManager.FindByIdAsync(Id.ToString())).FullName;
-            IdentityResult result = await userService.DeleteUserAsync(Id,password);
-            if (result.Succeeded)
+        public async Task<IActionResult> Delete([FromRoute] Guid Id, [FromForm] string password)
+        {
+            if (password != null)
             {
-                toastNotification.AddSuccessToastMessage(Messages.Messages.Delete(name, type), new ToastrOptions { Title = "Kullanıcı Silme" });
-            }
-            else {
-                toastNotification.AddErrorToastMessage(Messages.Messages.DeleteError(name, type), new ToastrOptions { Title = "Kullanıcı Silme" });
+                var name = (await userManager.FindByIdAsync(Id.ToString())).FullName;
+                IdentityResult result = await userService.DeleteUserAsync(Id, password);
+                if (result.Succeeded)
+                {
+                    toastNotification.AddSuccessToastMessage(Messages.Messages.Delete(name, type), new ToastrOptions { Title = "Kullanıcı Silme" });
+                }
+                else
+                {
+                    toastNotification.AddErrorToastMessage(Messages.Messages.DeleteError(name, type), new ToastrOptions { Title = "Kullanıcı Silme" });
 
+                }
             }
+            else
+                toastNotification.AddErrorToastMessage("Yönetici Şifresi Alanı Boş Geçilemez", new ToastrOptions { Title = "Kullanıcı Silme" });
             return RedirectToAction("Index");
+
+
         }
     }
 }

@@ -185,6 +185,10 @@ namespace Cantin.Service.Services.Concrete
 
 		public async Task ValidateUserAsync(UserAddDto dto, ModelStateDictionary modelState)
 		{
+            if (dto.Password == null)
+            {
+                modelState.AddModelError("Password","Yönetici Şifresi boş olamaz");
+            }
             AppUser user = mapper.Map<AppUser>(dto);
             ValidationResult result = await validator.ValidateAsync(user);
 			if (!result.IsValid)
@@ -195,7 +199,11 @@ namespace Cantin.Service.Services.Concrete
 
 		public async Task ValidateUserAsync(UserUpdateDto dto, ModelStateDictionary modelState)
 		{
-			AppUser user = mapper.Map<AppUser>(dto);
+            if (dto.Password == null)
+            {
+                modelState.AddModelError("Password", "Yönetici Şifresi boş olamaz");
+            }
+            AppUser user = mapper.Map<AppUser>(dto);
 			ValidationResult result = await validator.ValidateAsync(user);
 			if (!result.IsValid) { 
 				result.AddErrorsToModelState(modelState);
