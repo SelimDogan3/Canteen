@@ -57,7 +57,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("2ac8179a-3f45-40d2-ac0e-65d58333e265"),
-                            ConcurrencyStamp = "7d34476a-3272-4fdd-8153-db114258201f",
+                            ConcurrencyStamp = "5c755bf7-28cf-49e5-8496-8bef377923e3",
                             Description = "Super Admin",
                             Name = "Superadmin",
                             NormalizedName = "SUPERADMIN"
@@ -65,7 +65,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("eebcd6ba-d079-4fde-a81a-df80076c8002"),
-                            ConcurrencyStamp = "e53b91eb-3e5b-46e6-8df8-68781e45ea3b",
+                            ConcurrencyStamp = "35d6b457-7e90-4203-b6ce-aa52a229f1f6",
                             Description = "Admin",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
@@ -73,7 +73,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("bd76b238-de73-447e-bef6-424f84b844c8"),
-                            ConcurrencyStamp = "a67a6903-e9dc-4fa4-930d-4773dc3b318e",
+                            ConcurrencyStamp = "90b3650d-56f1-4972-9684-736db97d7ff0",
                             Description = "Çalışan",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
@@ -192,42 +192,21 @@ namespace Cantin.Data.Migrations
                             Id = new Guid("6168a092-56d5-439d-a0b8-940fbda81950"),
                             AccessFailedCount = 0,
                             Adress = "This is an Adress",
-                            ConcurrencyStamp = "9192f426-57e1-4f86-9a3c-f12856eb3bdc",
+                            ConcurrencyStamp = "8139deba-1bce-403c-a8c3-36a1041e3f8f",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = true,
-                            FirstName = "Mutlu",
-                            LastName = "Bozdemir",
+                            FirstName = "Selim",
+                            LastName = "Doğan",
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPlxHkwtu5V2NwTzmHBOId00YeTT+ONo4E17ulyJBzW5X7lhEQaE1v23rkS6vl6q7g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELIj9GC39tG0BAGVVOCPFvLexYJMjoj1PR1c9iA84YDcFTdHrK5fV9Cv7ZvaScttlw==",
                             PhoneNumber = "+905000000000",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "1142961a-78a4-43f9-9e3d-04d458cd18ec",
+                            SecurityStamp = "bccaecea-05e7-48e9-86db-e2bf5015e838",
                             StoreId = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
-                        },
-                        new
-                        {
-                            Id = new Guid("4083029d-7624-44d6-acfa-4a54deefbd3f"),
-                            AccessFailedCount = 0,
-                            Adress = "This is an Adress2",
-                            ConcurrencyStamp = "45413426-0c5c-40bb-bae9-25a322b394f9",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Dilara",
-                            LastName = "Bozdemir",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@GMAIL.COM",
-                            NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ4n3rXtxY1Yls6nrarFr1l4DXYdSUDdzv9R0enyqMXxx+8hsQc2qf7sQeezCeH2+g==",
-                            PhoneNumber = "+905000000000",
-                            PhoneNumberConfirmed = true,
-                            SecurityStamp = "9034a7b4-161b-4294-9dfc-c59969dc8c10",
-                            StoreId = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
-                            TwoFactorEnabled = false,
-                            UserName = "admin@gmail.com"
                         });
                 });
 
@@ -297,11 +276,6 @@ namespace Cantin.Data.Migrations
                         {
                             UserId = new Guid("6168a092-56d5-439d-a0b8-940fbda81950"),
                             RoleId = new Guid("2ac8179a-3f45-40d2-ac0e-65d58333e265")
-                        },
-                        new
-                        {
-                            UserId = new Guid("4083029d-7624-44d6-acfa-4a54deefbd3f"),
-                            RoleId = new Guid("eebcd6ba-d079-4fde-a81a-df80076c8002")
                         });
                 });
 
@@ -673,11 +647,11 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
-                            Adress = "Depo",
-                            CreatedBy = "Admin",
-                            CreatedDate = new DateTime(2023, 9, 22, 17, 9, 14, 120, DateTimeKind.Local).AddTicks(1680),
+                            Adress = "SuperAdmin",
+                            CreatedBy = "Superadmin",
+                            CreatedDate = new DateTime(2023, 9, 23, 8, 15, 55, 560, DateTimeKind.Local).AddTicks(6663),
                             IsDeleted = false,
-                            Name = "Depo",
+                            Name = "SuperAdmin",
                             PhoneNumber = "123214512412512"
                         });
                 });

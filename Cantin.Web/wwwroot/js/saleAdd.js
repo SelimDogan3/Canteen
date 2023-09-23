@@ -125,11 +125,7 @@ async function GetAndSetProductsWithAjax(barcode, lines) {
             if (data !== null && data !== undefined) {
                 var line;
                 if (lines.ProductLines.length > 0) {
-                    console.log(data.id);
                     line = lines.ProductLines.filter(x => x.Product.id === data.id);
-                    lines.ProductLines.forEach(function (myline) {
-                        console.log(myline);
-                    });
                 }
                 if (!line || line.length === 0) {
                     line = new ProductLine(data);
@@ -148,7 +144,7 @@ async function GetAndSetProductsWithAjax(barcode, lines) {
                 CheckIfAddButtonCanBeAble(lines);
             }
             else {
-                console.log('null');
+                toastr.warning('Ürün Bulunamadı Tekrar Deneyiniz','Barkod Okuma');
             }
         }
     });
@@ -308,9 +304,9 @@ $(document).ready(function () {
 
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    console.log(xhr.status);
-                    console.log(thrownError);
-                    console.log(xhr.responseText);
+                    //console.log(xhr.status);
+                    //console.log(thrownError);
+                    //console.log(xhr.responseText);
                 }
             });
         }

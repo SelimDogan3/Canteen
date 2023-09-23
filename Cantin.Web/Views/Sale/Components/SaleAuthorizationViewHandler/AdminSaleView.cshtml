@@ -68,8 +68,6 @@
                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Satış Tarihi</th>
                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ödeme Şekli</th>
                 <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Toplam Fiyat</th>
-                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Ödenilen Para</th>
-                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px;">Paranın Üssü</th>
             </tr>
         </thead>
         <tbody>
@@ -83,14 +81,12 @@
                     <td>@sale.StringCreatedDate</td>
                     <td>@sale.PaymentType</td>
                     <td>@sale.SoldTotal.ToString()₺</td>
-                    <td>@sale.PaidAmount₺</td>
-                    <td>@sale.Exchange.ToString()₺</td>
                 </tr>
             }
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="6" class="text-right"></td>
+                <td colspan="4" class="text-right"></td>
                 <td id="total" class=" text-right text-danger">Toplam: @total</td>
             </tr>
         </tfoot>

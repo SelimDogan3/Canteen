@@ -24,7 +24,6 @@ let tableFinish =
     
     `
 function CreateProductTr(productLine) {
-    console.log(productLine);
     return (
         `
         <tr product="row" class="even">
@@ -81,7 +80,7 @@ $(document).ready(function () {
         let tr = $(this).closest('tr');
         let row = table.row(tr);
         // Şartlarınızı burada kontrol edin, örneğin:
-        console.log(row.child.isShown());
+
         if (row.child.isShown()) {
             // This row is already open - close it
             row.child.hide();
@@ -134,7 +133,7 @@ $(document).ready(function () {
                     total += debt.totalPrice;
                     let paid = debt.paid === true ? "Ödendi" : "Ödenmedi";
                     debt.paidDate = debt.paidDate === null ? "" : debt.paidDate;
-                    let row = table.row.add(['', debt.store.name, debt.firstName, debt.lastName, debt.totalPrice, debt.stringCreatedDate, paid, debt.paidDate]);
+                    let row = table.row.add(['', debt.store.name, debt.firstName, debt.lastName, debt.totalPrice, debt.stringCreatedDate, paid, debt.stringPaidDate]);
                     let tr = row.node();
                     $(tr).find('td:first').attr({
                         class: "dt-control dtr-control sorting_1",

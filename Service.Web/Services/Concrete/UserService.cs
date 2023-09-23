@@ -11,6 +11,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Linq.Expressions;
 using System.Security.Claims;
 
 namespace Cantin.Service.Services.Concrete
@@ -25,6 +26,8 @@ namespace Cantin.Service.Services.Concrete
         private readonly IdentityErrorDescriber errorDescriber;
         private readonly IValidator<AppUser> validator;
         private readonly ClaimsPrincipal _user;
+        private string? userRole => _user.GetRole();
+        private string? userMail => _user.GetLoggedInUserEmail();
 
         public UserService(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IMapper mapper, IUnitOfWork unitOfWork, IStoreService storeService, IdentityErrorDescriber errorDescriber, IHttpContextAccessor contextAccessor, IValidator<AppUser> validator)
         {
@@ -44,6 +47,7 @@ namespace Cantin.Service.Services.Concrete
         }
         public async Task<List<UserDto>> GetAllUsersWithRolesAsync()
         {
+
             IQueryable<AppUser> users = userManager.Users;
             List<UserDto> map = mapper.Map<List<UserDto>>(users);
             foreach (var item in map)
@@ -58,11 +62,20 @@ namespace Cantin.Service.Services.Concrete
         {
             IQueryable<AppUser> users = userManager.Users;
             List<UserDto> map = mapper.Map<List<UserDto>>(users);
+            List<UserDto> removeItem = new();
             foreach (var item in map)
             {
                 AppUser user = await userManager.FindByIdAsync(item.Id.ToString());
                 AppRole role = await GetUserRoleAsync(user.Id);
-                item.Role = role.Name;
+                if (userRole != "Superadmin" && role.Name == "Superadmin")
+                {
+                    removeItem.Add(item);
+                }
+                    item.Role = role.Name;
+            }
+            if (removeItem.Count > 0)
+            {
+                map.RemoveAll(x => removeItem.Contains(x));
             }
             foreach (var item in map)
             {
@@ -113,6 +126,7 @@ namespace Cantin.Service.Services.Concrete
             List<Store> stores = await unitOfWork.GetRepository<Store>().GetAllAsync(x => !x.IsDeleted);
             List<StoreDto> storesMap = mapper.Map<List<StoreDto>>(stores);
             IQueryable<AppRole> roles = roleManager.Roles;
+            roles = roles.Where(x => x.Name != "Superadmin");
             UserAddDto dto = new()
             {
                 Roles = roles.ToList(),
@@ -158,11 +172,12 @@ namespace Cantin.Service.Services.Concrete
             IdentityResult result = await CheckIfPasswordMatch(loggedInUser, dto.Password);
             if (!result.Succeeded)
                 return result;
-            if (dto.NewPassword != null){
-                 result = await ChangeUserPasswordWithoutConfig(user, dto.NewPassword);
+            if (dto.NewPassword != null)
+            {
+                result = await ChangeUserPasswordWithoutConfig(user, dto.NewPassword);
                 if (!result.Succeeded)
                     result.Errors.Cast<ModelAddIdentityError>().First().key = "NewPassword";
-                    return result;
+                return result;
             }
             AppUser map = mapper.Map(dto, user);
             AppRole role = await roleManager.FindByIdAsync(dto.RoleId.ToString());

@@ -24,7 +24,6 @@ let tableFinish =
     
     `
 function CreateProductTr(productLine) {
-    console.log(productLine);
     return (
         `
         <tr product="row" class="even">
@@ -89,7 +88,6 @@ $(document).ready(function () {
         let tr = $(this).closest('tr');
         let row = table.row(tr);
         // Şartlarınızı burada kontrol edin, örneğin:
-        console.log(row.child.isShown());
         if (row.child.isShown()) {
             // This row is already open - close it
             row.child.hide();
@@ -152,12 +150,11 @@ $(document).ready(function () {
                 table.draw();
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-                console.log(xhr.responseText);
+                //console.log(xhr.status);
+                //console.log(thrownError);
+                //console.log(xhr.responseText);
             }
         });
-        console.log("s");
 
     });
 });

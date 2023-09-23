@@ -30,7 +30,7 @@ namespace Cantin.Service.Services.Concrete
 		}
 		public async Task<List<StoreDto>> GetAllStoreDtosNonDeleted()
 		{
-			List<Store> stores = await repository.GetAllAsync(x => !x.IsDeleted);
+			List<Store> stores = await repository.GetAllAsync(x => !x.IsDeleted && x.Name != "Superadmin");
 			List<StoreDto> map = mapper.Map<List<StoreDto>>(stores);
 			return map;
 		}

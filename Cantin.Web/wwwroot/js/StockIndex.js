@@ -108,7 +108,6 @@ function EmptyXlsxContent(sheet) {
     let overlappingEmptyCount = 0;
     for (let i = 3; i <= maxValue; i++) {
         if (overlappingEmptyCount >= 200) {
-            console.log("işe yaradı");
             break;
         }
         let row = $('row[r=' + i + ']', sheet);

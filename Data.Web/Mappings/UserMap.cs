@@ -56,8 +56,8 @@ namespace Cantin.Data.Mappings
                 Email = "superadmin@gmail.com",
                 NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                 PhoneNumber = "+905000000000",
-                FirstName = "Mutlu",
-                LastName = "Bozdemir",
+                FirstName = "Selim",
+                LastName = "Doğan",
                 Adress = "This is an Adress",
                 PhoneNumberConfirmed = true,
                 EmailConfirmed = true,
@@ -67,28 +67,7 @@ namespace Cantin.Data.Mappings
             };
 
             superadmin.PasswordHash = CreatePasswordHash(superadmin, "123456");
-
-            var admin = new AppUser
-            {
-                Id = Guid.Parse("4083029D-7624-44D6-ACFA-4A54DEEFBD3F"),
-                UserName = "admin@gmail.com",
-                NormalizedUserName = "ADMIN@GMAIL.COM",
-                Email = "admin@gmail.com",
-                NormalizedEmail = "ADMIN@GMAIL.COM",
-                PhoneNumber = "+905000000000",
-                FirstName = "Dilara",
-                LastName = "Bozdemir",
-                Adress = "This is an Adress2",
-                PhoneNumberConfirmed = true,
-                EmailConfirmed = true,
-                StoreId = Guid.Parse("90411F34-B61A-4A4D-BBB1-6D98A2F9CF34"),
-                SecurityStamp = Guid.NewGuid().ToString(),
-
-            };
-
-            admin.PasswordHash = CreatePasswordHash(superadmin, "123456");
-
-            builder.HasData(superadmin, admin);
+            builder.HasData(superadmin);
 
         }
         private string CreatePasswordHash(AppUser user, string password)
