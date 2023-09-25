@@ -102,6 +102,11 @@ $(document).ready(function () {
             row.child(suppliesTable).show();
         }
     });
+
+    $('#ProductIdSelect').select2({
+        placeholder: "Ürün seçiniz",
+        allowClear: true
+    });
     $('#datePeriodSelect').on('change', function (e) {
         disableOrNotDatePicker($(this).val());
     });

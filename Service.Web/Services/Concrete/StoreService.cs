@@ -9,24 +9,27 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Linq.Expressions;
 using System.Security.Claims;
 namespace Cantin.Service.Services.Concrete
 {
-	public class StoreService : IStoreService
+    public class StoreService : IStoreService
 	{
 		private readonly IUnitOfWork unitOfWork;
 		private readonly IMapper mapper;
 		private readonly IValidator<Store> validator;
-		private readonly ClaimsPrincipal _user;
+        private readonly IProductService productService;
+        private readonly ClaimsPrincipal _user;
 
 		private IRepository<Store> repository { get => unitOfWork.GetRepository<Store>(); }
 
-		public StoreService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor contextAccessor,IValidator<Store> validator)
+		public StoreService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor contextAccessor,IValidator<Store> validator,IProductService productService)
 		{
 			this.unitOfWork = unitOfWork;
 			this.mapper = mapper;
 			this.validator = validator;
-			_user = contextAccessor.HttpContext!.User;
+            this.productService = productService;
+            _user = contextAccessor.HttpContext!.User;
 		}
 		public async Task<List<StoreDto>> GetAllStoreDtosNonDeleted()
 		{
@@ -34,7 +37,20 @@ namespace Cantin.Service.Services.Concrete
 			List<StoreDto> map = mapper.Map<List<StoreDto>>(stores);
 			return map;
 		}
-		public async Task<StoreDto> GetStoreById(Guid Id)
+        public async Task<List<StoreDto>> GetAllStoresNonDeletedWithStocksAsync()
+        {
+            List<Store> stores = await repository.GetAllAsync(x => !x.IsDeleted && x.Name != "Superadmin",x => x.Stocks);
+            foreach (var store in stores)
+            {
+                foreach (var stock in store.Stocks)
+                {
+                stock.Product = await productService.GetProductByIdAsync(stock.ProductId);
+                }
+            }
+            List<StoreDto> map = mapper.Map<List<StoreDto>>(stores);
+            return map;
+        }
+        public async Task<StoreDto> GetStoreById(Guid Id)
 		{
 			Store store = await repository.GetByGuidAsync(Id);
 			StoreDto dto = mapper.Map<StoreDto>(store);
@@ -98,5 +114,17 @@ namespace Cantin.Service.Services.Concrete
 				result.AddErrorsToModelState(modelState);
 			}
 		}
-	}
+
+        public async Task<StockDto> GetStoreByIdWithStocks(Guid Id)
+        {
+			Store store = await repository.GetAsync(x => x.Id == Id, y => y.Stocks);
+                foreach (var stock in store.Stocks)
+                {
+                    stock.Product = await productService.GetProductByIdAsync(stock.ProductId);
+                }
+            var storeMap = mapper.Map<StoreDto>(store);
+			var map = mapper.Map<StockDto>(storeMap);
+			return map;
+        }
+    }
 }

@@ -7,7 +7,7 @@ namespace Cantin.Service.Services.Abstraction
 {
 	public interface IRoleService
     {
-        List<RoleDto> GetAllRoles();
+        Task<List<RoleDto>> GetAllRoles();
         RoleAddDto GetRoleAddDto();
         Task<IdentityResult> AddRoleAsync(RoleAddDto addDto);
         Task<RoleUpdateDto> GetRoleUpdateDtoAsync(Guid Id);

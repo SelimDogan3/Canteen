@@ -57,7 +57,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("2ac8179a-3f45-40d2-ac0e-65d58333e265"),
-                            ConcurrencyStamp = "5c755bf7-28cf-49e5-8496-8bef377923e3",
+                            ConcurrencyStamp = "1d6d8e34-ad32-48d1-afe7-7a863450678a",
                             Description = "Super Admin",
                             Name = "Superadmin",
                             NormalizedName = "SUPERADMIN"
@@ -65,7 +65,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("eebcd6ba-d079-4fde-a81a-df80076c8002"),
-                            ConcurrencyStamp = "35d6b457-7e90-4203-b6ce-aa52a229f1f6",
+                            ConcurrencyStamp = "72c5ef24-7884-4c3c-89b7-aa1720adae6d",
                             Description = "Admin",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
@@ -73,7 +73,7 @@ namespace Cantin.Data.Migrations
                         new
                         {
                             Id = new Guid("bd76b238-de73-447e-bef6-424f84b844c8"),
-                            ConcurrencyStamp = "90b3650d-56f1-4972-9684-736db97d7ff0",
+                            ConcurrencyStamp = "cdf8c8ff-1101-4f51-92b4-6ca7909d00c1",
                             Description = "Çalışan",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
@@ -192,7 +192,7 @@ namespace Cantin.Data.Migrations
                             Id = new Guid("6168a092-56d5-439d-a0b8-940fbda81950"),
                             AccessFailedCount = 0,
                             Adress = "This is an Adress",
-                            ConcurrencyStamp = "8139deba-1bce-403c-a8c3-36a1041e3f8f",
+                            ConcurrencyStamp = "cdab29b9-6bc5-47fd-a4f2-97afe0f0d6ec",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Selim",
@@ -200,10 +200,10 @@ namespace Cantin.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELIj9GC39tG0BAGVVOCPFvLexYJMjoj1PR1c9iA84YDcFTdHrK5fV9Cv7ZvaScttlw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJjK8jGXsMSmuOjYY/oGnvU5gzZcgf/CVFBRNX+V8CgywiMYjmZ2M0GE6agoB8s9kg==",
                             PhoneNumber = "+905000000000",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "bccaecea-05e7-48e9-86db-e2bf5015e838",
+                            SecurityStamp = "9ca6c42c-5ac3-4d13-88f4-4b20c890478f",
                             StoreId = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
@@ -649,7 +649,7 @@ namespace Cantin.Data.Migrations
                             Id = new Guid("90411f34-b61a-4a4d-bbb1-6d98a2f9cf34"),
                             Adress = "SuperAdmin",
                             CreatedBy = "Superadmin",
-                            CreatedDate = new DateTime(2023, 9, 23, 8, 15, 55, 560, DateTimeKind.Local).AddTicks(6663),
+                            CreatedDate = new DateTime(2023, 9, 23, 20, 28, 30, 667, DateTimeKind.Local).AddTicks(2053),
                             IsDeleted = false,
                             Name = "SuperAdmin",
                             PhoneNumber = "123214512412512"
@@ -839,7 +839,7 @@ namespace Cantin.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Cantin.Entity.Entities.Store", "Store")
-                        .WithMany("StoreProducts")
+                        .WithMany("Stocks")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -858,7 +858,7 @@ namespace Cantin.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Cantin.Entity.Entities.Store", "Store")
-                        .WithMany("Stocks")
+                        .WithMany("Suppliles")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -899,7 +899,7 @@ namespace Cantin.Data.Migrations
 
                     b.Navigation("Stocks");
 
-                    b.Navigation("StoreProducts");
+                    b.Navigation("Suppliles");
                 });
 #pragma warning restore 612, 618
         }

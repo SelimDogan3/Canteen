@@ -19,16 +19,18 @@ namespace Cantin.Service.Services.Concrete
         private readonly IMapper mapper;
         private readonly UserManager<AppUser> userManager;
         private readonly IProductService productService;
+        private readonly IStockService stockService;
         private readonly ClaimsPrincipal _user;
 
         private IRepository<Debt> repository => unitOfWork.GetRepository<Debt>();
 
-        public DebtService(IUnitOfWork unitOfWork,IMapper mapper,IHttpContextAccessor contextAccessor,UserManager<AppUser> userManager,IProductService productService)
+        public DebtService(IUnitOfWork unitOfWork,IMapper mapper,IHttpContextAccessor contextAccessor,UserManager<AppUser> userManager,IProductService productService,IStockService stockService)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
             this.userManager = userManager;
             this.productService = productService;
+            this.stockService = stockService;
             _user = contextAccessor!.HttpContext!.User;
         }
 
@@ -78,6 +80,8 @@ namespace Cantin.Service.Services.Concrete
             {
                 await MatchProductWithDebtsAsync(debt.Id,line.ProductId,line.Quantity);
             }
+            //decreaseing stock
+            await stockService.UpdateStockAsync(dto,user.StoreId);
             await unitOfWork.SaveAsync();
         }
 

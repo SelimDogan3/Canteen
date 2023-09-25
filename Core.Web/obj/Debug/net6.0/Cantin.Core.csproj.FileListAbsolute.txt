@@ -22,3 +22,15 @@ C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\Cantin.C
 C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\refint\Cantin.Core.dll
 C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\Cantin.Core.pdb
 C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\ref\Cantin.Core.dll
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\bin\Debug\net6.0\Cantin.Core.deps.json
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\bin\Debug\net6.0\Cantin.Core.dll
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\bin\Debug\net6.0\Cantin.Core.pdb
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\Cantin.Core.csproj.AssemblyReference.cache
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\Cantin.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\Cantin.Core.AssemblyInfoInputs.cache
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\Cantin.Core.AssemblyInfo.cs
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\Cantin.Core.csproj.CoreCompileInputs.cache
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\Cantin.Core.dll
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\refint\Cantin.Core.dll
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\Cantin.Core.pdb
+C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Core.Web\obj\Debug\net6.0\ref\Cantin.Core.dll

@@ -75,15 +75,17 @@ $(document).ready(function () {
             }
         }
     });
-    //$('#ProductIdSelect').select2({
+    $('#ProductIdSelect').select2({
+        placeholder: "Ürün seçiniz",
+        allowClear: true
+    });
+    $('#StoreIdSelect').select2({
+        placeholder: "Kantin seçiniz",
+        allowClear: true
+    });
+    $('#paymentTypeSelect').select2({
 
-    //});
-    //$('#StoreIdSelect').select2({
-
-    //});
-    //$('#paymentTypeSelect').select2({
-
-    //});
+    });
     table.on('click', 'td.dt-control', function (e) {
         let tr = $(this).closest('tr');
         let row = table.row(tr);

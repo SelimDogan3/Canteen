@@ -9,145 +9,145 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Cantin.Web
 build_property.RootNamespace = Cantin.Web
-build_property.ProjectDir = C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Cantin.Web\
+build_property.ProjectDir = C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Cantin.Web\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = true
-build_property.MSBuildProjectDirectory = C:\Users\selim\OneDrive\Masaüstü\Cantin.Web\Cantin.Web
+build_property.MSBuildProjectDirectory = C:\Users\selim\OneDrive\Masaüstü\masaüstü\Cantin.Web\Cantin.Web
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Auth/Login.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Components/DebtAuthorizationViewHandler/AdminDebtView.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Components/DebtAuthorizationViewHandler/AdminDebtView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVidFxDb21wb25lbnRzXERlYnRBdXRob3JpemF0aW9uVmlld0hhbmRsZXJcQWRtaW5EZWJ0Vmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Components/DebtAuthorizationViewHandler/EmployeeDebtView.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Components/DebtAuthorizationViewHandler/EmployeeDebtView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVidFxDb21wb25lbnRzXERlYnRBdXRob3JpemF0aW9uVmlld0hhbmRsZXJcRW1wbG95ZWVEZWJ0Vmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Index.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVidFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Pay.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Debt/Pay.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVidFxQYXkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Home/Index.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Home/Privacy.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Product/Add.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Product/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Product/Index.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Product/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Product/Update.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Product/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Role/Add.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Role/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Role/Index.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Role/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Role/Update.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Role/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Sale/Add.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Sale/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZVxBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Sale/Components/SaleAuthorizationViewHandler/AdminSaleView.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Sale/Components/SaleAuthorizationViewHandler/AdminSaleView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZVxDb21wb25lbnRzXFNhbGVBdXRob3JpemF0aW9uVmlld0hhbmRsZXJcQWRtaW5TYWxlVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Sale/Components/SaleAuthorizationViewHandler/EmployeeSaleView.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Sale/Components/SaleAuthorizationViewHandler/EmployeeSaleView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZVxDb21wb25lbnRzXFNhbGVBdXRob3JpemF0aW9uVmlld0hhbmRsZXJcRW1wbG95ZWVTYWxlVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Sale/Index.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Sale/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Shared/Components/NavUserManagement/_NavUserManagement.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Shared/Components/NavUserManagement/_NavUserManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTmF2VXNlck1hbmFnZW1lbnRcX05hdlVzZXJNYW5hZ2VtZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Shared/Error.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Store/Add.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Store/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVcQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Store/Index.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Store/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Store/Stock.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Store/Stock.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVcU3RvY2suY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Store/Update.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Store/StockDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVcU3RvY2tEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Store/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVcVXBkYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Supply/Add.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Supply/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGx5XEFkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Supply/Index.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Supply/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGx5XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Supply/Update.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Supply/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGx5XFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/User/Add.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/User/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/User/Index.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/User/Update.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/User/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/_ViewImports.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/_ViewStart.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/Shared/_Layout.cshtml]
+[C:/Users/selim/OneDrive/Masaüstü/masaüstü/Cantin.Web/Cantin.Web/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-atb818dkou
-
-[C:/Users/selim/OneDrive/Masaüstü/Cantin.Web/Cantin.Web/Views/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX0xheW91dC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = b-i9eilfuluj

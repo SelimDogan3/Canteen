@@ -1,4 +1,6 @@
-﻿namespace Cantin.Entity.Dtos.Stores
+﻿using Cantin.Entity.Entities;
+
+namespace Cantin.Entity.Dtos.Stores
 {
     public class StoreDto
 	{
@@ -6,6 +8,6 @@
         public string Name { get; set; }
 		public string Adress { get; set; }
 		public string PhoneNumber { get; set; }
-
-	}
+        public List<StockLine>? Stocks { get; set; }
+    }
 }

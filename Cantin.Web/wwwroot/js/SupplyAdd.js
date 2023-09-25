@@ -1,0 +1,4 @@
+﻿$("#productSelect").select2({
+
+
+});

@@ -91,57 +91,6 @@
             background-image: none;
         }
 
-.select2-container {
-    width: 100% !important;
-    font-family: Arial, sans-serif;
-}
-
-.select2-selection__choice {
-    background-color: #5c6bc0 !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 15px !important;
-    padding: 5px 8px !important; /* X eksenindeki padding değerini azalttım */
-    position: relative !important;
-}
-
-.select2-selection__choice__remove {
-    color: transparent !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    background-color: transparent !important;
-    border-radius: 50% !important;
-    transition: 0.3s !important;
-    z-index: 2 !important;
-}
-
-.select2-selection__choice:focus .select2-selection__choice__remove,
-.select2-selection__choice:hover .select2-selection__choice__remove {
-    color: #FFF !important;
-}
-
-.select2-dropdown {
-    border: 1px solid #5c6bc0 !important;
-}
-
-.select2-results__option {
-    padding: 6px 10px; /* X eksenindeki padding değerini azalttım */
-}
-
-.select2-results__option--highlighted {
-    background-color: #5c6bc0 !important;
-    color: white !important;
-}
-
-.select2-search__field:focus {
-    outline: none !important;
-}
-
-
-
-
 /* Mobil için düğmeleri düzenlemek */
 @media (max-width: 767px) {
     .d-flex.flex-wrap {

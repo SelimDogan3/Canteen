@@ -6,8 +6,10 @@ using Cantin.Service.Extensions;
 using Cantin.Service.Services.Abstraction;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Security.Claims;
 
 namespace Cantin.Service.Services.Concrete
 {
@@ -17,17 +19,25 @@ namespace Cantin.Service.Services.Concrete
         private readonly RoleManager<AppRole> roleManager;
         private readonly IMapper mapper;
 		private readonly IValidator<AppRole> validator;
+        private readonly ClaimsPrincipal _user;
+        private string? userRole => _user.GetRole();
+        private string? userMail => _user.GetLoggedInUserEmail();
 
-		public RoleService(RoleManager<AppRole> roleManager, IMapper mapper, IValidator<AppRole> validator)
+        public RoleService(RoleManager<AppRole> roleManager, IMapper mapper, IValidator<AppRole> validator,IHttpContextAccessor contextAccessor)
         {
             this.roleManager = roleManager;
             this.mapper = mapper;
 			this.validator = validator;
-		}
-		public List<RoleDto> GetAllRoles()
+			_user = contextAccessor.HttpContext.User;
+        }
+		public async Task<List<RoleDto>> GetAllRoles()
 		{
 			List<AppRole> roles = roleManager.Roles.ToList();
-			List<RoleDto> map = mapper.Map<List<RoleDto>>(roles);
+			if (userRole != "Superadmin") {
+                var role = await roleManager.FindByNameAsync("Superadmin");
+                roles.Remove(role);
+			}
+            List<RoleDto> map = mapper.Map<List<RoleDto>>(roles);
 			return map;
 		}
 		public RoleAddDto GetRoleAddDto()

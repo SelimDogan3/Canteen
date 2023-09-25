@@ -143,11 +143,13 @@
 
             <!-- Birden Fazla Seçim Yapabileceğiniz Select Kutusu -->
                 <div class="filter-item col-md-3 mb-3">
-                    <label for="multiSelect">Ürünler Seçim Yap:</label>
-                    <select id="ProductIdSelect" class="form-control" asp-items="@(new SelectList(ViewBag.Products,"Id","Name"))" multiple="multiple">
-                    </select>
+                    
             </div>
+            
         </div>
+        <label for="multiSelect">Ürünler Seçim Yap:</label>
+        <select id="ProductIdSelect" class="" asp-items="@(new SelectList(ViewBag.Products,"Id","Name"))" multiple="multiple">
+        </select>
         <button class="btn btn-primary" id="filterButton">Filtrele</button>
         <!--begin: Datatable-->
         <div class="table-responsive">

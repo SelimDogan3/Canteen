@@ -76,6 +76,14 @@ $(document).ready(function () {
             }
         }
     });
+    $('#ProductIdSelect').select2({
+        placeholder: "Ürün seçiniz",
+        allowClear: true
+    });
+    $('#StoreIdSelect').select2({
+        placeholder: "Kantin seçiniz",
+        allowClear: true
+    });
     table.on('click', 'td.dt-control', function (e) {
         let tr = $(this).closest('tr');
         let row = table.row(tr);

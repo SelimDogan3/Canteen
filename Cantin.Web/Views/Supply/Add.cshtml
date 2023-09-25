@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProductId">Tedarik Edilen Ürün</label>
-                <select class="form-control" asp-for="ProductId" asp-items="@(new SelectList(Model.Products,"Id","Name"))"></select>
+                <select id="productSelect" class="form-control" asp-for="ProductId" asp-items="@(new SelectList(Model.Products,"Id","Name"))"></select>
                 <span class="text-danger" asp-validation-for="ProductId"></span>
             </div>
             <div class="form-group">
@@ -52,3 +52,6 @@
     </form>
     <!--end::Form-->
 </div>
+@section Scripts{
+    <script src="~/js/SupplyAdd.js"></script>
+}

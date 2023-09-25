@@ -1,4 +1,5 @@
 ﻿using Cantin.Entity.Dtos.Stores;
+using Cantin.Service.Extensions;
 using Cantin.Service.Services.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,38 +7,44 @@ using NToastNotify;
 
 namespace Cantin.Web.Areas.Admin.Controllers
 {
-    [Authorize(
-		Policy = "AdminOnly"
-		)]
-
-
     public class StoreController : Controller
 	{
 		private readonly ILogger<StoreController> logger;
 		private readonly IStoreService storeService;
 		private readonly IStockService stockService;
 		private readonly IToastNotification toastMessage;
-		private readonly string type = "Mağaza";
+        private readonly IUserService userService;
+        private readonly string type = "Mağaza";
 
-		public StoreController(ILogger<StoreController> logger, IStoreService storeService, IStockService stockService, IToastNotification toastMessage)
+		public StoreController(ILogger<StoreController> logger, IStoreService storeService, IStockService stockService, IToastNotification toastMessage,IUserService userService)
 		{
 			this.logger = logger;
 			this.storeService = storeService;
 			this.stockService = stockService;
 			this.toastMessage = toastMessage;
-		}
-		public async Task<IActionResult> Index()
+            this.userService = userService;
+        }
+        [Authorize(
+        Policy = "AdminOnly"
+        )]
+        public async Task<IActionResult> Index()
 		{
 			var stores = await storeService.GetAllStoreDtosNonDeleted();
 			return View(stores);
 		}
-		[HttpGet]
+        [Authorize(
+        Policy = "AdminOnly"
+        )]
+        [HttpGet]
 		public IActionResult Add()
 		{
 			var dto = storeService.GetStoreAddDto();
 			return View(dto);
 		}
-		[HttpPost]
+        [Authorize(
+        Policy = "AdminOnly"
+        )]
+        [HttpPost]
 		public async Task<IActionResult> Add(StoreAddDto dto)
 		{
 			await storeService.ValidateStoreAsync(dto, ModelState);
@@ -50,13 +57,20 @@ namespace Cantin.Web.Areas.Admin.Controllers
 			toastMessage.AddErrorToastMessage(Messages.Messages.AddError(dto.Name, type), new ToastrOptions { Title = "Mağaza Ekleme" });
 			return View(dto);
 		}
-		[HttpGet]
+        [Authorize(
+        Policy = "AdminOnly"
+        )]
+        [HttpGet]
 		public async Task<IActionResult> Update(Guid Id)
 		{
 			var dto = await storeService.GetStoreUpdateDtoByIdAsync(Id);
 			return View(dto);
 		}
-		[HttpPost]
+        [Authorize(
+        Policy = "AdminOnly"
+        )]
+        [HttpPost]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Update(StoreUpdateDto dto)
 		{
 			if (ModelState.IsValid)
@@ -69,16 +83,41 @@ namespace Cantin.Web.Areas.Admin.Controllers
 			toastMessage.AddErrorToastMessage(Messages.Messages.UpdateError(dto.Name, type), new ToastrOptions { Title = "Mağaza Güncelleme" });
 			return View(dto);
 		}
-		public async Task<IActionResult> Delete(Guid Id)
+        [Authorize(
+        Policy = "AdminOnly"
+        )]
+        public async Task<IActionResult> Delete(Guid Id)
 		{
 			var name = await storeService.DeleteStoreAsyncById(Id);
 			toastMessage.AddSuccessToastMessage(Messages.Messages.Delete(name, type), new ToastrOptions { Title = "Mağaza Silme" });
 			return RedirectToAction("Index");
 		}
-		public async Task<IActionResult> Stock()
+        [Authorize(
+        Policy = "AdminOnly"
+        )]
+        public async Task<IActionResult> Stock()
 		{
 			List<StockDto> stocks = await stockService.GetAllStocksIncludingStores();
 			return View(stocks);
 		}
-	}
+        [Authorize]
+        public async Task<IActionResult> StockDetail([FromRoute]Guid Id)
+        {
+			var role = HttpContext.User.GetRole();
+			var user = await userService.GetUserByEmail(HttpContext.User.GetLoggedInUserEmail());
+			if ((role != "Superadmin" && role != "Admin") && user.StoreId != Id)
+			{
+				return RedirectToAction("AccessDenied","Auth");
+			}
+            StockDto stock = await stockService.GetStocksOfAnStoreAsync(Id);
+            return View("StockDetail",stock);
+        }
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> DecreaseProduct(Guid StoreId,int Quantity,Guid ProductId) {
+			await stockService.UpdateStockAsync(StoreId, ProductId,Quantity);
+			toastMessage.AddSuccessToastMessage("Ürün Stoğu Başarı ile azaltıldı",new ToastrOptions{Title = "Stok Bilgisi" });
+			return RedirectToAction("StockDetail",new {Id = StoreId });
+		}
+    }
 }

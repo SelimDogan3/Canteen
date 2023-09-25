@@ -1,0 +1,1 @@
+﻿$('#StockTable').DataTable();

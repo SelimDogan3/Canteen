@@ -8,6 +8,6 @@ namespace Cantin.Entity.Dtos.Stores
         public string Name { get; set; }
         public string Adress { get; set; }
         public string PhoneNumber { get; set; }
-        public List<StockLine>? StockLines { get; set; } = new List<StockLine>();
+        public List<StockLine> Stocks { get; set; } = new List<StockLine>();
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vJLvbE9hUQRz/nKRWO4hgSxQmavRK39G5JMZ0JPSG7b4UcQRIQlYH1TaJmcZztlFCZdgqxYBVnaHdS3zLyTFIQ==",
+  "dgSpecHash": "7vNVOEXw3EogtDTltVeHDh8hy/EeKYQCja5QsqpmG+FCD9jRNhFF7x/se5+lyD97Mp/vv1cceAqog8JKclYj/A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Service.Web\\Cantin.Service.csproj",
+  "projectFilePath": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Service.Web\\Cantin.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\selim\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\selim\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

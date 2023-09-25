@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KG4yU2d6iLewhwf5wm0pBjrUmUhozOatlRU+2H+Tymt4wXZ+lwmkWeyQkPnV2CzThq+8kw5muVCT1wRC+AXMHA==",
+  "dgSpecHash": "ka0aykQjqxUdyRvVA5zjOkDEfLnubv/ic1mjP9BU5JYHz/ZIOt3hy1SuwDw+oPr/EqZtQdavOYGd9p8BjNfL7A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\selim\\OneDrive\\Masaüstü\\Cantin.Web\\Data.Web\\Cantin.Data.csproj",
+  "projectFilePath": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Data.Web\\Cantin.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\selim\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\selim\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

@@ -1,0 +1,77 @@
+﻿@model StockDto
+@section Css{
+    <link rel="stylesheet" href="~/css/StockDetailStyles.css">
+}
+<!--begin::Card-->
+<div class="card card-custom">
+    <div class="card-header flex-wrap">
+        <div class="card-title">
+            <h3 class="card-label">
+                @Model.Name Stok Tablosu
+            </h3>
+        </div>
+        <div class="card-toolbar">
+
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <div class="table-responsive">
+            <!-- Responsive Table Container -->
+            <table id="StockTable" class="table table-separate table-head-custom table-checkable responsive nowrap" Supply="grid" aria-describedby="kt_datatable_info" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Miktarı</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.Stocks)
+                    {
+                        <tr>
+                            <td>@item.Product!.Name</td>
+                            <td>@item.Quantity</td>
+                            <td nowrap="nowrap">
+                                <a class="btn btn-sm btn-danger btn-icon" data-toggle="modal" data-target="#PassCheckModal" title="Azalt">Azalt</a>
+                                <div class="modal fade" id="PassCheckModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method="post" asp-action="DecreaseProduct">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">@item.Product.Name Stokta Azalt</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="StoreId" value="@Model.Id" />
+                                                        <input type="hidden" name="ProductId" value="@item.ProductId" />
+                                                        <label>Miktar:</label>
+                                                        <input type="number" class="form-control" name="Quantity" placeholder="Miktar Giriniz" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Geri Dön</button>
+                                                    <button type="submit" class="btn btn-primary">Azalt</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div> <!-- End Responsive Table Container -->
+        <!--end: Datatable-->
+    </div>
+</div>
+<!--end::Card-->
+@section Scripts{
+    <script src="~/js/StockDetail.js"></script>
+}
