@@ -12,6 +12,8 @@ namespace Cantin.Entity.Entities
         public ICollection<Sale> Sales { get; set; }
         public ICollection<Supply> Suppliles { get; set; }
         public ICollection<Debt> Debts { get; set; }
+        public ICollection<ManuelStockReduction> ManuelStockReductions { get; set; }
+
     }
 
 

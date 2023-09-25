@@ -92,8 +92,7 @@
                         <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 200px;">Telefon Numarası</th>
                         <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 200px;">Ürün Tür Sayısı</th>
                         <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 200px;">Toplam Ürün Sayısı</th>
-                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 200px;"></th>
-                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 200px;"></th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 200px;">İşlemler</th>
 
                     </tr>
                 </thead>
@@ -110,7 +109,8 @@
                             <td>@stock.PhoneNumber</td>
                             <td>@stock.Stocks.Count</td>
                             <td>@stock.Stocks.Sum(x => x.Quantity)</td>
-                            <td>
+                            <td nowrap="nowrap">
+                                <div class="d-flex flex-wrap">
                                 <a asp-action="StockDetail" asp-route-Id="@stock.Id" class="btn btn-sm btn-clean btn-icon mr-2" title="Düzenle">
                                     <span class="svg-icon svg-icon-primary svg-icon-2x">
                                         <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Clip.svg-->
@@ -122,8 +122,6 @@
                                         </svg><!--end::Svg Icon-->
                                     </span>
                                 </a>
-                            </td>
-                            <td>
                                 <div class="dropdown dropdown-inline">
                                     <a href="javascript:;" class="btn btn-sm btn-clean btn-icon mr-2" data-toggle="dropdown" aria-expanded="false">
                                         <span class="svg-icon svg-icon-md">
@@ -166,6 +164,7 @@
                                             </li>
                                         </ul>
                                     </div>
+                                </div>
                                 </div>
                             </td>
                         </tr>

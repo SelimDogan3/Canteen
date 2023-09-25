@@ -33,7 +33,7 @@
                             <td>@item.Product!.Name</td>
                             <td>@item.Quantity</td>
                             <td nowrap="nowrap">
-                                <a class="btn btn-sm btn-danger btn-icon" data-toggle="modal" data-target="#PassCheckModal" title="Azalt">Azalt</a>
+                                <a class="btn btn-icon btn-danger" data-toggle="modal" data-target="#PassCheckModal" title="Azalt">-</a>
                                 <div class="modal fade" id="PassCheckModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -49,7 +49,9 @@
                                                         <input type="hidden" name="StoreId" value="@Model.Id" />
                                                         <input type="hidden" name="ProductId" value="@item.ProductId" />
                                                         <label>Miktar:</label>
-                                                        <input type="number" class="form-control" name="Quantity" placeholder="Miktar Giriniz" />
+                                                        <input type="number" class="form-control" name="DecreasingQuantity" placeholder="Miktar Giriniz" min="1" />
+                                                        <label>Sebep(Opsiyonel):</label>
+                                                        <input type="text" class="form-control" name="FReason" placeholder="Sebep Giriniz" />
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

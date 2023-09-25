@@ -2,10 +2,14 @@
 using Cantin.Data.Repository.Abstract;
 using Cantin.Data.UnitOfWorks;
 using Cantin.Entity.Dtos.Debts;
+using Cantin.Entity.Dtos.ManuelStockReduction;
 using Cantin.Entity.Dtos.Sales;
 using Cantin.Entity.Dtos.Stores;
 using Cantin.Entity.Entities;
+using Cantin.Service.Extensions;
 using Cantin.Service.Services.Abstraction;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace Cantin.Service.Services.Concrete
 {
@@ -15,15 +19,18 @@ namespace Cantin.Service.Services.Concrete
         private readonly IMapper mapper;
         private readonly IStoreService storeService;
         private readonly IProductService productService;
+        private readonly ClaimsPrincipal _user;
+        private string _userEmail => _user.GetLoggedInUserEmail();
 
         private IRepository<Stock> repository { get => unitOfWork.GetRepository<Stock>(); }
 
-        public StockService(IUnitOfWork unitOfWork, IMapper mapper,IStoreService storeService,IProductService productService)
+        public StockService(IUnitOfWork unitOfWork, IMapper mapper,IStoreService storeService,IProductService productService,IHttpContextAccessor contextAccessor)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
             this.storeService = storeService;
             this.productService = productService;
+            _user = contextAccessor.HttpContext.User;
         }
         public async Task AddStockToStoreAsync(Supply supply)
         {
@@ -67,12 +74,19 @@ namespace Cantin.Service.Services.Concrete
             }
             await unitOfWork.SaveAsync();
         }
-        public async Task UpdateStockAsync(Guid storeId,Guid ProductId,int Quantity)
+        public async Task<string> UpdateStockAsync(ManuelStockReductionAddDto dto)
         {
-            var stocks = await repository.GetAllAsync(x => x.StoreId == storeId);
-            var stock = stocks.First(x => x.ProductId == ProductId);
-            stock.Quantity -= Quantity;
-            await unitOfWork.SaveAsync();
+            var stocks = await repository.GetAllAsync(x => x.StoreId == dto.StoreId);
+            var stock = stocks.First(x => x.ProductId == dto.ProductId);
+            if (stock.Quantity - dto.DecreasingQuantity >= 0) {
+                stock.Quantity -= dto.DecreasingQuantity;
+                await AddManuelStockReductionAsync(dto);
+                await unitOfWork.SaveAsync();
+                return "";
+            }
+            else {
+                return "Stok Sayısı 0ın altına inemez";
+            }
         }
         public async Task<StockDto> GetStocksOfAnStoreAsync(Guid storeId) {
             var stockDto = await storeService.GetStoreByIdWithStocks(storeId);
@@ -86,6 +100,15 @@ namespace Cantin.Service.Services.Concrete
             var stores = await storeService.GetAllStoresNonDeletedWithStocksAsync();
             var dtos = mapper.Map<List<StockDto>>(stores);
             return dtos;
+        }
+
+        public async Task AddManuelStockReductionAsync(ManuelStockReductionAddDto dto)
+        {
+            
+            var manuelSD = mapper.Map<ManuelStockReduction>(dto);
+            manuelSD.CreatedBy = _userEmail;
+            await unitOfWork.GetRepository<ManuelStockReduction>().AddAsync(manuelSD);
+            await unitOfWork.SaveAsync();
         }
     }
 }
