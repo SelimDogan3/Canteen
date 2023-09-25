@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Core.Web\Cantin.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\StockHistory\" />
+  </ItemGroup>
+
 </Project>

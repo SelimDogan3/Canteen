@@ -98,7 +98,7 @@ namespace Cantin.Web.Areas.Admin.Controllers
         )]
         public async Task<IActionResult> Stock()
         {
-            List<StockDto> stocks = await stockService.GetAllStocksIncludingStores();
+            List<StockDto> stocks = await stockService.GetAllStocksIncludingStoresAsync();
             return View(stocks);
         }
         [Authorize]
@@ -134,6 +134,7 @@ namespace Cantin.Web.Areas.Admin.Controllers
                 toastMessage.AddErrorToastMessage("Stok güncellenirken bir hata ile karşılaşıldı", new ToastrOptions { Title = "Stok Bilgisi" });
 
             }
+            
             return RedirectToAction("StockDetail", new { Id = dto.StoreId });
 
         }

@@ -8,13 +8,13 @@ namespace Cantin.Service.Services.Abstraction
 {
 	public interface IStockService
 	{
-		Task<List<StockDto>> GetAllStocksIncludingStores();
+		Task<List<StockDto>> GetAllStocksIncludingStoresAsync();
 		Task<StockDto> GetStocksOfAnStoreAsync(Guid storeId);
         Task AddStockToStoreAsync(Supply supply);
-        Task AddManuelStockReductionAsync(ManuelStockReductionAddDto dto);
-		Task UpdateStockAsync(SaleAddDto dto, Guid storeId);
-		Task UpdateStockAsync(DebtAddDto dto, Guid storeId);
-		Task<string> UpdateStockAsync(ManuelStockReductionAddDto dto);
+        Task AddManuelStockReductionAsync(ManuelStockReductionAddDto manuelSD);
+		Task UpdateStockAsync(Sale sale);
+		Task UpdateStockAsync(Debt debt);
+		Task<string> UpdateStockAsync(ManuelStockReductionAddDto manuelSD);
 
     }
 }

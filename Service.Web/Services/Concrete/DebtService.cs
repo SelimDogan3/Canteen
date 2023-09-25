@@ -81,7 +81,7 @@ namespace Cantin.Service.Services.Concrete
                 await MatchProductWithDebtsAsync(debt.Id,line.ProductId,line.Quantity);
             }
             //decreaseing stock
-            await stockService.UpdateStockAsync(dto,user.StoreId);
+            await stockService.UpdateStockAsync(debt);
             await unitOfWork.SaveAsync();
         }
 

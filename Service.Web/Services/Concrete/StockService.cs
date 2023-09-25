@@ -6,6 +6,7 @@ using Cantin.Entity.Dtos.ManuelStockReduction;
 using Cantin.Entity.Dtos.Sales;
 using Cantin.Entity.Dtos.Stores;
 using Cantin.Entity.Entities;
+using Cantin.Entity.Enums;
 using Cantin.Service.Extensions;
 using Cantin.Service.Services.Abstraction;
 using Microsoft.AspNetCore.Http;
@@ -23,6 +24,7 @@ namespace Cantin.Service.Services.Concrete
         private string _userEmail => _user.GetLoggedInUserEmail();
 
         private IRepository<Stock> repository { get => unitOfWork.GetRepository<Stock>(); }
+        private IRepository<StockHistory> historyRepository { get => unitOfWork.GetRepository<StockHistory>(); }
 
         public StockService(IUnitOfWork unitOfWork, IMapper mapper,IStoreService storeService,IProductService productService,IHttpContextAccessor contextAccessor)
         {
@@ -48,10 +50,10 @@ namespace Cantin.Service.Services.Concrete
             await unitOfWork.SaveAsync();
         }
 
-        public async Task UpdateStockAsync(SaleAddDto dto, Guid storeId)
+        public async Task UpdateStockAsync(Sale sale)
         {
-            var stocks = await repository.GetAllAsync(x => x.StoreId == storeId);
-            foreach (ProductLine line in dto.ProductLines)
+            var stocks = await repository.GetAllAsync(x => x.StoreId == sale.StoreId);
+            foreach (SaleProduct line in sale.SaleProducts)
             {
                 stocks.First(x => x.ProductId == line.ProductId).Quantity -= line.Quantity;
             }
@@ -61,10 +63,11 @@ namespace Cantin.Service.Services.Concrete
             }
             await unitOfWork.SaveAsync();
         }
-        public async Task UpdateStockAsync(DebtAddDto dto, Guid storeId)
+        public async Task UpdateStockAsync(Debt debt)
         {
-            var stocks = await repository.GetAllAsync(x => x.StoreId == storeId);
-            foreach (ProductLine line in dto.ProductLines)
+            var stocks = await repository.GetAllAsync(x => x.StoreId == debt.StoreId);
+
+            foreach (DebtProduct line in debt.DebtProducts)
             {
                 stocks.First(x => x.ProductId == line.ProductId).Quantity -= line.Quantity;
             }
@@ -72,6 +75,7 @@ namespace Cantin.Service.Services.Concrete
             {
                 await repository.UpdateAsync(stock);
             }
+            await AddStockHistoryAsync(StockActions.Debt, debt.Id,debt.StoreId);
             await unitOfWork.SaveAsync();
         }
         public async Task<string> UpdateStockAsync(ManuelStockReductionAddDto dto)
@@ -95,7 +99,7 @@ namespace Cantin.Service.Services.Concrete
             return stockDto;
         }
 
-        public async Task<List<StockDto>> GetAllStocksIncludingStores()
+        public async Task<List<StockDto>> GetAllStocksIncludingStoresAsync()
         {
             var stores = await storeService.GetAllStoresNonDeletedWithStocksAsync();
             var dtos = mapper.Map<List<StockDto>>(stores);
@@ -108,7 +112,46 @@ namespace Cantin.Service.Services.Concrete
             var manuelSD = mapper.Map<ManuelStockReduction>(dto);
             manuelSD.CreatedBy = _userEmail;
             await unitOfWork.GetRepository<ManuelStockReduction>().AddAsync(manuelSD);
+            await AddStockHistoryAsync(StockActions.ManualReduction,manuelSD.Id,dto.StoreId);
             await unitOfWork.SaveAsync();
+        }
+        public async Task AddStockHistoryAsync(StockActions action, Guid id,Guid storeId)
+        {
+
+            StockHistory historyEntry = new StockHistory
+            {
+                Type = action,
+                CreatedBy = _userEmail,
+                StoreId = storeId
+            };
+
+            switch (action)
+            {
+                case StockActions.Supply:
+                    historyEntry.SupplyId = id;
+                    break;
+                case StockActions.Sale:
+                    historyEntry.SaleId = id;
+                    break;
+                case StockActions.Debt:
+                    historyEntry.DebtId = id;
+                    break;
+                case StockActions.ManualReduction:
+                    historyEntry.ManualStockReductionId = id;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid stock action type", nameof(action));
+            }
+
+            try
+            {
+                await historyRepository.AddAsync(historyEntry);
+            }
+            catch (Exception ex)
+            {
+                // Burada hatayı loglama veya geri dönüş yapma işlemleri gerçekleştirilebilir.
+                throw; //veya özelleştirilmiş bir hata mesajı dönebilirsiniz.
+            }
         }
     }
 }

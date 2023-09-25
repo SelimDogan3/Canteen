@@ -78,7 +78,7 @@ namespace Cantin.Service.Services.Concrete
 			{
 				await MatchProductWithSaleAsync(sale.Id, productLine.ProductId, productLine.Quantity);
 			}
-			await stockService.UpdateStockAsync(dto, user.StoreId);
+			await stockService.UpdateStockAsync(sale);
 			await unitOfWork.SaveAsync();
 		}
 		public async Task MatchProductWithSaleAsync(Guid saleId, Guid productId, int quantity)
