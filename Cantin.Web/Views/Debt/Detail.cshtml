@@ -1,0 +1,48 @@
+﻿@model DebtDto
+@section Css{
+    <link rel="stylesheet" href="~/css/StockDetailStyles.css">
+}
+<!--begin::Card-->
+<div class="card card-custom">
+    <div class="card-header flex-wrap">
+        <div class="card-title">
+            <h3 class="card-label">
+                Veresiye Detayları
+            </h3>
+        </div>
+        <div class="card-toolbar">
+            Kayıt Tarihi: @DateTimeFormatter.FormatForTr( Model.CreatedDate)
+        </div>
+    </div>
+    <div class="card-body">
+        <h3>Verilen Kişi: @Model.FullName</h3><br />
+        <h3>Ödendi : @(Model.Paid ? "Ödendi" : "Ödenmedi")</h3><br />
+        <h3>Ödenme Tarihi: @DateTimeFormatter.FormatForTr(Model.PaidDate)</h3>
+        <!--begin: Datatable-->
+        <div class="table-responsive">
+            <!-- Responsive Table Container -->
+            <table id="DebtTable" class="table table-separate table-head-custom table-checkable responsive nowrap" Supply="grid" aria-describedby="kt_datatable_info" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Miktarı</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ProductLines)
+                    {
+                        <tr>
+                            <td>@item.Product!.Name</td>
+                            <td>@item.Quantity</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div> <!-- End Responsive Table Container -->
+        <!--end: Datatable-->
+    </div>
+</div>
+<!--end::Card-->
+@section Scripts{
+    <script src="~/js/SaleDetail.js"></script>
+}

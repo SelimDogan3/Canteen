@@ -47,6 +47,7 @@ namespace Cantin.Service.Services.Concrete
             {
                 baseStock.Quantity += stock.Quantity;
             }
+            await AddStockHistoryAsync(StockActions.Supply,supply.Id,supply.StoreId);
             await unitOfWork.SaveAsync();
         }
 
@@ -61,6 +62,7 @@ namespace Cantin.Service.Services.Concrete
             {
                 await repository.UpdateAsync(stock);
             }
+            await AddStockHistoryAsync(StockActions.Sale, sale.Id, sale.StoreId);
             await unitOfWork.SaveAsync();
         }
         public async Task UpdateStockAsync(Debt debt)

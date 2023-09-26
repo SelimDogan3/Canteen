@@ -1,4 +1,5 @@
 ﻿let table = $('#UsersTable').DataTable({
+    responsive: false,
     dom:
         "<'row'<'col-sm-3'l><'col-sm-6 text-center'><'col-sm-3'f>>" +
         "<'row'<'col-sm-12'tr>>" +

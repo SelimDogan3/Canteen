@@ -1,5 +1,6 @@
 ﻿using Cantin.Entity.Dtos.Debts;
 using Cantin.Service.Services.Abstraction;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cantin.Web.Controllers
@@ -10,7 +11,7 @@ namespace Cantin.Web.Controllers
         private readonly IProductService productService;
         private readonly IStoreService storeService;
 
-        public DebtController(IDebtService debtService,IProductService productService,IStoreService storeService)
+        public DebtController(IDebtService debtService, IProductService productService, IStoreService storeService)
         {
             this.debtService = debtService;
             this.productService = productService;
@@ -39,11 +40,16 @@ namespace Cantin.Web.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public async Task<ActionResult<List<DebtDto>>> GetWithFilter([FromBody]DebtFilterDto filterDto) {
+        [Authorize(Policy = "AdminOnly")]
+
+        public async Task<ActionResult<List<DebtDto>>> GetWithFilter([FromBody] DebtFilterDto filterDto) {
             var debts = await debtService.GetAllDebtsNonDeletedAsync(filterDto);
             return Ok(debts);
-
-
+        }
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> Detail(Guid Id) {
+            var debt = await debtService.GetDebtByIdAsync(Id);
+            return View(debt);
         }
     }
 }

@@ -19833,6 +19833,10 @@
       "PackagePath": "staticwebassets\\img\\logo1.png"
     },
     {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\DebtDetail.js",
+      "PackagePath": "staticwebassets\\js\\DebtDetail.js"
+    },
+    {
       "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\DebtIndex.js",
       "PackagePath": "staticwebassets\\js\\DebtIndex.js"
     },
@@ -19847,6 +19851,10 @@
     {
       "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\RoleIndex.js",
       "PackagePath": "staticwebassets\\js\\RoleIndex.js"
+    },
+    {
+      "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\SaleDetail.js",
+      "PackagePath": "staticwebassets\\js\\SaleDetail.js"
     },
     {
       "Id": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\SaleIndex.js",

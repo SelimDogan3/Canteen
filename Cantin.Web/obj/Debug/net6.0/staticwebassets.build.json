@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eGR7OgriaDYOXlLkVPODcMLlI02RMTkuCF3EMScW7NI=",
+  "Hash": "2byB4TDGwfyE11u0JKRTJGH1+vbVvEUrnAOxoWkOoto=",
   "Source": "Cantin.Web",
   "BasePath": "_content/Cantin.Web",
   "Mode": "Default",
@@ -84354,6 +84354,23 @@
       "OriginalItemSpec": "wwwroot\\img\\logo1.png"
     },
     {
+      "Identity": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\DebtDetail.js",
+      "SourceId": "Cantin.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\",
+      "BasePath": "_content/Cantin.Web",
+      "RelativePath": "js/DebtDetail.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\DebtDetail.js"
+    },
+    {
       "Identity": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\DebtIndex.js",
       "SourceId": "Cantin.Web",
       "SourceType": "Discovered",
@@ -84437,6 +84454,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\saleAdd.js"
+    },
+    {
+      "Identity": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\SaleDetail.js",
+      "SourceId": "Cantin.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\",
+      "BasePath": "_content/Cantin.Web",
+      "RelativePath": "js/SaleDetail.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\SaleDetail.js"
     },
     {
       "Identity": "C:\\Users\\selim\\OneDrive\\Masaüstü\\masaüstü\\Cantin.Web\\Cantin.Web\\wwwroot\\js\\SaleIndex.js",

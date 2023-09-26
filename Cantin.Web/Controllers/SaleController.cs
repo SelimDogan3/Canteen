@@ -25,10 +25,13 @@ namespace Cantin.Web.Controllers
 			this.productService = productService;
             this.storeService = storeService;
         }
-		public async Task<IActionResult> GetProductByBarcode(string barCode) {
+
+        public async Task<IActionResult> GetProductByBarcode(string barCode) {
 			var product = await productService.GetProductByBarcodeAsync(barCode);
 			return Ok(product);
 		}
+        [Authorize(
+        Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
 		{
 			ClaimsPrincipal _user = HttpContext.User;
@@ -47,21 +50,30 @@ namespace Cantin.Web.Controllers
 			return View(sales);
 		}
 		[HttpGet]
-		public async Task<IActionResult> Add()
+        public async Task<IActionResult> Add()
 		{
 			ViewBag.MostUsedProducts = await productService.GetMostUsedProductsAsync();
 			return View();
 		}
 		[HttpPost]
-		public async Task<IActionResult> Add([FromBody]SaleAddDto addDto) {
+        public async Task<IActionResult> Add([FromBody]SaleAddDto addDto) {
 			await saleService.AddSaleAsync(addDto);
 			return Ok();
 			//s
 		}
 		[HttpPost]
-		public async Task<ActionResult<SaleDto>> GetWithFilter([FromBody] SaleFilterDto filterDto) {
+        [Authorize(
+        Policy = "AdminOnly")]
+        public async Task<ActionResult<SaleDto>> GetWithFilter([FromBody] SaleFilterDto filterDto) {
 			var sales = await saleService.GetAllSalesNonDeletedAsync(filterDto);
 			return Json(sales);
 		}
-	}
+        [Authorize(
+        Policy = "AdminOnly")]
+        public async Task<IActionResult> Detail(Guid Id)
+        {
+			var sale = await saleService.GetSaleByIdAsync(Id);
+            return View(sale);
+        }
+    }
 }

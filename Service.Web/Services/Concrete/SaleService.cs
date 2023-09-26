@@ -9,6 +9,7 @@ using Cantin.Service.Extensions;
 using Cantin.Service.Services.Abstraction;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Security.Claims;
@@ -100,5 +101,13 @@ namespace Cantin.Service.Services.Concrete
 			}
 			return lines;
 		}
-	}
+
+        public async Task<SaleDto> GetSaleByIdAsync(Guid id)
+        {
+			var sale = await repository.GetAsync(x =>x.Id == id,x => x.SaleProducts,y => y.Store);
+			var map = mapper.Map<SaleDto>(sale);
+			map.ProductLines = await GetProductLineWithSaleId(sale.Id);
+			return map;
+        }
+    }
 }
