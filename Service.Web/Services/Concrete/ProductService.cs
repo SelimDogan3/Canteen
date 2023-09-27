@@ -33,7 +33,7 @@ namespace Cantin.Service.Services.Concrete
 		public async Task<List<ProductDto>> GetAllProductsNonDeletedAsync()
 		{
 			List<Product> products = await repository.GetAllAsync(x => !x.IsDeleted);
-			List<ProductDto> map = mapper.Map<List<ProductDto>>(products);
+            List<ProductDto> map = mapper.Map<List<ProductDto>>(products);
 			return map;
 
 		}
