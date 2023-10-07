@@ -30,8 +30,6 @@ namespace Cantin.Web.Controllers
 			var product = await productService.GetProductByBarcodeAsync(barCode);
 			return Ok(product);
 		}
-        [Authorize(
-        Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
 		{
 			ClaimsPrincipal _user = HttpContext.User;

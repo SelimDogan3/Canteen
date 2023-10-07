@@ -147,7 +147,7 @@ function ensureCellWithText(sheet, cellReference, defaultText) {
     }
 }
 
-function FillTableBody(sheet, stockLines, numCellXfs,rowNumber) {
+function FillTableBody(sheet, stockLines, numCellXfs, rowNumber) {
     let startRow = 3;
     stockLines.forEach(function (line) {
         let bCellRef = XlsxCellHandler(2, startRow);
@@ -155,7 +155,7 @@ function FillTableBody(sheet, stockLines, numCellXfs,rowNumber) {
         ensureCellWithText(sheet, bCellRef, line.product.name);
         ensureCellWithText(sheet, cCellRef, line.quantity.toString());
         if (line.quantity < 10) {
-            $('c[r="' + cCellRef + '"]', sheet).attr('s', numCellXfs-1);
+            $('c[r="' + cCellRef + '"]', sheet).attr('s', numCellXfs - 1);
         }
         startRow += 1;
     });
@@ -221,7 +221,7 @@ function createNewSheet(xlsx, sheetName) {
     newRelationship.setAttribute("Target", "worksheets/" + sheetName + ".xml");
     relationships.appendChild(newRelationship);
 }
-function SetSheetTitle(sheet, title, styles) { 
+function SetSheetTitle(sheet, title, styles) {
     var numStyles = $('cellXfs xf', styles).length;
     $('cellXfs', styles).append('<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment horizontal="center" vertical="center"/></xf>');
     let cell = $('c[r="B1"]', sheet);
@@ -231,7 +231,7 @@ function SetSheetTitle(sheet, title, styles) {
     else {
         cell.attr('t', 'inlineStr').attr('s', numStyles).children('is').children('t').text(title);
         if (cell.children('is').length === 0) {
-            cell.append('<is><t>' + title +'</t></is>');
+            cell.append('<is><t>' + title + '</t></is>');
         }
     }
 }
@@ -239,9 +239,7 @@ function CreateTableTitle(sheet, title, styles) {
 
     // Mevcut birleşik hücreyi kaldır
     $('mergeCells mergeCell', sheet).each(function () {
-        if ($(this).attr('ref') === 'A1:E1') {
-            $(this).remove();
-        }
+        $(this).remove();
     });
     let rowIndex = 2;  // 2. satır için
     let startingColumn = "B";
@@ -346,7 +344,7 @@ let table = $('#StocksTable').DataTable({
         {
             extend: "excel",
             customize: function (xlsx) {
-                GenerateXstsTable(xlsx,table);
+                GenerateXstsTable(xlsx, table);
                 DeselectAllRows();
                 return xlsx;
             },
